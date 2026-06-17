@@ -1155,3 +1155,33 @@ main {
     font-size: 46px;
   }
 }
+
+/* 选题卡时效紧迫度徽标 */
+.topic-urgency {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  padding: 4px 9px;
+  border: 1px solid transparent;
+}
+
+.topic-urgency-soon {
+  background: #fde8e5;
+  border-color: #f5c4bd;
+  color: #b5362a;
+}
+
+.topic-urgency-open {
+  background: #e2f6f1;
+  border-color: #b8e6db;
+  color: #047a66;
+}
+
+.topic-urgency-closed {
+  background: #f0f0f0;
+  border-color: #e0e0e0;
+  color: #8a8a8a;
+}
