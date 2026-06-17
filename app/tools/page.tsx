@@ -26,7 +26,7 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
         <p className="eyebrow">工具库</p>
         <h1>全球工具，先测后写</h1>
         <p>
-          工具库用于支撑文章内链和联盟转化。每张卡片都保留分类、标签、外链和搞着玩指数。
+          每个工具都先测过，再决定值不值得写。每张卡片都给出分类、标签、官网链接和搞着玩指数，帮你快速判断要不要用。
         </p>
       </div>
 

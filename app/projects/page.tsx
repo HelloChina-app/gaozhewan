@@ -4,7 +4,7 @@ import { SubscribeForm } from "@/components/subscribe-form";
 export const metadata: Metadata = {
   title: "搞项目",
   description:
-    "搞项目是搞着玩的后续产品线，从全球产品、开源和社区信号里拆出可执行的小项目灵感。"
+    "搞项目帮你从全球产品、开源和社区信号里，找到可以动手做的小项目灵感。"
 };
 
 const projectSignals = [
@@ -29,7 +29,7 @@ export default function ProjectsPage() {
         <p className="eyebrow">搞项目 · 下一阶段</p>
         <h1>从全球信号里找能开搞的小项目</h1>
         <p>
-          这条线暂不急着做成完整产品。先收集想搞项目的人，再用搞选题积累的全球信号反哺产品灵感库。
+          这条线还在打磨中。你可以先留下想做的项目方向，我们会用每天的全球信号，持续为你补充能动手的产品灵感。
         </p>
       </div>
 

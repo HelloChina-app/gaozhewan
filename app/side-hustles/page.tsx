@@ -4,7 +4,7 @@ import { SubscribeForm } from "@/components/subscribe-form";
 export const metadata: Metadata = {
   title: "搞副业",
   description:
-    "搞副业是搞着玩的后续产品线，把全球工具、流量玩法和小生意案例拆成可验证的副业方案。"
+    "搞副业帮你把全球工具、流量玩法和小生意案例，拆成能小成本验证的副业方案。"
 };
 
 const sideHustleSignals = [
@@ -29,7 +29,7 @@ export default function SideHustlesPage() {
         <p className="eyebrow">搞副业 · 规划中</p>
         <h1>把全球玩法拆成能验证的副业方案</h1>
         <p>
-          这条线会慢一点做。先用意向名单判断用户是不是真的需要副业方案，而不是凭感觉扩张。
+          这条线我们会慢慢做扎实。你可以先留下想做的副业方向，我们优先把你最需要的方案做出来。
         </p>
       </div>
 

@@ -9,7 +9,7 @@ import { getAllTags, getSortedPosts, getSortedTopicCards } from "@/lib/content";
 export const metadata: Metadata = {
   title: "搞选题",
   description:
-    "搞选题是搞着玩的第一条产品线，把全球新奇信号拆成中文创作者可发布的选题资产。"
+    "搞选题帮中文创作者把全球新奇信号，快速变成今天就能发布的内容。"
 };
 
 export default function PostIndexPage() {
@@ -23,7 +23,7 @@ export default function PostIndexPage() {
     <>
       <section className="page-shell">
         <div className="page-title">
-          <p className="eyebrow">搞选题 · 当前 MVP 产品线</p>
+          <p className="eyebrow">搞选题 · 把全球信号变成今天能发的内容</p>
           <h1>把全球信号拆成你今天能发的选题</h1>
           <p>
             免费层帮你判断一件事值不值得跟，搞选题 Pro

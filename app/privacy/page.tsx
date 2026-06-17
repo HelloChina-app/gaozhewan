@@ -11,9 +11,9 @@ export default function PrivacyPage() {
     <section className="page-shell">
       <div className="page-title">
         <p className="eyebrow">隐私政策</p>
-        <h1>只收集运营必须的数据</h1>
+        <h1>只收集必要的数据</h1>
         <p>
-          MVP 阶段主要收集邮件订阅信息，用于发送今日信号、周刊摘要和搞选题 Pro 早鸟通知。
+          我们目前只收集你的邮箱订阅信息，用于发送今日信号、周刊摘要和搞选题 Pro 早鸟通知。
         </p>
       </div>
 

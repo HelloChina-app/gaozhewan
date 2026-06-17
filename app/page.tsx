@@ -54,7 +54,7 @@ export default function HomePage() {
           <p className="eyebrow">GAOZHEWAN · START WITH GLOBAL SIGNALS</p>
           <h1>搞着玩</h1>
           <p>
-            搞着玩不是一个单一资讯站，而是把全球新奇事物变成选题、工具、项目和副业灵感的开搞入口。
+            搞着玩帮你把全球新奇事物，变成可以立刻动手的选题、工具、项目和副业灵感。
           </p>
           <div className="hero-actions">
             <Link className="button" href={`/post/${today.slug}`}>
@@ -73,7 +73,7 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
-          <div className="hero-stats" aria-label="MVP 指标">
+          <div className="hero-stats" aria-label="内容概览">
             <div>
               <strong>{posts.length}</strong>
               <span>篇全球信号</span>
