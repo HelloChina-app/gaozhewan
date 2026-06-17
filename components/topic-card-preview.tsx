@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { GzwScore } from "@/components/gzw-score";
+import { TopicUrgency } from "@/components/topic-urgency";
 import type { TopicCard } from "@/lib/content";
 
 type TopicCardPreviewProps = {
@@ -13,6 +14,7 @@ export function TopicCardPreview({ card }: TopicCardPreviewProps) {
         <span>选题雷达</span>
         <span>窗口 {card.window}</span>
         <span>竞争度 {card.competition}</span>
+        <TopicUrgency publishedAt={card.publishedAt} window={card.window} />
       </div>
       <h3>{card.title}</h3>
       <p>{card.heat}</p>
