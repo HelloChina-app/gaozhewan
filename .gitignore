@@ -1,0 +1,17 @@
+node_modules
+.tools
+.next
+out
+dist
+.env
+.env*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dev-server*.log
+start-server*.log
+preview-server*.log
+.DS_Store
+Thumbs.db
+content/_drafts

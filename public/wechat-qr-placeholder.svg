@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">搞着玩公众号二维码占位图</title>
+  <desc id="desc">上线前替换为真实公众号二维码</desc>
+  <rect width="240" height="240" fill="#ffffff"/>
+  <rect x="16" y="16" width="208" height="208" fill="#fafafa" stroke="#1a1a1a" stroke-width="4" rx="8"/>
+  <rect x="36" y="36" width="48" height="48" fill="#1a1a1a" rx="4"/>
+  <rect x="156" y="36" width="48" height="48" fill="#1a1a1a" rx="4"/>
+  <rect x="36" y="156" width="48" height="48" fill="#1a1a1a" rx="4"/>
+  <rect x="48" y="48" width="24" height="24" fill="#ffd600" rx="3"/>
+  <rect x="168" y="48" width="24" height="24" fill="#ffd600" rx="3"/>
+  <rect x="48" y="168" width="24" height="24" fill="#ffd600" rx="3"/>
+  <path d="M108 40h16v16h-16zM132 40h12v28h-12zM100 76h40v12h-40zM152 100h20v20h-20zM104 108h16v16h-16zM128 108h12v32h-12zM176 128h16v16h-16zM96 152h28v12H96zM136 156h20v20h-20zM164 168h36v12h-36zM104 188h16v16h-16zM128 188h48v16h-48z" fill="#1a1a1a"/>
+  <text x="120" y="132" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#00a88d">公众号</text>
+</svg>
