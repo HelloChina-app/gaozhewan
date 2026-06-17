@@ -1,12 +1,11 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { parseBody, parseFrontmatter, parsePairs } from "@/lib/markdown";
+import type { GzwScore } from "@/lib/score";
 
-export type GzwScore = {
-  novelty: number;
-  viral: number;
-  accessible: number;
-};
+export type { GzwScore } from "@/lib/score";
+import { getAverageScore } from "@/lib/score";
+export { getAverageScore };
 
 export type Source = {
   label: string;
@@ -319,12 +318,6 @@ export function getPostBySlug(slug: string) {
 
 export function getToolBySlug(slug: string) {
   return tools.find((tool) => tool.slug === slug);
-}
-
-export function getAverageScore(scores: GzwScore) {
-  return Number(
-    ((scores.novelty + scores.viral + scores.accessible) / 3).toFixed(1)
-  );
 }
 
 export function getPostsByType(type: PostType) {

@@ -1,4 +1,4 @@
-import { getAverageScore, type GzwScore } from "@/lib/content";
+import { getAverageScore, type GzwScore } from "@/lib/score";
 
 type GzwScoreProps = {
   scores: GzwScore;

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { SubscribeForm } from "@/components/subscribe-form";
-import { TopicCardPreview } from "@/components/topic-card-preview";
+import { TopicsExplorer } from "@/components/topics-explorer";
 import { getSortedTopicCards } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "选题卡归档",
-  description: "搞着玩选题卡归档：全球信号拆出的可执行选题，按时间从新到旧排列。"
+  title: "选题工作台",
+  description:
+    "搞着玩选题工作台：全球信号拆出的可执行选题，按竞争度筛选、按搞着玩指数或时间排序，快速锁定今天值得写的那条。"
 };
 
 export default function TopicsPage() {
@@ -14,18 +15,14 @@ export default function TopicsPage() {
   return (
     <section className="page-shell">
       <div className="page-title">
-        <p className="eyebrow">选题卡</p>
-        <h1>全部选题卡</h1>
+        <p className="eyebrow">选题工作台</p>
+        <h1>今天写哪条？</h1>
         <p>
-          每张卡是一条全球信号拆出的可执行选题，含写作角度、标题模板、竞争度和时效窗口。点开看完整内容。
+          每张卡是一条全球信号拆出的可执行选题，含写作角度、标题模板、竞争度和时效窗口。按竞争度筛、按分数或时间排，挑出最值得写的那条。
         </p>
       </div>
 
-      <div className="topic-grid">
-        {cards.map((card) => (
-          <TopicCardPreview card={card} key={card.id} />
-        ))}
-      </div>
+      <TopicsExplorer cards={cards} />
 
       <section className="section">
         <div className="subscribe-band">
