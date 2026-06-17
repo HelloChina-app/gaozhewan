@@ -52,7 +52,7 @@ export default function HomePage() {
       <section className="section-inner hero">
         <div className="hero-copy">
           <p className="eyebrow">GAOZHEWAN · START WITH GLOBAL SIGNALS</p>
-          <h1>你想搞什么？</h1>
+          <h1>搞着玩</h1>
           <p>
             搞着玩不是一个单一资讯站，而是把全球新奇事物变成选题、工具、项目和副业灵感的开搞入口。
           </p>

@@ -48,7 +48,7 @@ export function SubscribeForm({
 
   return (
     <form className="subscribe-form" onSubmit={onSubmit}>
-      <label htmlFor={`interest-${source}`}>你想搞什么？</label>
+      <label htmlFor={`interest-${source}`}>想搞哪个方向？</label>
       <select
         id={`interest-${source}`}
         name="interest"

@@ -12,7 +12,7 @@ export default function SubscribePage() {
     <section className="page-shell">
       <div className="page-title">
         <p className="eyebrow">订阅</p>
-        <h1>告诉我们你想搞什么</h1>
+        <h1>告诉我们你想搞哪个方向</h1>
         <p>
           邮件列表不只发内容，也用来验证后续产品方向：搞选题、搞工具、搞项目还是搞副业。
         </p>
