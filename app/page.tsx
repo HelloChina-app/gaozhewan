@@ -30,7 +30,7 @@ export default function HomePage() {
     {
       title: "搞工具",
       desc: "先测全球工具，再判断值不值得写",
-      status: "MVP 内",
+      status: "已上线",
       href: "/tools"
     },
     {
@@ -155,9 +155,9 @@ export default function HomePage() {
         <div className="section-inner pro-cta">
           <div>
             <p className="eyebrow">搞选题 Pro</p>
-            <h2>搞着玩是母品牌，搞选题 Pro 是第一条商业闭环</h2>
+            <h2>每天 3 张选题卡，打开就能写</h2>
             <p>
-              每日 3 张选题卡，包含写作角度、标题模板、竞争度、时效窗口和素材包。
+              每张卡含写作角度、标题模板、竞争度和时效窗口，免费层先看摘要。
             </p>
           </div>
           <Link className="button" href="/pricing">
@@ -210,7 +210,7 @@ export default function HomePage() {
             <p className="eyebrow">邮件订阅</p>
             <h2>把全球新奇雷达发到你的邮箱</h2>
             <p>
-              免费层用于验证选题和培养 Pro 转化。上线早期建议同步公众号和小红书，把邮件列表作为长期资产。
+              每天一条最值得写的全球信号，直接发到你邮箱。免费，随时退订。
             </p>
           </div>
           <SubscribeForm source="home" />
