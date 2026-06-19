@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ArticleCard } from "@/components/article-card";
 import { SubscribeForm } from "@/components/subscribe-form";
 import { TopicCardPreview } from "@/components/topic-card-preview";
+import { SignalRadar } from "@/components/signal-radar";
 import {
   getAverageScore,
   getSortedPosts,
@@ -94,14 +94,7 @@ export default function HomePage() {
             <span>GLOBAL SIGNALS</span>
           </div>
           <div className="radar-visual-wrap">
-            <Image
-              className="radar-visual"
-              src="/global-signal-radar.jpg"
-              alt="全球信号雷达与选题卡产品界面"
-              width={1663}
-              height={945}
-              priority
-            />
+            <SignalRadar />
           </div>
           <div className="signal-list">
             {recentCards.map((card) => (
