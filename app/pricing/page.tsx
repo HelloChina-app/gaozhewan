@@ -94,7 +94,7 @@ export default function PricingPage() {
           <div className="section-head">
             <div>
               <p className="eyebrow">FAQ</p>
-              <h2>上线前最需要说清楚的事</h2>
+              <h2>几个你可能关心的问题</h2>
             </div>
           </div>
           <div className="faq-list">
