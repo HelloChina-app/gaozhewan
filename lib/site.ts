@@ -4,7 +4,7 @@
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://gaozhewan.com",
   title: "搞着玩 · 把全球信号变成你的选题",
   description:
-    "帮中文用户把全球新奇事物，变成可以立刻开搞的选题、工具、项目和副业灵感。",
+    "每天从 Hacker News、GitHub 等全球信号里挑出值得写的选题，附写作角度、标题模板和工具实测，帮中文创作者更快从「发现」到「开写」。",
   slogan: "搞着玩，先从全球信号开始",
   email: "hello@gaozhewan.com"
 };

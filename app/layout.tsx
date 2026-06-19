@@ -25,10 +25,10 @@ export const metadata: Metadata = {
     siteName: site.name,
     images: [
       {
-        url: "/global-signal-radar.jpg",
-        width: 1663,
-        height: 945,
-        alt: "搞着玩全球信号雷达"
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "搞着玩 · 把全球信号变成你能立刻写的选题"
       }
     ],
     locale: "zh_CN",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: site.title,
     description: site.description,
-    images: ["/global-signal-radar.jpg"]
+    images: ["/og.png"]
   }
 };
 

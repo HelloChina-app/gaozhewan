@@ -102,6 +102,20 @@ export default async function PostPage({ params }: PostPageProps) {
     },
     mainEntityOfPage: `${site.url}/post/${post.slug}`
   };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "首页", item: site.url },
+      { "@type": "ListItem", position: 2, name: "文章", item: `${site.url}/post` },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: `${site.url}/post/${post.slug}`
+      }
+    ]
+  };
 
   return (
     <article className="article-shell">
@@ -161,6 +175,11 @@ export default async function PostPage({ params }: PostPageProps) {
           type="application/ld+json"
           suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
       </div>
 
