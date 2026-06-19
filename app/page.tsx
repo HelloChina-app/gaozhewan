@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArticleCard } from "@/components/article-card";
 import { SubscribeForm } from "@/components/subscribe-form";
 import { TopicCardPreview } from "@/components/topic-card-preview";
-import { SignalRadar } from "@/components/signal-radar";
 import {
   getAverageScore,
   getSortedPosts,
@@ -10,7 +9,6 @@ import {
   getSortedTopicCards,
   tools
 } from "@/lib/content";
-import { site } from "@/lib/site";
 
 export default function HomePage() {
   const sortedPosts = getSortedPosts();
@@ -20,6 +18,7 @@ export default function HomePage() {
     .slice(0, 3);
   const featuredTools = tools.filter((tool) => tool.featured).slice(0, 3);
   const recentCards = getSortedTopicCards().slice(0, 3);
+  const signalFeed = getSortedTopicCards().slice(0, 4);
   const playLanes = [
     {
       title: "搞选题",
@@ -88,28 +87,35 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="radar-panel" aria-label="选题雷达预览">
+        <div className="radar-panel" aria-label="实时全球信号">
           <div className="radar-header">
-            <span>GAOZHEWAN RADAR</span>
-            <span>GLOBAL SIGNALS</span>
-          </div>
-          <div className="radar-visual-wrap">
-            <SignalRadar />
+            <span className="signal-live">
+              <i aria-hidden="true" />
+              实时全球信号
+            </span>
+            <span>每日更新</span>
           </div>
           <div className="signal-list">
-            {recentCards.map((card) => (
-              <div className="signal-item" key={card.id}>
-                <strong>{card.title}</strong>
-                <span>{card.heat}</span>
-              </div>
+            {signalFeed.map((card, index) => (
+              <Link className="signal-item" href={`/topic/${card.id}`} key={card.id}>
+                <span className="signal-index">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="signal-body">
+                  <strong>{card.title}</strong>
+                  <span className="signal-heat">{card.heat}</span>
+                  <span className="signal-tags">
+                    <em>竞争度 {card.competition}</em>
+                    <em>{card.window}</em>
+                  </span>
+                </span>
+              </Link>
             ))}
           </div>
-          <div className="signal-foot">
-            <span>{site.slogan}</span>
-            <div className="signal-meter" aria-hidden="true">
-              <i />
-            </div>
-          </div>
+          <Link className="signal-cta" href="/topics">
+            去选题工作台挑今天写哪条
+            <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </section>
 
@@ -201,7 +207,7 @@ export default function HomePage() {
         <div className="section-inner subscribe-band">
           <div>
             <p className="eyebrow">邮件订阅</p>
-            <h2>把全球新奇雷达发到你的邮箱</h2>
+            <h2>把全球新奇信号发到你的邮箱</h2>
             <p>
               每天一条最值得写的全球信号，直接发到你邮箱。免费，随时退订。
             </p>
