@@ -170,7 +170,7 @@ export default function HomePage() {
           <div className="section-head">
             <div>
               <p className="eyebrow">选题卡预览</p>
-              <h2>Pro 核心交付长这样</h2>
+              <h2>一张选题卡长什么样</h2>
             </div>
           </div>
           <div className="topic-grid">

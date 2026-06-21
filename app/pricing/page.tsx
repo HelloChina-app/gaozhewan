@@ -39,9 +39,9 @@ export default function PricingPage() {
       <section className="page-shell">
         <div className="page-title">
           <p className="eyebrow">搞选题 Pro</p>
-          <h1>第一款产品先帮你搞选题</h1>
+          <h1>把全球信号变成你能直接发的选题</h1>
           <p>
-            搞着玩想帮你做的事很多，第一款产品先把全球信号变成你能直接发布的选题。
+            每天从全球信号里挑出值得写的，拆成写作角度、标题模板和素材，让你打开就能写。
           </p>
         </div>
 
@@ -77,8 +77,8 @@ export default function PricingPage() {
         <div className="section-inner">
           <div className="section-head">
             <div>
-              <p className="eyebrow">交付样式</p>
-              <h2>一张选题卡就是一个可执行信号包</h2>
+              <p className="eyebrow">选题卡预览</p>
+              <h2>一张选题卡，打开就能照着写</h2>
             </div>
           </div>
           <div className="topic-grid">
