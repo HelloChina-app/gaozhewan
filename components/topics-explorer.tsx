@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { TopicCardPreview } from "@/components/topic-card-preview";
 import { getAverageScore } from "@/lib/score";
 import { getDeadline } from "@/lib/window";
@@ -22,12 +22,33 @@ function byClosingSoon(a: TopicCard, b: TopicCard) {
   return da - db;
 }
 
+// 把一张卡里创作者会搜的字段拼成一段可检索文本：标题、热度、写作角度、标题模板。
+function haystack(card: TopicCard): string {
+  return [card.title, card.heat, ...card.angles, ...card.headlines]
+    .join(" ")
+    .toLowerCase();
+}
+
+// 关键词以空格分词，全部命中才算匹配（AND）；中文无空格时即单词子串匹配。
+function matchesQuery(card: TopicCard, terms: string[]): boolean {
+  if (terms.length === 0) return true;
+  const text = haystack(card);
+  return terms.every((term) => text.includes(term));
+}
+
 export function TopicsExplorer({ cards }: { cards: TopicCard[] }) {
   const [comp, setComp] = useState<CompKey>("全部");
   const [sort, setSort] = useState<SortKey>("newest");
+  const [query, setQuery] = useState("");
+
+  const terms = useMemo(
+    () => query.trim().toLowerCase().split(/\s+/).filter(Boolean),
+    [query]
+  );
 
   const filtered = cards.filter(
-    (card) => comp === "全部" || card.competition === comp
+    (card) =>
+      (comp === "全部" || card.competition === comp) && matchesQuery(card, terms)
   );
   const sorted = [...filtered].sort((a, b) => {
     if (sort === "score") {
@@ -41,6 +62,16 @@ export function TopicsExplorer({ cards }: { cards: TopicCard[] }) {
 
   return (
     <>
+      <div className="topic-search">
+        <input
+          type="search"
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="搜你想写的方向，如 开源、AI 搜索、浏览器"
+          aria-label="按关键词搜索选题"
+        />
+      </div>
+
       <div className="filter-row" aria-label="筛选与排序">
         {compOptions.map((option) => (
           <button
@@ -75,6 +106,12 @@ export function TopicsExplorer({ cards }: { cards: TopicCard[] }) {
         </button>
       </div>
 
+      <p className="topic-count" aria-live="polite">
+        {terms.length > 0
+          ? `匹配到 ${sorted.length} 条选题`
+          : `共 ${sorted.length} 条选题`}
+      </p>
+
       {sorted.length > 0 ? (
         <div className="topic-grid">
           {sorted.map((card) => (
@@ -82,7 +119,11 @@ export function TopicsExplorer({ cards }: { cards: TopicCard[] }) {
           ))}
         </div>
       ) : (
-        <p className="form-message">这个竞争度暂时没有选题卡，换个筛选看看。</p>
+        <p className="form-message">
+          {terms.length > 0
+            ? "没找到匹配的选题，换个关键词，或清空搜索看看全部。"
+            : "这个竞争度暂时没有选题卡，换个筛选看看。"}
+        </p>
       )}
     </>
   );

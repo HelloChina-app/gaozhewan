@@ -1264,3 +1264,39 @@ main {
   border-color: #e0e0e0;
   color: #8a8a8a;
 }
+
+/* 选题工作台：关键词搜索框与结果计数 */
+.topic-search {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.topic-search input {
+  width: 100%;
+  max-width: 520px;
+  background: #fffdf5;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 15px;
+  padding: 11px 18px;
+}
+
+.topic-search input::placeholder {
+  color: var(--muted);
+}
+
+.topic-search input:focus {
+  outline: none;
+  border-color: var(--ink);
+}
+
+.topic-count {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  margin: 0 0 18px;
+  text-align: center;
+}
