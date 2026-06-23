@@ -115,7 +115,7 @@ main {
   border-radius: 999px;
   color: var(--muted);
   font-size: 14px;
-  padding: 8px 12px;
+  padding: 11px 14px;
   white-space: nowrap;
 }
 
@@ -262,7 +262,7 @@ main {
 }
 
 .hero-copy h1 {
-  font-size: 78px;
+  font-size: clamp(36px, 9vw, 78px);
   font-weight: 950;
   max-width: 760px;
 }
@@ -725,6 +725,13 @@ main {
   align-items: center;
 }
 
+/* 侧栏里的订阅区收成单列，避免窄列把中文压成一字一行 */
+.article-side .subscribe-band {
+  grid-template-columns: 1fr;
+  gap: 16px;
+  align-items: stretch;
+}
+
 .subscribe-form label {
   display: block;
   font-weight: 800;
@@ -1081,6 +1088,18 @@ main {
   background: #f3f0df;
 }
 
+/* 对比表在平板/窄屏堆叠成「标签 + 值」，避免三列在 641–900px 溢出 */
+@media (max-width: 768px) {
+  .compare-row {
+    grid-template-columns: 1fr;
+  }
+
+  .compare-row strong {
+    background: var(--ink);
+    color: #ffffff;
+  }
+}
+
 .value-list,
 .faq-list {
   display: grid;
@@ -1134,6 +1153,15 @@ main {
   .site-nav {
     justify-content: flex-start;
     width: 100%;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    -webkit-mask-image: linear-gradient(90deg, #000 90%, transparent);
+    mask-image: linear-gradient(90deg, #000 90%, transparent);
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .hero,
@@ -1148,10 +1176,6 @@ main {
 
   .hero {
     min-height: auto;
-  }
-
-  .hero-copy h1 {
-    font-size: 58px;
   }
 
   .page-title h1 {
@@ -1194,10 +1218,6 @@ main {
     flex-direction: column;
   }
 
-  .hero-copy h1 {
-    font-size: 42px;
-  }
-
   .page-title h1,
   .article-hero h1 {
     font-size: 38px;
@@ -1233,6 +1253,20 @@ main {
   .price strong {
     font-size: 46px;
   }
+
+  .filter-row button,
+  .filter-row a {
+    padding: 8px 13px;
+  }
+}
+
+/* 长链接 / 长英文兜底，避免窄屏横向溢出 */
+.breadcrumb,
+.article-body,
+.source-list a,
+.topic-section a,
+.signal-heat {
+  overflow-wrap: anywhere;
 }
 
 /* 选题卡时效紧迫度徽标 */
