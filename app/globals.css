@@ -70,7 +70,8 @@ main {
   justify-content: space-between;
   gap: 20px;
   padding: 14px 0;
-  backdrop-filter: blur(18px);
+  /* 用纯色背景替代 backdrop-filter: blur——避免滚动时逐帧重绘，移动端更省 */
+  background: rgba(250, 250, 250, 0.94);
 }
 
 .brand {
