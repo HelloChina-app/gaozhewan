@@ -119,6 +119,11 @@ main {
   white-space: nowrap;
 }
 
+/* 汉堡按钮：仅 ≤640px 显示，详见底部媒体查询 */
+.nav-toggle {
+  display: none;
+}
+
 .site-nav a:hover {
   background: #f0eddf;
   color: var(--ink);
@@ -718,18 +723,13 @@ main {
   margin: 0;
 }
 
+/* 按容器宽度自适应：窄父容器（侧栏 320px）或窄屏自动收成单列，
+   不再依赖视口断点，根治嵌套时被压成一字一行的问题 */
 .subscribe-band {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
   gap: 28px;
   align-items: center;
-}
-
-/* 侧栏里的订阅区收成单列，避免窄列把中文压成一字一行 */
-.article-side .subscribe-band {
-  grid-template-columns: 1fr;
-  gap: 16px;
-  align-items: stretch;
 }
 
 .subscribe-form label {
@@ -982,7 +982,7 @@ main {
   align-items: start;
   display: grid;
   gap: 16px;
-  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
 }
 
 .topic-preview-stack {
@@ -1038,7 +1038,7 @@ main {
 
 .pricing-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 18px;
   align-items: start;
 }
@@ -1166,11 +1166,8 @@ main {
 
   .hero,
   .article-card-featured,
-  .subscribe-band,
   .pro-cta,
-  .article-shell,
-  .topic-sample-grid,
-  .pricing-grid {
+  .article-shell {
     grid-template-columns: 1fr;
   }
 
@@ -1216,6 +1213,58 @@ main {
   .section-head {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .site-header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    flex: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+  }
+
+  .nav-toggle-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--ink);
+  }
+
+  .site-nav {
+    display: none;
+    order: 3;
+    width: 100%;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .site-nav-open {
+    display: flex;
+  }
+
+  .site-nav a {
+    width: 100%;
+    border-radius: 8px;
+    padding: 12px 14px;
   }
 
   .page-title h1,
