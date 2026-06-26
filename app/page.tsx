@@ -79,7 +79,7 @@ export default function HomePage() {
             </div>
             <div>
               <strong>{tools.length}</strong>
-              <span>个工具样本</span>
+              <span>个实测工具</span>
             </div>
             <div>
               <strong>48h</strong>

@@ -176,7 +176,7 @@ export const tools: Tool[] = [
   {
     slug: "github-copilot",
     name: "GitHub Copilot",
-    description: "主流 AI 编程助手，可作为所有 AI 编程工具实测里的基准样本。",
+    description: "主流 AI 编程助手，按月订阅、在编辑器里补全和改写代码，几乎人人都从它上手。",
     url: "https://github.com/features/copilot",
     category: "AI 编程",
     tags: ["编程", "补全", "GitHub"],
@@ -204,7 +204,7 @@ export const tools: Tool[] = [
   {
     slug: "notion",
     name: "Notion",
-    description: "内容创作者常用知识库，可作为 AI 笔记和个人工作台话题的对照组。",
+    description: "内容创作者常用的笔记与知识库，集成 AI 写作和整理，能当你的素材库。",
     url: "https://www.notion.so/",
     category: "知识库",
     tags: ["笔记", "知识库", "协作"],
@@ -222,7 +222,7 @@ export const tools: Tool[] = [
   {
     slug: "chatgpt",
     name: "ChatGPT",
-    description: "OpenAI 的对话式 AI，几乎所有 AI 内容评测都绕不开的基准样本。",
+    description: "OpenAI 的对话式 AI，写作、问答、查资料都能用，几乎人人都拿它当起点。",
     url: "https://chat.openai.com/",
     category: "AI 助手",
     tags: ["对话", "写作", "通用"],
@@ -232,7 +232,7 @@ export const tools: Tool[] = [
   {
     slug: "claude",
     name: "Claude",
-    description: "Anthropic 的 AI 助手，长文档处理和写作能力强，适合做对照评测。",
+    description: "Anthropic 的 AI 助手，长文档处理和写作能力强，适合啃长文、改稿和整理资料。",
     url: "https://claude.ai/",
     category: "AI 助手",
     tags: ["对话", "长文本", "写作"],
