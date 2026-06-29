@@ -47,6 +47,15 @@ export type WindowStatus = {
 };
 
 /**
+ * 截止时间是否已过（热度窗口关闭）。依赖「当前时间」，仅客户端挂载后调用。
+ * deadline 为 null（窗口无法解析）时视为「未关闭」，不因解析失败而被隐藏。
+ */
+export function isClosed(deadline: number | null, now: number): boolean {
+  if (deadline == null) return false;
+  return deadline - now <= 0;
+}
+
+/**
  * 给定截止时间与当前时间，返回面向创作者的紧迫度状态与文案。
  * 依赖「当前时间」，应仅在客户端挂载后调用，避免水合不一致。
  */
