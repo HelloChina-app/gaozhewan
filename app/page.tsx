@@ -156,7 +156,7 @@ export default function HomePage() {
             <p className="eyebrow">搞选题 Pro</p>
             <h2>每天 3 张选题卡，打开就能写</h2>
             <p>
-              每张卡含写作角度、标题模板、竞争度和时效窗口，免费层先看摘要。
+              每张卡含写作角度、标题模板、竞争度和时效窗口，免费版先看摘要。
             </p>
           </div>
           <Link className="button" href="/pricing">

@@ -9,7 +9,7 @@ export function TopicCardFull({ card }: TopicCardFullProps) {
   return (
     <article className="topic-full">
       <div className="card-meta">
-        <span>公开样品</span>
+        <span>公开示例</span>
         <span>时效 {card.window}</span>
         <span>竞争度 {card.competition}</span>
       </div>

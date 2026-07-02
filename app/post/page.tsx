@@ -26,7 +26,7 @@ export default function PostIndexPage() {
           <p className="eyebrow">搞选题 · 把全球信号变成今天能发的内容</p>
           <h1>把全球信号拆成你今天能发的选题</h1>
           <p>
-            免费层帮你判断一件事值不值得跟，搞选题 Pro
+            免费版帮你判断一件事值不值得跟，搞选题 Pro
             交付角度、标题、时效、竞争度和素材包。
           </p>
         </div>
@@ -51,8 +51,8 @@ export default function PostIndexPage() {
         <div className="section-inner">
           <div className="section-head">
             <div>
-              <p className="eyebrow">完整样品</p>
-              <h2>付费后拿到的不是资讯，是一张可执行选题卡</h2>
+              <p className="eyebrow">完整示例</p>
+              <h2>不是又一条资讯，是一张今天就能动手的选题卡</h2>
             </div>
             <Link className="text-button" href="/pricing">
               查看搞选题 Pro
@@ -97,7 +97,7 @@ export default function PostIndexPage() {
           <div>
             <p className="eyebrow">早鸟名单</p>
             <h2>如果你要搞选题，先加入前 100 名</h2>
-            <p>我们会优先把完整选题卡样品、早鸟价格和内测反馈入口发给你。</p>
+            <p>我们会优先把完整选题卡、早鸟价和抢先体验发给你。</p>
           </div>
           <SubscribeForm source="topic-line" defaultInterest="搞选题" />
         </div>

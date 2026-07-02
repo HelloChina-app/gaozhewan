@@ -29,7 +29,7 @@ export default function TopicsPage() {
           <div>
             <p className="eyebrow">搞选题 Pro</p>
             <h2>每天 3 张选题卡发到你邮箱</h2>
-            <p>免费层看摘要，Pro 给完整角度、标题模板和素材包。</p>
+            <p>免费版看摘要，Pro 给完整角度、标题模板和素材包。</p>
           </div>
           <SubscribeForm source="topics-archive" defaultInterest="搞选题" />
         </div>
