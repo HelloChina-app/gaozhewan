@@ -35,13 +35,13 @@ export default function HomePage() {
     {
       title: "搞项目",
       desc: "从新产品和开源趋势里找可做的小项目",
-      status: "下一阶段",
+      status: "开放预约",
       href: "/projects"
     },
     {
       title: "搞副业",
       desc: "把流量玩法、工具组合和案例变成可执行方案",
-      status: "规划中",
+      status: "开放预约",
       href: "/side-hustles"
     }
   ];

@@ -26,10 +26,10 @@ export default function ProjectsPage() {
   return (
     <section className="page-shell">
       <div className="page-title">
-        <p className="eyebrow">搞项目 · 下一阶段</p>
+        <p className="eyebrow">搞项目 · 开放预约</p>
         <h1>从全球信号里找能开搞的小项目</h1>
         <p>
-          这条线还在打磨中。你可以先留下想做的项目方向，我们会用每天的全球信号，持续为你补充能动手的产品灵感。
+          先留下你想做的项目方向，我们会用每天的全球信号，优先为你补上能直接动手的产品灵感。
         </p>
       </div>
 
@@ -45,7 +45,7 @@ export default function ProjectsPage() {
       <section className="section">
         <div className="subscribe-band">
           <div>
-            <p className="eyebrow">内测名单</p>
+            <p className="eyebrow">抢先体验</p>
             <h2>如果你想搞项目，先留下方向</h2>
             <p>当我们把第一批产品灵感卡整理出来，会优先发给选择“搞项目”的用户。</p>
           </div>

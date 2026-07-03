@@ -26,10 +26,10 @@ export default function SideHustlesPage() {
   return (
     <section className="page-shell">
       <div className="page-title">
-        <p className="eyebrow">搞副业 · 规划中</p>
+        <p className="eyebrow">搞副业 · 开放预约</p>
         <h1>把全球玩法拆成能验证的副业方案</h1>
         <p>
-          这条线我们会慢慢做扎实。你可以先留下想做的副业方向，我们优先把你最需要的方案做出来。
+          先留下你想做的副业方向，我们会优先把你最需要的方案做扎实、做出来。
         </p>
       </div>
 
@@ -45,7 +45,7 @@ export default function SideHustlesPage() {
       <section className="section">
         <div className="subscribe-band">
           <div>
-            <p className="eyebrow">候补名单</p>
+            <p className="eyebrow">抢先体验</p>
             <h2>如果你想搞副业，先告诉我们</h2>
             <p>后续会优先把副业案例拆解和工具组合发给选择“搞副业”的用户。</p>
           </div>
