@@ -1,3 +1,4 @@
+import { CopyBriefButton } from "@/components/copy-brief-button";
 import { GzwScore } from "@/components/gzw-score";
 import type { TopicCard } from "@/lib/content";
 
@@ -17,6 +18,8 @@ export function TopicCardFull({ card }: TopicCardFullProps) {
       <p>{card.heat}</p>
 
       <GzwScore scores={card.scores} compact />
+
+      <CopyBriefButton card={card} />
 
       <div className="topic-section">
         <h4>推荐写作角度</h4>

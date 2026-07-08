@@ -1037,6 +1037,20 @@ main {
   font-weight: 800;
 }
 
+.copy-brief {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.copy-brief-hint {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .pricing-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
@@ -1383,4 +1397,20 @@ main {
   font-weight: 700;
   margin: 0 0 18px;
   text-align: center;
+}
+
+/* 复制写作包：选题卡详情页的「选定 → 开写」一键动作 */
+.copy-brief {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 18px;
+}
+
+.copy-brief-hint {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 420px;
 }
