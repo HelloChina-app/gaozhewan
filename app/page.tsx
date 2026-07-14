@@ -105,8 +105,8 @@ export default function HomePage() {
                   <strong>{card.title}</strong>
                   <span className="signal-heat">{card.heat}</span>
                   <span className="signal-tags">
-                    <em>竞争度 {card.competition}</em>
-                    <em>{card.window}</em>
+                    <em>今日信号</em>
+                    <em>Pro 可解锁写作包</em>
                   </span>
                 </span>
               </Link>
@@ -159,8 +159,8 @@ export default function HomePage() {
               每张卡含写作角度、标题模板、竞争度和时效窗口，免费版先看摘要。
             </p>
           </div>
-          <Link className="button" href="/pricing">
-            查看早鸟价
+          <Link className="button" href="/checkout">
+            使用 USDT 开通
           </Link>
         </div>
       </section>

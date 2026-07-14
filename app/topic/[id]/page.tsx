@@ -1,23 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SubscribeForm } from "@/components/subscribe-form";
 import { TopicCardFull } from "@/components/topic-card-full";
 import { TopicCardPreview } from "@/components/topic-card-preview";
 import {
   getSortedTopicCards,
-  getTopicCardById,
-  topicCards
+  getTopicCardById
 } from "@/lib/content";
 import { site } from "@/lib/site";
+import { getProAccess } from "@/lib/pro-access";
 
 type TopicPageProps = {
   params: Promise<{ id: string }>;
 };
 
-export function generateStaticParams() {
-  return topicCards.map((card) => ({ id: card.id }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params
@@ -47,6 +44,7 @@ export async function generateMetadata({
 export default async function TopicPage({ params }: TopicPageProps) {
   const { id } = await params;
   const card = getTopicCardById(id);
+  const access = await getProAccess();
 
   if (!card) {
     notFound();
@@ -73,10 +71,10 @@ export default async function TopicPage({ params }: TopicPageProps) {
           <span>/</span>
           <Link href="/topics">选题卡</Link>
           <span>/</span>
-          <span>时效 {card.window}</span>
+          <span>{access ? `时效 ${card.window}` : "免费预览"}</span>
         </div>
 
-        <TopicCardFull card={card} />
+        <TopicCardFull card={card} showPro={Boolean(access)} />
 
         {more.length > 0 ? (
           <section className="section">
@@ -91,7 +89,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             </div>
             <div className="topic-grid">
               {more.map((item) => (
-                <TopicCardPreview card={item} key={item.id} />
+                <TopicCardPreview card={item} key={item.id} showPro={Boolean(access)} />
               ))}
             </div>
           </section>
@@ -107,10 +105,20 @@ export default async function TopicPage({ params }: TopicPageProps) {
       <aside className="article-side">
         <div className="subscribe-band">
           <div>
-            <p className="eyebrow">搞选题 Pro</p>
-            <h2>每天 3 张这样的选题卡，直接发到你邮箱</h2>
+            <p className="eyebrow">{access ? "Pro 已解锁" : "搞选题 Pro"}</p>
+            <h2>
+              {access
+                ? "完整角度、标题模板和素材包已显示"
+                : "使用 USDT 开通完整选题卡"}
+            </h2>
           </div>
-          <SubscribeForm source={`topic-${card.id}`} defaultInterest="搞选题" />
+          {access ? (
+            <p className="form-message">授权邮箱：{access.email}</p>
+          ) : (
+            <Link className="button" href="/checkout">
+              前往 USDT 收银台
+            </Link>
+          )}
         </div>
       </aside>
     </article>

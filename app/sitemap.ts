@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/weekly",
     "/topics",
     "/pricing",
+    "/checkout",
     "/subscribe",
     "/about",
     "/privacy"

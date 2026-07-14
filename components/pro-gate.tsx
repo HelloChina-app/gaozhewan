@@ -20,8 +20,8 @@ export function ProGate({ anglesCount = 3, templatesCount = 3 }: ProGateProps) {
         <span />
         <span />
       </div>
-      <Link className="button button-dark" href="/pricing">
-        升级搞选题 Pro
+      <Link className="button button-dark" href="/checkout">
+        使用 USDT 开通 Pro
       </Link>
     </section>
   );

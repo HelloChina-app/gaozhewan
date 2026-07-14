@@ -2,23 +2,22 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { GzwScore } from "@/components/gzw-score";
+import { ProContent } from "@/components/pro-content";
 import { ProGate } from "@/components/pro-gate";
 import {
   getPostBySlug,
   getToolBySlug,
-  posts,
   type BodyBlock
 } from "@/lib/content";
 import { site } from "@/lib/site";
 import { formatDate } from "@/lib/utils";
+import { getProAccess } from "@/lib/pro-access";
 
 type PostPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return posts.map((post) => ({ slug: post.slug }));
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params
@@ -78,6 +77,7 @@ function renderBlock(block: BodyBlock, index: number) {
 export default async function PostPage({ params }: PostPageProps) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
+  const access = await getProAccess();
 
   if (!post) {
     notFound();
@@ -143,10 +143,17 @@ export default async function PostPage({ params }: PostPageProps) {
           {post.body.map((block, index) => renderBlock(block, index))}
         </div>
 
-        <ProGate
-          anglesCount={post.proAngles.length}
-          templatesCount={post.headlineTemplates.length}
-        />
+        {access ? (
+          <ProContent
+            angles={post.proAngles}
+            headlines={post.headlineTemplates}
+          />
+        ) : (
+          <ProGate
+            anglesCount={post.proAngles.length}
+            templatesCount={post.headlineTemplates.length}
+          />
+        )}
 
         {relatedTools.length > 0 ? (
           <section className="section">

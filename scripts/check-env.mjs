@@ -44,13 +44,18 @@ for (const fileName of [".env.local", ".env"]) {
 const requiredProductionVars = [
   "NEXT_PUBLIC_SITE_URL",
   "RESEND_API_KEY",
-  "RESEND_AUDIENCE_ID"
+  "RESEND_AUDIENCE_ID",
+  "USDT_NETWORK",
+  "USDT_WALLET_ADDRESS",
+  "USDT_PRICE",
+  "PRO_ACCESS_SECRET"
 ];
 
 const isProductionCheck = process.argv.includes("--production");
 const missing = requiredProductionVars.filter((key) => !process.env[key]);
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 const urlErrors = [];
+const paymentErrors = [];
 
 if (siteUrl) {
   try {
@@ -64,17 +69,36 @@ if (siteUrl) {
   }
 }
 
+if (
+  process.env.USDT_PRICE &&
+  (!/^\d+(\.\d{1,6})?$/.test(process.env.USDT_PRICE) ||
+    Number(process.env.USDT_PRICE) <= 0)
+) {
+  paymentErrors.push("USDT_PRICE must be a positive decimal amount.");
+}
+
+if (
+  process.env.PRO_ACCESS_SECRET &&
+  process.env.PRO_ACCESS_SECRET.length < 32
+) {
+  paymentErrors.push("PRO_ACCESS_SECRET must contain at least 32 characters.");
+}
+
 if (!isProductionCheck) {
   console.log("Local env check complete. Production-only values may be empty.");
   process.exit(0);
 }
 
-if (missing.length > 0 || urlErrors.length > 0) {
+if (missing.length > 0 || urlErrors.length > 0 || paymentErrors.length > 0) {
   for (const key of missing) {
     console.error(`Missing required production env var: ${key}`);
   }
 
   for (const error of urlErrors) {
+    console.error(error);
+  }
+
+  for (const error of paymentErrors) {
     console.error(error);
   }
 

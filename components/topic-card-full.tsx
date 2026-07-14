@@ -1,57 +1,68 @@
 import { CopyBriefButton } from "@/components/copy-brief-button";
 import { GzwScore } from "@/components/gzw-score";
+import { ProGate } from "@/components/pro-gate";
 import type { TopicCard } from "@/lib/content";
 
 type TopicCardFullProps = {
   card: TopicCard;
+  showPro?: boolean;
 };
 
-export function TopicCardFull({ card }: TopicCardFullProps) {
+export function TopicCardFull({ card, showPro = false }: TopicCardFullProps) {
   return (
     <article className="topic-full">
       <div className="card-meta">
-        <span>公开示例</span>
-        <span>时效 {card.window}</span>
-        <span>竞争度 {card.competition}</span>
+        <span>{showPro ? "Pro 已解锁" : "免费预览"}</span>
+        {showPro ? <span>时效 {card.window}</span> : null}
+        {showPro ? <span>竞争度 {card.competition}</span> : null}
       </div>
       <h3>{card.title}</h3>
       <p>{card.heat}</p>
 
       <GzwScore scores={card.scores} compact />
 
-      <CopyBriefButton card={card} />
+      {showPro ? (
+        <>
+          <CopyBriefButton card={card} />
 
-      <div className="topic-section">
-        <h4>推荐写作角度</h4>
-        <ol>
-          {card.angles.map((angle) => (
-            <li key={angle}>{angle}</li>
-          ))}
-        </ol>
-      </div>
+          <div className="topic-section">
+            <h4>推荐写作角度</h4>
+            <ol>
+              {card.angles.map((angle) => (
+                <li key={angle}>{angle}</li>
+              ))}
+            </ol>
+          </div>
 
-      <div className="topic-section">
-        <h4>标题模板</h4>
-        <ul>
-          {card.headlines.map((headline) => (
-            <li key={headline}>「{headline}」</li>
-          ))}
-        </ul>
-      </div>
+          <div className="topic-section">
+            <h4>标题模板</h4>
+            <ul>
+              {card.headlines.map((headline) => (
+                <li key={headline}>「{headline}」</li>
+              ))}
+            </ul>
+          </div>
 
-      <div className="topic-section">
-        <h4>素材包</h4>
-        {card.materials.map((material) => (
-          <a
-            href={material.url}
-            key={material.url}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            {material.label}
-          </a>
-        ))}
-      </div>
+          <div className="topic-section">
+            <h4>素材包</h4>
+            {card.materials.map((material) => (
+              <a
+                href={material.url}
+                key={material.url}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                {material.label}
+              </a>
+            ))}
+          </div>
+        </>
+      ) : (
+        <ProGate
+          anglesCount={card.angles.length}
+          templatesCount={card.headlines.length}
+        />
+      )}
     </article>
   );
 }

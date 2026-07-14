@@ -12,7 +12,8 @@
     "check:env:production": "node scripts/check-env.mjs --production",
     "check:content": "node scripts/check-content.mjs",
     "signals": "node scripts/fetch-signals.mjs",
-    "smoke:local": "node scripts/smoke-local.mjs"
+    "smoke:local": "node scripts/smoke-local.mjs",
+    "pro:access": "node scripts/create-pro-access-link.mjs"
   },
   "dependencies": {
     "next": "^15.5.19",

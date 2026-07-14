@@ -6,6 +6,14 @@ import { getAverageScore } from "@/lib/score";
 import { getDeadline, isClosed } from "@/lib/window";
 import type { TopicCard } from "@/lib/content";
 
+type ExplorerCard = Pick<
+  TopicCard,
+  "id" | "title" | "heat" | "scores" | "publishedAt"
+> &
+  Partial<
+    Pick<TopicCard, "angles" | "competition" | "headlines" | "window">
+  >;
+
 type SortKey = "newest" | "score" | "closing";
 type CompKey = "全部" | "低" | "中" | "高";
 type HeatKey = "全部" | "writable" | "closed";
@@ -14,9 +22,9 @@ const compOptions: CompKey[] = ["全部", "低", "中", "高"];
 
 // 按热度截止时间升序：越快关闭越靠前；无法解析窗口的排到最后。
 // 截止时间 = 发布日 + 窗口时长，是确定值，服务端/客户端一致，排序无水合风险。
-function byClosingSoon(a: TopicCard, b: TopicCard) {
-  const da = getDeadline(a.publishedAt, a.window);
-  const db = getDeadline(b.publishedAt, b.window);
+function byClosingSoon(a: ExplorerCard, b: ExplorerCard) {
+  const da = a.window ? getDeadline(a.publishedAt, a.window) : null;
+  const db = b.window ? getDeadline(b.publishedAt, b.window) : null;
   if (da == null && db == null) return 0;
   if (da == null) return 1;
   if (db == null) return -1;
@@ -25,9 +33,9 @@ function byClosingSoon(a: TopicCard, b: TopicCard) {
 
 // 挂载后用「当前时间」修正排序：已过热度的卡沉到最后；
 // 还能写的卡里越快关闭越靠前。让创作者第一眼看到「现在还来得及写」的选题。
-function byClosingSoonAware(a: TopicCard, b: TopicCard, now: number) {
-  const da = getDeadline(a.publishedAt, a.window);
-  const db = getDeadline(b.publishedAt, b.window);
+function byClosingSoonAware(a: ExplorerCard, b: ExplorerCard, now: number) {
+  const da = a.window ? getDeadline(a.publishedAt, a.window) : null;
+  const db = b.window ? getDeadline(b.publishedAt, b.window) : null;
   const ca = isClosed(da, now);
   const cb = isClosed(db, now);
   if (ca !== cb) return ca ? 1 : -1; // 已过的排后面
@@ -35,20 +43,26 @@ function byClosingSoonAware(a: TopicCard, b: TopicCard, now: number) {
 }
 
 // 把一张卡里创作者会搜的字段拼成一段可检索文本：标题、热度、写作角度、标题模板。
-function haystack(card: TopicCard): string {
-  return [card.title, card.heat, ...card.angles, ...card.headlines]
+function haystack(card: ExplorerCard): string {
+  return [card.title, card.heat, ...(card.angles || []), ...(card.headlines || [])]
     .join(" ")
     .toLowerCase();
 }
 
 // 关键词以空格分词，全部命中才算匹配（AND）；中文无空格时即单词子串匹配。
-function matchesQuery(card: TopicCard, terms: string[]): boolean {
+function matchesQuery(card: ExplorerCard, terms: string[]): boolean {
   if (terms.length === 0) return true;
   const text = haystack(card);
   return terms.every((term) => text.includes(term));
 }
 
-export function TopicsExplorer({ cards }: { cards: TopicCard[] }) {
+export function TopicsExplorer({
+  cards,
+  showPro = false
+}: {
+  cards: ExplorerCard[];
+  showPro?: boolean;
+}) {
   const [comp, setComp] = useState<CompKey>("全部");
   const [sort, setSort] = useState<SortKey>("newest");
   const [heat, setHeat] = useState<HeatKey>("全部");
@@ -69,16 +83,18 @@ export function TopicsExplorer({ cards }: { cards: TopicCard[] }) {
   // 还在热度窗口内的卡数：仅挂载后可知，用于按钮提示与计数。
   const writableCount = useMemo(() => {
     if (now == null) return null;
-    return cards.filter(
-      (card) => !isClosed(getDeadline(card.publishedAt, card.window), now)
+    return cards.filter((card) =>
+      card.window
+        ? !isClosed(getDeadline(card.publishedAt, card.window), now)
+        : false
     ).length;
   }, [cards, now]);
 
   const filtered = cards.filter((card) => {
-    if (comp !== "全部" && card.competition !== comp) return false;
+    if (showPro && comp !== "全部" && card.competition !== comp) return false;
     if (!matchesQuery(card, terms)) return false;
     // 热度筛选依赖当前时间，仅挂载后生效；挂载前不过滤，保持首屏一致。
-    if (heat !== "全部" && now != null) {
+    if (showPro && heat !== "全部" && now != null && card.window) {
       const closed = isClosed(getDeadline(card.publishedAt, card.window), now);
       if (heat === "writable" && closed) return false;
       if (heat === "closed" && !closed) return false;
@@ -109,30 +125,36 @@ export function TopicsExplorer({ cards }: { cards: TopicCard[] }) {
       </div>
 
       <div className="filter-row" aria-label="筛选与排序">
-        {compOptions.map((option) => (
+        {showPro
+          ? compOptions.map((option) => (
+              <button
+                key={option}
+                type="button"
+                className={comp === option ? "active" : undefined}
+                onClick={() => setComp(option)}
+              >
+                {option === "全部" ? "全部" : `竞争度 ${option}`}
+              </button>
+            ))
+          : null}
+        {showPro ? (
           <button
-            key={option}
             type="button"
-            className={comp === option ? "active" : undefined}
-            onClick={() => setComp(option)}
+            className={heat === "writable" ? "active" : undefined}
+            onClick={() => setHeat(heat === "writable" ? "全部" : "writable")}
           >
-            {option === "全部" ? "全部" : `竞争度 ${option}`}
+            {writableCount != null ? `还能写 ${writableCount}` : "还能写"}
           </button>
-        ))}
-        <button
-          type="button"
-          className={heat === "writable" ? "active" : undefined}
-          onClick={() => setHeat(heat === "writable" ? "全部" : "writable")}
-        >
-          {writableCount != null ? `还能写 ${writableCount}` : "还能写"}
-        </button>
-        <button
-          type="button"
-          className={heat === "closed" ? "active" : undefined}
-          onClick={() => setHeat(heat === "closed" ? "全部" : "closed")}
-        >
-          热度已过
-        </button>
+        ) : null}
+        {showPro ? (
+          <button
+            type="button"
+            className={heat === "closed" ? "active" : undefined}
+            onClick={() => setHeat(heat === "closed" ? "全部" : "closed")}
+          >
+            热度已过
+          </button>
+        ) : null}
         <button
           type="button"
           className={sort === "newest" ? "active" : undefined}
@@ -147,13 +169,15 @@ export function TopicsExplorer({ cards }: { cards: TopicCard[] }) {
         >
           高分优先
         </button>
-        <button
-          type="button"
-          className={sort === "closing" ? "active" : undefined}
-          onClick={() => setSort("closing")}
-        >
-          快关闭
-        </button>
+        {showPro ? (
+          <button
+            type="button"
+            className={sort === "closing" ? "active" : undefined}
+            onClick={() => setSort("closing")}
+          >
+            快关闭
+          </button>
+        ) : null}
       </div>
 
       <p className="topic-count" aria-live="polite">
@@ -165,7 +189,7 @@ export function TopicsExplorer({ cards }: { cards: TopicCard[] }) {
       {sorted.length > 0 ? (
         <div className="topic-grid">
           {sorted.map((card) => (
-            <TopicCardPreview card={card} key={card.id} />
+            <TopicCardPreview card={card} key={card.id} showPro={showPro} />
           ))}
         </div>
       ) : (

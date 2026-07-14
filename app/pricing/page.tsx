@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { SubscribeForm } from "@/components/subscribe-form";
+import Link from "next/link";
 import { TopicCardPreview } from "@/components/topic-card-preview";
 import { getSortedTopicCards } from "@/lib/content";
+import { getUsdtCheckoutConfig } from "@/lib/usdt";
 
 export const metadata: Metadata = {
   title: "搞选题 Pro 定价",
@@ -28,11 +29,20 @@ const faqs = [
   },
   {
     q: "现在怎么开通？",
-    a: "现在先加入早鸟名单，开通后我们第一时间通知你，并为你锁定早鸟价。"
+    a: "进入 USDT 收银台，按页面指定的唯一网络付款并提交交易哈希。链上核验通过后，访问链接会发送到你的邮箱。"
+  },
+  {
+    q: "支持哪些付款方式？",
+    a: "只接受 USDT。本站不接受人民币、美元、银行卡、PayPal、其他稳定币或其他加密资产。"
+  },
+  {
+    q: "付款后多久开通？",
+    a: "采用人工链上核验，通常 12 小时内完成。提交交易哈希不等于付款确认，只有币种、网络、地址、金额和确认数全部匹配才会开通。"
   }
 ];
 
 export default function PricingPage() {
+  const checkout = getUsdtCheckoutConfig();
   const recentCards = getSortedTopicCards().slice(0, 3);
   return (
     <>
@@ -47,14 +57,18 @@ export default function PricingPage() {
 
         <div className="pricing-grid">
           <div className="price-card">
-            <p className="eyebrow">早鸟计划</p>
-            <h2>前 100 名锁定早鸟价</h2>
+            <p className="eyebrow">USDT ONLY</p>
+            <h2>Pro 年度版</h2>
             <div className="price">
-              <strong>¥99</strong>
+              <strong>{checkout.amount} USDT</strong>
               <span>/ 年</span>
             </div>
-            <p>标准价 ¥199/年，月付 ¥29。现在先收早鸟名单，不在站内直接收款。</p>
-            <SubscribeForm source="pricing-page" defaultInterest="搞选题" />
+            <p>
+              一次支付，解锁 365 天完整选题工作台。仅接受页面指定网络的 USDT，其他付款方式一律不支持。
+            </p>
+            <Link className="button" href="/checkout">
+              前往 USDT 收银台
+            </Link>
           </div>
 
           <div className="compare-table" aria-label="免费与 Pro 对比">

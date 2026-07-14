@@ -1,27 +1,29 @@
 import Link from "next/link";
 import { GzwScore } from "@/components/gzw-score";
-import { TopicUrgency } from "@/components/topic-urgency";
 import type { TopicCard } from "@/lib/content";
 
 type TopicCardPreviewProps = {
-  card: TopicCard;
+  card: Pick<TopicCard, "id" | "title" | "heat" | "scores" | "publishedAt"> &
+    Partial<Pick<TopicCard, "window" | "competition">>;
+  showPro?: boolean;
 };
 
-export function TopicCardPreview({ card }: TopicCardPreviewProps) {
+export function TopicCardPreview({ card, showPro = false }: TopicCardPreviewProps) {
   return (
     <Link className="topic-preview" href={`/topic/${card.id}`}>
       <div className="card-meta">
         <span>选题雷达</span>
-        <span>窗口 {card.window}</span>
-        <span>竞争度 {card.competition}</span>
-        <TopicUrgency publishedAt={card.publishedAt} window={card.window} />
+        {showPro && card.window ? <span>窗口 {card.window}</span> : null}
+        {showPro && card.competition ? (
+          <span>竞争度 {card.competition}</span>
+        ) : null}
       </div>
       <h3>{card.title}</h3>
       <p>{card.heat}</p>
       <GzwScore scores={card.scores} compact />
       <div className="topic-mask">
-        <span>{card.angles[0]}</span>
-        <span>{card.headlines[0]}</span>
+        <span>Pro 写作角度</span>
+        <span>Pro 标题模板</span>
       </div>
     </Link>
   );
