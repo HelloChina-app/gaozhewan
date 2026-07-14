@@ -5,7 +5,7 @@ import { FormEvent, useState } from "react";
 type CheckoutState =
   | { kind: "idle" }
   | { kind: "submitting" }
-  | { kind: "error"; message: string }
+  | { kind: "error"; mailto?: string; message: string }
   | { kind: "success"; orderId: string; receiptSent: boolean };
 
 type UsdtCheckoutFormProps = {
@@ -54,11 +54,38 @@ export function UsdtCheckoutForm({
       });
       const result = (await response.json()) as {
         error?: string;
+        fallbackEmail?: string;
         orderId?: string;
         receiptSent?: boolean;
       };
 
       if (!response.ok || !result.orderId) {
+        if (result.fallbackEmail) {
+          const email = String(formData.get("email") || "");
+          const txHash = String(formData.get("txHash") || "");
+          const senderAddress = String(formData.get("senderAddress") || "");
+          const note = String(formData.get("note") || "");
+          const subject = `搞着玩 Pro USDT 核验：${txHash.slice(0, 12)}`;
+          const body = [
+            "请核验以下搞着玩 Pro USDT 付款：",
+            "",
+            `客户邮箱：${email}`,
+            `金额：${amount} USDT`,
+            `网络：${network}`,
+            `收款地址：${address}`,
+            `交易哈希：${txHash}`,
+            `付款地址：${senderAddress || "未提供"}`,
+            `备注：${note || "无"}`
+          ].join("\n");
+
+          setState({
+            kind: "error",
+            message: result.error || "请改用邮件登记。",
+            mailto: `mailto:${result.fallbackEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+          });
+          return;
+        }
+
         throw new Error(result.error || "订单提交失败，请稍后重试。");
       }
 
@@ -176,13 +203,15 @@ export function UsdtCheckoutForm({
             {state.kind === "submitting" ? "正在登记…" : "我已付款，提交核验"}
           </button>
           {state.kind === "error" ? (
-            <p className="form-message form-error" role="alert">
-              {state.message}
-            </p>
+            <div className="form-message form-error" role="alert">
+              <p>{state.message}</p>
+              {state.mailto ? (
+                <a href={state.mailto}>打开邮件草稿并发送订单资料</a>
+              ) : null}
+            </div>
           ) : null}
         </form>
       )}
     </div>
   );
 }
-

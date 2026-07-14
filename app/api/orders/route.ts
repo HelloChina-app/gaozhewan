@@ -87,7 +87,10 @@ export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
     return NextResponse.json(
-      { error: "订单通知服务暂不可用，请稍后重试。" },
+      {
+        error: "自动登记暂不可用，请使用页面下方的邮件登记。",
+        fallbackEmail: site.email
+      },
       { status: 503 }
     );
   }
@@ -122,7 +125,10 @@ export async function POST(request: Request) {
 
   if (!operatorResponse.ok) {
     return NextResponse.json(
-      { error: "订单通知发送失败，请稍后重试。" },
+      {
+        error: "自动登记暂不可用，请使用页面下方的邮件登记。",
+        fallbackEmail: site.email
+      },
       { status: 502 }
     );
   }
@@ -149,4 +155,3 @@ export async function POST(request: Request) {
     }
   );
 }
-
