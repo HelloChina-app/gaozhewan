@@ -6,17 +6,25 @@ type CheckoutState =
   | { kind: "idle" }
   | { kind: "submitting" }
   | { kind: "error"; mailto?: string; message: string }
-  | { kind: "success"; orderId: string; receiptSent: boolean };
+  | {
+      accessUrl?: string;
+      kind: "success";
+      orderId: string;
+      receiptSent: boolean;
+      verified: boolean;
+    };
 
 type UsdtCheckoutFormProps = {
   address: string;
   amount: string;
+  automaticVerification: boolean;
   network: string;
 };
 
 export function UsdtCheckoutForm({
   address,
   amount,
+  automaticVerification,
   network
 }: UsdtCheckoutFormProps) {
   const [state, setState] = useState<CheckoutState>({ kind: "idle" });
@@ -53,10 +61,12 @@ export function UsdtCheckoutForm({
         })
       });
       const result = (await response.json()) as {
+        accessUrl?: string;
         error?: string;
         fallbackEmail?: string;
         orderId?: string;
         receiptSent?: boolean;
+        verified?: boolean;
       };
 
       if (!response.ok || !result.orderId) {
@@ -90,9 +100,11 @@ export function UsdtCheckoutForm({
       }
 
       setState({
+        accessUrl: result.accessUrl,
         kind: "success",
         orderId: result.orderId,
-        receiptSent: Boolean(result.receiptSent)
+        receiptSent: Boolean(result.receiptSent),
+        verified: Boolean(result.verified)
       });
       form.reset();
     } catch (error) {
@@ -132,14 +144,25 @@ export function UsdtCheckoutForm({
         <div className="order-success" role="status">
           <p className="eyebrow">订单已登记</p>
           <h2>{state.orderId}</h2>
-          <p>
-            我们会人工核对链上到账情况，通常在 12 小时内把一年期 Pro 访问链接发送到你的邮箱。
-          </p>
-          <p>
-            {state.receiptSent
-              ? "订单回执已发送，请同时检查垃圾邮件。"
-              : "回执邮件暂未送达，但订单通知已登记；请保存本页订单号。"}
-          </p>
+          {state.verified && state.accessUrl ? (
+            <>
+              <p>链上核验已通过，该 TxID 已登记并锁定，不能重复开通。</p>
+              <a className="button" href={state.accessUrl}>
+                立即解锁 365 天 Pro
+              </a>
+            </>
+          ) : (
+            <>
+              <p>
+                我们会人工核对链上到账情况，通常在 12 小时内把一年期 Pro 访问链接发送到你的邮箱。
+              </p>
+              <p>
+                {state.receiptSent
+                  ? "订单回执已发送，请同时检查垃圾邮件。"
+                  : "回执邮件暂未送达，但订单通知已登记；请保存本页订单号。"}
+              </p>
+            </>
+          )}
         </div>
       ) : (
         <form className="checkout-form" onSubmit={onSubmit}>
@@ -200,7 +223,11 @@ export function UsdtCheckoutForm({
             disabled={state.kind === "submitting"}
             type="submit"
           >
-            {state.kind === "submitting" ? "正在登记…" : "我已付款，提交核验"}
+            {state.kind === "submitting"
+              ? "正在核验链上交易…"
+              : automaticVerification
+                ? "我已付款，核验并开通"
+                : "我已付款，提交核验"}
           </button>
           {state.kind === "error" ? (
             <div className="form-message form-error" role="alert">

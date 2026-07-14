@@ -37,6 +37,7 @@ export default async function CheckoutPage() {
         <UsdtCheckoutForm
           address={checkout.address}
           amount={checkout.amount}
+          automaticVerification={checkout.automaticVerification}
           network={checkout.network}
         />
       ) : (
@@ -63,11 +64,12 @@ export default async function CheckoutPage() {
         </div>
         <div className="value-row">
           <strong>03</strong>
-          <h2>邮件领取访问链接</h2>
-          <p>核验通过后发送一年期签名访问链接。链接仅用于开通内容权限，不会要求你的私钥或助记词。</p>
+          <h2>核验通过后站内解锁</h2>
+          <p>
+            已确认的官方 USDT 转账会直接生成一年期访问权；同一 TxID 只能开通一次。异常情况才转人工处理。
+          </p>
         </div>
       </div>
     </section>
   );
 }
-

@@ -43,12 +43,11 @@ for (const fileName of [".env.local", ".env"]) {
 
 const requiredProductionVars = [
   "NEXT_PUBLIC_SITE_URL",
-  "RESEND_API_KEY",
-  "RESEND_AUDIENCE_ID",
   "USDT_NETWORK",
   "USDT_WALLET_ADDRESS",
   "USDT_PRICE",
-  "PRO_ACCESS_SECRET"
+  "PRO_ACCESS_SECRET",
+  "USDT_ORDER_STORE"
 ];
 
 const isProductionCheck = process.argv.includes("--production");
@@ -82,6 +81,13 @@ if (
   process.env.PRO_ACCESS_SECRET.length < 32
 ) {
   paymentErrors.push("PRO_ACCESS_SECRET must contain at least 32 characters.");
+}
+
+if (
+  process.env.USDT_ORDER_STORE &&
+  process.env.USDT_ORDER_STORE !== "vercel-blob"
+) {
+  paymentErrors.push('USDT_ORDER_STORE must be "vercel-blob".');
 }
 
 if (!isProductionCheck) {

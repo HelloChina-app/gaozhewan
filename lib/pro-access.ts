@@ -24,6 +24,22 @@ function isPayload(value: unknown): value is ProAccessPayload {
   );
 }
 
+export function createProAccessToken(
+  payload: ProAccessPayload,
+  secret = process.env.PRO_ACCESS_SECRET || ""
+) {
+  if (secret.length < 32 || !isPayload(payload)) return null;
+
+  const encodedPayload = Buffer.from(JSON.stringify(payload)).toString(
+    "base64url"
+  );
+  const signature = createHmac("sha256", secret)
+    .update(encodedPayload)
+    .digest("base64url");
+
+  return `${encodedPayload}.${signature}`;
+}
+
 export function verifyProAccessToken(
   token: string,
   secret = process.env.PRO_ACCESS_SECRET || ""
@@ -62,4 +78,3 @@ export async function getProAccess() {
   const token = cookieStore.get(PRO_COOKIE_NAME)?.value;
   return token ? verifyProAccessToken(token) : null;
 }
-

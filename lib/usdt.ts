@@ -4,6 +4,7 @@ export const PRO_PLAN_DAYS = 365;
 export type UsdtCheckoutConfig = {
   address: string;
   amount: string;
+  automaticVerification: boolean;
   enabled: boolean;
   network: string;
   planDays: number;
@@ -22,6 +23,13 @@ export function getUsdtCheckoutConfig(): UsdtCheckoutConfig {
   return {
     address,
     amount,
+    automaticVerification: Boolean(
+      (process.env.USDT_ORDER_STORE === "vercel-blob" ||
+        process.env.BLOB_READ_WRITE_TOKEN) &&
+        process.env.PRO_ACCESS_SECRET &&
+        process.env.PRO_ACCESS_SECRET.length >= 32 &&
+        /TRON|TRC20/i.test(network)
+    ),
     enabled: Boolean(
       address &&
         network &&

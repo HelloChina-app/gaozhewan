@@ -1,7 +1,16 @@
 import { randomBytes } from "node:crypto";
 import { NextResponse } from "next/server";
+import { createProAccessToken } from "@/lib/pro-access";
 import { site } from "@/lib/site";
+import { verifyConfirmedTronUsdtTransfer } from "@/lib/tron-usdt";
 import { getUsdtCheckoutConfig } from "@/lib/usdt";
+import {
+  automaticUsdtOrdersEnabled,
+  hashOrderEmail,
+  readUsdtOrder,
+  saveUsdtOrder,
+  type StoredUsdtOrder
+} from "@/lib/usdt-orders";
 
 export const runtime = "nodejs";
 
@@ -42,6 +51,62 @@ function createOrderId() {
   return `GZW-${day}-${randomBytes(3).toString("hex").toUpperCase()}`;
 }
 
+function accessResult(order: StoredUsdtOrder, email: string) {
+  const token = createProAccessToken({
+    v: 1,
+    email,
+    orderId: order.orderId,
+    plan: "pro-yearly",
+    exp: order.accessExpiresAt
+  });
+
+  return token
+    ? {
+        accessUrl: `/api/access/redeem?token=${encodeURIComponent(token)}`,
+        ok: true,
+        orderId: order.orderId,
+        receiptSent: false,
+        verified: true
+      }
+    : null;
+}
+
+function verificationError(
+  reason:
+    | "invalid_tx_hash"
+    | "not_confirmed"
+    | "underpaid"
+    | "upstream_error"
+    | "wrong_recipient"
+    | "wrong_token"
+) {
+  if (reason === "not_confirmed") {
+    return NextResponse.json(
+      { error: "暂未查到这笔已确认交易，请等待链上确认后重试。" },
+      { status: 409 }
+    );
+  }
+
+  if (reason === "upstream_error") {
+    return NextResponse.json(
+      {
+        error: "链上核验服务暂不可用，请稍后重试或改用邮件登记。",
+        fallbackEmail: site.email
+      },
+      { status: 503 }
+    );
+  }
+
+  const messages = {
+    invalid_tx_hash: "交易哈希格式无效。",
+    underpaid: "该交易的 USDT 到账金额不足。",
+    wrong_recipient: "该交易未转入本站公布的收款地址。",
+    wrong_token: "该交易不是 Tether 官方 TRC20 USDT 转账。"
+  } as const;
+
+  return NextResponse.json({ error: messages[reason] }, { status: 422 });
+}
+
 export async function POST(request: Request) {
   const contentLength = Number(request.headers.get("content-length") || "0");
   if (contentLength > 12_000) {
@@ -73,7 +138,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "请输入有效邮箱。" }, { status: 400 });
   }
 
-  if (!/^(0x)?[A-Za-z0-9]{32,128}$/.test(txHash)) {
+  if (!/^(0x)?[0-9a-fA-F]{64}$/.test(txHash)) {
     return NextResponse.json({ error: "交易哈希格式无效。" }, { status: 400 });
   }
 
@@ -82,6 +147,79 @@ export async function POST(request: Request) {
       { error: "请先确认 USDT 网络和金额。" },
       { status: 400 }
     );
+  }
+
+  const normalizedTxHash = txHash.replace(/^0x/i, "").toLowerCase();
+
+  if (checkout.automaticVerification && automaticUsdtOrdersEnabled()) {
+    try {
+      const emailHash = hashOrderEmail(email);
+      const existing = await readUsdtOrder(normalizedTxHash);
+
+      if (existing) {
+        if (existing.emailHash !== emailHash) {
+          return NextResponse.json(
+            { error: "该交易哈希已经用于其他订单。" },
+            { status: 409 }
+          );
+        }
+
+        const result = accessResult(existing, email);
+        return result
+          ? NextResponse.json(result, {
+              status: 202,
+              headers: { "Cache-Control": "no-store" }
+            })
+          : NextResponse.json(
+              { error: "访问权生成失败，请联系人工处理。" },
+              { status: 503 }
+            );
+      }
+
+      const verification = await verifyConfirmedTronUsdtTransfer({
+        amount: checkout.amount,
+        recipient: checkout.address,
+        txHash: normalizedTxHash
+      });
+
+      if (!verification.ok) return verificationError(verification.reason);
+
+      const now = Math.floor(Date.now() / 1000);
+      const order = await saveUsdtOrder({
+        v: 1,
+        accessExpiresAt: now + checkout.planDays * 24 * 60 * 60,
+        blockNumber: verification.blockNumber,
+        blockTimestamp: verification.blockTimestamp,
+        createdAt: new Date().toISOString(),
+        emailHash,
+        orderId: createOrderId(),
+        paidAtomic: verification.valueAtomic,
+        txHash: normalizedTxHash
+      });
+
+      if (order.emailHash !== emailHash) {
+        return NextResponse.json(
+          { error: "该交易哈希已经用于其他订单。" },
+          { status: 409 }
+        );
+      }
+
+      const result = accessResult(order, email);
+      return result
+        ? NextResponse.json(result, {
+            status: 202,
+            headers: { "Cache-Control": "no-store" }
+          })
+        : NextResponse.json(
+            { error: "访问权生成失败，请联系人工处理。" },
+            { status: 503 }
+          );
+    } catch (error) {
+      console.error(
+        "Automatic USDT order intake failed:",
+        error instanceof Error ? error.name : "unknown"
+      );
+    }
   }
 
   const apiKey = process.env.RESEND_API_KEY;

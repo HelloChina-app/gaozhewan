@@ -8,6 +8,7 @@ export function GET() {
     service: "gaozhewan",
     monetization: {
       asset: "USDT",
+      automaticVerification: checkout.automaticVerification,
       checkoutConfigured: checkout.enabled,
       network: checkout.enabled ? checkout.network : null
     },
