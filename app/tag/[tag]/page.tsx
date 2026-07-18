@@ -9,7 +9,9 @@ type TagPageProps = {
 };
 
 export function generateStaticParams() {
-  return getAllTags().map((tag) => ({ tag: encodeURIComponent(tag) }));
+  // Next.js encodes dynamic route segments when it emits the static path.
+  // Returning an already encoded value produces `%25...` paths and a 404 page.
+  return getAllTags().map((tag) => ({ tag }));
 }
 
 export async function generateMetadata({
@@ -21,7 +23,7 @@ export async function generateMetadata({
     title: `标签：${label}`,
     description: `搞着玩里关于「${label}」的全部文章。`,
     alternates: {
-      canonical: `/tag/${tag}`
+      canonical: `/tag/${encodeURIComponent(label)}`
     }
   };
 }
