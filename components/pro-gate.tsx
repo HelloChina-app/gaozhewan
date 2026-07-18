@@ -2,15 +2,22 @@ import Link from "next/link";
 
 type ProGateProps = {
   anglesCount?: number;
+  headingLevel?: "h2" | "h4";
   templatesCount?: number;
 };
 
-export function ProGate({ anglesCount = 3, templatesCount = 3 }: ProGateProps) {
+export function ProGate({
+  anglesCount = 3,
+  headingLevel = "h2",
+  templatesCount = 3
+}: ProGateProps) {
+  const Heading = headingLevel;
+
   return (
     <section className="pro-gate" aria-label="Pro 专属内容">
       <div>
         <p className="eyebrow">解锁完整选题</p>
-        <h2>这篇还能直接拆成 {anglesCount} 个写作角度</h2>
+        <Heading>这篇还能直接拆成 {anglesCount} 个写作角度</Heading>
         <p>
           搞选题 Pro 用户可见竞争度、时效窗口、素材链接和 {templatesCount} 个标题模板，适合直接改成公众号、小红书或视频脚本。
         </p>

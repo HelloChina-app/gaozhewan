@@ -102,7 +102,11 @@ export default async function TopicPage({ params }: TopicPageProps) {
           <span>{access ? `时效 ${card.window}` : "免费预览"}</span>
         </div>
 
-        <TopicCardFull card={card} showPro={Boolean(access)} />
+        <TopicCardFull
+          card={card}
+          headingLevel="h1"
+          showPro={Boolean(access)}
+        />
 
         {more.length > 0 ? (
           <section className="section">
