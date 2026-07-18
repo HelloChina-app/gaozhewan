@@ -7,7 +7,11 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "USDT 收银台",
-  description: "使用 USDT 开通搞选题 Pro 年度版。"
+  description: "使用 USDT 开通搞选题 Pro 年度版。",
+  robots: {
+    follow: true,
+    index: false
+  }
 };
 
 export default async function CheckoutPage() {

@@ -58,10 +58,28 @@ export function TopicCardFull({ card, showPro = false }: TopicCardFullProps) {
           </div>
         </>
       ) : (
-        <ProGate
-          anglesCount={card.angles.length}
-          templatesCount={card.headlines.length}
-        />
+        <>
+          {card.materials.length > 0 ? (
+            <div className="topic-section topic-sources-public">
+              <h4>公开核验来源</h4>
+              <p>事实与热度可免费核验；Pro 只锁定写作角度、标题模板和执行素材包。</p>
+              {card.materials.map((material) => (
+                <a
+                  href={material.url}
+                  key={material.url}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {material.label}
+                </a>
+              ))}
+            </div>
+          ) : null}
+          <ProGate
+            anglesCount={card.angles.length}
+            templatesCount={card.headlines.length}
+          />
+        </>
       )}
     </article>
   );

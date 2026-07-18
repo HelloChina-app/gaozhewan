@@ -1038,6 +1038,22 @@ main {
   font-weight: 800;
 }
 
+.topic-sources-public {
+  background: #f3f0df;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.topic-sources-public p {
+  margin-bottom: 10px;
+}
+
+.topic-sources-public a {
+  display: block;
+  margin-top: 8px;
+}
+
 .copy-brief {
   align-items: center;
   display: flex;

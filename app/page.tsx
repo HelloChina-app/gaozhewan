@@ -7,12 +7,13 @@ import {
   getSortedPosts,
   posts,
   getSortedTopicCards,
+  topicCards,
   tools
 } from "@/lib/content";
 
 export default function HomePage() {
   const sortedPosts = getSortedPosts();
-  const today = sortedPosts[0];
+  const latestPost = sortedPosts[0];
   const topPosts = [...posts]
     .sort((a, b) => getAverageScore(b.scores) - getAverageScore(a.scores))
     .slice(0, 3);
@@ -56,7 +57,7 @@ export default function HomePage() {
             搞着玩帮你把全球新奇事物，变成可以立刻动手的选题、工具、项目和副业灵感。
           </p>
           <div className="hero-actions">
-            <Link className="button" href={`/post/${today.slug}`}>
+            <Link className="button" href={`/post/${latestPost.slug}`}>
               先搞选题
             </Link>
             <Link className="text-button" href="/pricing">
@@ -74,12 +75,12 @@ export default function HomePage() {
           </div>
           <div className="hero-stats" aria-label="内容概览">
             <div>
-              <strong>{posts.length}</strong>
-              <span>篇全球信号</span>
+              <strong>{topicCards.length}</strong>
+              <span>张选题卡</span>
             </div>
             <div>
-              <strong>{tools.length}</strong>
-              <span>个实测工具</span>
+              <strong>{posts.length}</strong>
+              <span>篇免费深读</span>
             </div>
             <div>
               <strong>48h</strong>
@@ -87,11 +88,11 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="radar-panel" aria-label="实时全球信号">
+        <div className="radar-panel" aria-label="最新全球信号">
           <div className="radar-header">
             <span className="signal-live">
               <i aria-hidden="true" />
-              实时全球信号
+              最新全球信号
             </span>
             <span>每日更新</span>
           </div>
@@ -105,7 +106,7 @@ export default function HomePage() {
                   <strong>{card.title}</strong>
                   <span className="signal-heat">{card.heat}</span>
                   <span className="signal-tags">
-                    <em>今日信号</em>
+                    <em>{card.publishedAt}</em>
                     <em>Pro 可解锁写作包</em>
                   </span>
                 </span>
@@ -123,14 +124,14 @@ export default function HomePage() {
         <div className="section-inner">
           <div className="section-head">
             <div>
-              <p className="eyebrow">今日新奇</p>
-              <h2>先看一个最值得抢占的全球信号</h2>
+              <p className="eyebrow">最新深读</p>
+              <h2>从全球信号到中文创作判断</h2>
             </div>
             <Link className="text-button" href="/post">
               全部文章
             </Link>
           </div>
-          <ArticleCard post={today} featured />
+          <ArticleCard post={latestPost} featured />
         </div>
       </section>
 

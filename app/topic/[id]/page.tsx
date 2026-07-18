@@ -8,6 +8,7 @@ import {
   getTopicCardById
 } from "@/lib/content";
 import { site } from "@/lib/site";
+import { truncateText } from "@/lib/utils";
 import { getProAccess } from "@/lib/pro-access";
 
 type TopicPageProps = {
@@ -26,16 +27,19 @@ export async function generateMetadata({
     return { title: "选题卡不存在" };
   }
 
+  const description = truncateText(card.heat, 150);
+
   return {
     title: `${card.title} - 选题卡`,
-    description: card.heat,
+    description,
     alternates: {
       canonical: `/topic/${card.id}`
     },
     openGraph: {
       title: card.title,
-      description: card.heat,
+      description,
       type: "article",
+      publishedTime: card.publishedAt,
       url: `/topic/${card.id}`
     }
   };
@@ -53,14 +57,38 @@ export default async function TopicPage({ params }: TopicPageProps) {
   const more = getSortedTopicCards()
     .filter((item) => item.id !== card.id)
     .slice(0, 3);
+  const description = truncateText(card.heat, 150);
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "CreativeWork",
-    name: card.title,
-    abstract: card.heat,
+    "@type": "Article",
+    headline: card.title,
+    description,
     datePublished: card.publishedAt || undefined,
-    url: `${site.url}/topic/${card.id}`,
-    publisher: { "@type": "Organization", name: site.name }
+    dateModified: card.publishedAt || undefined,
+    inLanguage: "zh-CN",
+    mainEntityOfPage: `${site.url}/topic/${card.id}`,
+    citation: card.materials.map((material) => material.url),
+    author: { "@type": "Organization", name: site.name },
+    publisher: { "@type": "Organization", name: site.name, url: site.url }
+  };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "首页", item: site.url },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "选题卡",
+        item: `${site.url}/topics`
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: card.title,
+        item: `${site.url}/topic/${card.id}`
+      }
+    ]
   };
 
   return (
@@ -99,6 +127,11 @@ export default async function TopicPage({ params }: TopicPageProps) {
           type="application/ld+json"
           suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
       </div>
 

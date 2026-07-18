@@ -1,8 +1,20 @@
 import type { MetadataRoute } from "next";
-import { getAllTags, posts, tools, topicCards } from "@/lib/content";
+import {
+  getAllTags,
+  getPostsByTag,
+  posts,
+  tools,
+  topicCards
+} from "@/lib/content";
 import { site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const latestContentDate = [...posts, ...topicCards]
+    .map((item) => item.publishedAt)
+    .filter(Boolean)
+    .sort()
+    .at(-1);
+  const contentHubs = new Set(["", "/post", "/weekly", "/topics"]);
   const routes = [
     "",
     "/post",
@@ -12,7 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/weekly",
     "/topics",
     "/pricing",
-    "/checkout",
     "/subscribe",
     "/about",
     "/privacy"
@@ -21,7 +32,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...routes.map((route) => ({
       url: `${site.url}${route}`,
-      lastModified: new Date(),
+      ...(latestContentDate && contentHubs.has(route)
+        ? { lastModified: new Date(latestContentDate) }
+        : {}),
       changeFrequency: "weekly" as const,
       priority: route === "" ? 1 : 0.7
     })),
@@ -33,7 +46,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...tools.map((tool) => ({
       url: `${site.url}/tools/${tool.slug}`,
-      lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.6
     })),
@@ -43,11 +55,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       priority: 0.6
     })),
-    ...getAllTags().map((tag) => ({
-      url: `${site.url}/tag/${encodeURIComponent(tag)}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.5
-    }))
+    ...getAllTags().map((tag) => {
+      const lastModified = getPostsByTag(tag)[0]?.publishedAt;
+      return {
+        url: `${site.url}/tag/${encodeURIComponent(tag)}`,
+        ...(lastModified ? { lastModified: new Date(lastModified) } : {}),
+        changeFrequency: "weekly" as const,
+        priority: 0.5
+      };
+    })
   ];
 }

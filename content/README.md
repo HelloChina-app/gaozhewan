@@ -47,7 +47,8 @@
    - 搞着玩指数：给 novelty / viral / accessible 三个 0–10 分。
    - 写 3 个角度 + 3 个标题，materials 填真实链接。
 3. **发布**：补全的文件放进 `topic-cards/`（或据此写一篇 `posts/` 文章），删掉对应草稿。
-4. **校验**：`npm run check:content` 通过后提交部署。
+4. **分发**：正式选题卡会自动进入首页、选题工作台、独立详情页、sitemap 和 RSS；来源链接保持公开可核验，写作角度与标题模板继续由 Pro 解锁。
+5. **校验**：`npm run check:content` 通过后提交部署。
 
 ### 两个真实例子（2026-06-17 抓取）
 
