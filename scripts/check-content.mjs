@@ -94,9 +94,10 @@ for (const fileName of readDir(join(contentRoot, "posts"))) {
 }
 assert(postCount > 0, "No posts found in content/posts");
 
+const topicIds = new Set();
 let cardCount = 0;
 for (const fileName of readDir(join(contentRoot, "topic-cards"))) {
-  const { data } = parseFrontmatter(
+  const { data, body } = parseFrontmatter(
     readFileSync(join(contentRoot, "topic-cards", fileName), "utf8")
   );
   for (const key of ["title", "heat", "window"]) {
@@ -106,13 +107,43 @@ for (const fileName of readDir(join(contentRoot, "topic-cards"))) {
   if (data.publishedAt) {
     assert(/^\d{4}-\d{2}-\d{2}$/.test(data.publishedAt), `${fileName}: publishedAt must be YYYY-MM-DD`);
   }
+  if (data.updatedAt) {
+    assert(/^\d{4}-\d{2}-\d{2}$/.test(data.updatedAt), `${fileName}: updatedAt must be YYYY-MM-DD`);
+  }
   for (const field of ["novelty", "viral", "accessible"]) assertScore(data, field, fileName);
   assert(listLen(data.angles) >= 3, `${fileName}: at least 3 angles required`);
   assert(listLen(data.headlines) >= 3, `${fileName}: at least 3 headlines required`);
   assertPairs(data.materials, "materials", fileName, 1);
+  if (data.updatedAt) {
+    assert(body.trim().length >= 900, `${fileName}: deep-read body must be at least 900 characters`);
+  }
+  topicIds.add(data.id || fileName.replace(/\.md$/, ""));
   console.log(`topic-cards/${fileName} ok`);
   cardCount++;
 }
 assert(cardCount > 0, "No topic cards found in content/topic-cards");
 
-console.log(`Content check passed. ${postCount} posts, ${cardCount} topic cards.`);
+let clusterCount = 0;
+for (const fileName of readDir(join(contentRoot, "topic-clusters"))) {
+  const { data, body } = parseFrontmatter(
+    readFileSync(join(contentRoot, "topic-clusters", fileName), "utf8")
+  );
+  for (const key of ["title", "description", "eyebrow", "publishedAt"]) {
+    assert(typeof data[key] === "string" && data[key], `${fileName}: ${key} is required`);
+  }
+  for (const field of ["publishedAt", "updatedAt"]) {
+    if (data[field]) {
+      assert(/^\d{4}-\d{2}-\d{2}$/.test(data[field]), `${fileName}: ${field} must be YYYY-MM-DD`);
+    }
+  }
+  assert(listLen(data.topicIds) >= 4, `${fileName}: at least 4 topicIds required`);
+  for (const topicId of data.topicIds) {
+    assert(topicIds.has(topicId), `${fileName}: unknown topicId ${topicId}`);
+  }
+  assert(body.trim().length >= 500, `${fileName}: body must be at least 500 characters`);
+  console.log(`topic-clusters/${fileName} ok`);
+  clusterCount++;
+}
+assert(clusterCount > 0, "No topic clusters found in content/topic-clusters");
+
+console.log(`Content check passed. ${postCount} posts, ${cardCount} topic cards, ${clusterCount} topic clusters.`);

@@ -1,4 +1,5 @@
 import { CopyBriefButton } from "@/components/copy-brief-button";
+import { ContentBody } from "@/components/content-body";
 import { GzwScore } from "@/components/gzw-score";
 import { ProGate } from "@/components/pro-gate";
 import type { TopicCard } from "@/lib/content";
@@ -28,6 +29,13 @@ export function TopicCardFull({
       <p>{card.heat}</p>
 
       <GzwScore scores={card.scores} compact />
+
+      {headingLevel === "h1" && card.body.length > 0 ? (
+        <section className="topic-deep-read">
+          <p className="eyebrow">免费深读</p>
+          <ContentBody blocks={card.body} />
+        </section>
+      ) : null}
 
       {showPro ? (
         <>

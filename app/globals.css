@@ -1038,6 +1038,12 @@ main {
   font-weight: 800;
 }
 
+.topic-full h1 {
+  font-size: clamp(34px, 6vw, 54px);
+  line-height: 1.08;
+  margin: 14px 0 10px;
+}
+
 .topic-sources-public {
   background: #f3f0df;
   border: 1px solid var(--line);
@@ -1052,6 +1058,99 @@ main {
 .topic-sources-public a {
   display: block;
   margin-top: 8px;
+}
+
+.topic-deep-read {
+  border-top: 2px solid var(--ink);
+  margin-top: 28px;
+  padding-top: 26px;
+}
+
+.topic-deep-read .article-body p {
+  color: #343434;
+  margin: 1em 0;
+}
+
+.topic-deep-read .article-body h2:first-child {
+  margin-top: 16px;
+}
+
+.topic-cluster-band {
+  padding-bottom: 30px;
+}
+
+.topic-cluster-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.topic-cluster-card {
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 var(--ink);
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+  padding: 20px;
+}
+
+.topic-cluster-card > span {
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.topic-cluster-card h3 {
+  font-size: 24px;
+  line-height: 1.18;
+  margin: 12px 0;
+}
+
+.topic-cluster-card p {
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+
+.topic-cluster-card strong {
+  color: var(--blue);
+  margin-top: auto;
+}
+
+.topic-cluster-page {
+  max-width: 920px;
+}
+
+.topic-cluster-page .article-hero {
+  max-width: 820px;
+}
+
+.topic-cluster-links {
+  align-items: center;
+  background: #f3f0df;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 28px 0;
+  padding: 14px 16px;
+}
+
+.topic-cluster-links span {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.topic-cluster-links a {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 800;
+  padding: 6px 10px;
 }
 
 .copy-brief {
@@ -1429,6 +1528,10 @@ main {
   .topic-positioning,
   .weekly-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .topic-cluster-grid {
+    grid-template-columns: 1fr;
   }
 
   .article-side {

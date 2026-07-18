@@ -5,7 +5,8 @@ import { TopicCardFull } from "@/components/topic-card-full";
 import { TopicCardPreview } from "@/components/topic-card-preview";
 import {
   getSortedTopicCards,
-  getTopicCardById
+  getTopicCardById,
+  getTopicClustersForTopic
 } from "@/lib/content";
 import { site } from "@/lib/site";
 import { truncateText } from "@/lib/utils";
@@ -40,6 +41,7 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime: card.publishedAt,
+      modifiedTime: card.updatedAt || card.publishedAt,
       url: `/topic/${card.id}`
     }
   };
@@ -57,6 +59,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
   const more = getSortedTopicCards()
     .filter((item) => item.id !== card.id)
     .slice(0, 3);
+  const clusters = getTopicClustersForTopic(card.id);
   const description = truncateText(card.heat, 150);
   const jsonLd = {
     "@context": "https://schema.org",
@@ -64,7 +67,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
     headline: card.title,
     description,
     datePublished: card.publishedAt || undefined,
-    dateModified: card.publishedAt || undefined,
+    dateModified: card.updatedAt || card.publishedAt || undefined,
     inLanguage: "zh-CN",
     mainEntityOfPage: `${site.url}/topic/${card.id}`,
     citation: card.materials.map((material) => material.url),
@@ -107,6 +110,17 @@ export default async function TopicPage({ params }: TopicPageProps) {
           headingLevel="h1"
           showPro={Boolean(access)}
         />
+
+        {clusters.length > 0 ? (
+          <nav className="topic-cluster-links" aria-label="所属主题">
+            <span>继续系统阅读</span>
+            {clusters.map((cluster) => (
+              <Link href={`/topics/${cluster.slug}`} key={cluster.slug}>
+                {cluster.title}
+              </Link>
+            ))}
+          </nav>
+        ) : null}
 
         {more.length > 0 ? (
           <section className="section">

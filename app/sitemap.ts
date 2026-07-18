@@ -4,13 +4,14 @@ import {
   getPostsByTag,
   posts,
   tools,
-  topicCards
+  topicCards,
+  topicClusters
 } from "@/lib/content";
 import { site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const latestContentDate = [...posts, ...topicCards]
-    .map((item) => item.publishedAt)
+  const latestContentDate = [...posts, ...topicCards, ...topicClusters]
+    .map((item) => ("updatedAt" in item ? item.updatedAt : undefined) || item.publishedAt)
     .filter(Boolean)
     .sort()
     .at(-1);
@@ -51,9 +52,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...topicCards.map((card) => ({
       url: `${site.url}/topic/${card.id}`,
-      lastModified: card.publishedAt ? new Date(card.publishedAt) : new Date(),
+      lastModified: card.updatedAt || card.publishedAt ? new Date(card.updatedAt || card.publishedAt) : new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.6
+    })),
+    ...topicClusters.map((cluster) => ({
+      url: `${site.url}/topics/${cluster.slug}`,
+      lastModified: new Date(cluster.updatedAt || cluster.publishedAt),
+      changeFrequency: "weekly" as const,
+      priority: 0.75
     })),
     ...getAllTags().map((tag) => {
       const lastModified = getPostsByTag(tag)[0]?.publishedAt;

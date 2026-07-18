@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { TopicsExplorer } from "@/components/topics-explorer";
-import { getSortedTopicCards } from "@/lib/content";
+import { getSortedTopicCards, topicClusters } from "@/lib/content";
 import { getProAccess } from "@/lib/pro-access";
 
 export const metadata: Metadata = {
@@ -34,6 +34,25 @@ export default async function TopicsPage() {
             : "免费版可浏览全球信号摘要和搞着玩指数；Pro 解锁写作角度、标题模板、素材包、竞争度与时效窗口。"}
         </p>
       </div>
+
+      <section className="section topic-cluster-band">
+        <div className="section-head">
+          <div>
+            <p className="eyebrow">主题指南</p>
+            <h2>从一条热点，读成一套判断框架</h2>
+          </div>
+        </div>
+        <div className="topic-cluster-grid">
+          {topicClusters.map((cluster) => (
+            <Link className="topic-cluster-card" href={`/topics/${cluster.slug}`} key={cluster.slug}>
+              <span>{cluster.eyebrow}</span>
+              <h3>{cluster.title}</h3>
+              <p>{cluster.description}</p>
+              <strong>{cluster.topicIds.length} 个相关选题 →</strong>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       <TopicsExplorer cards={visibleCards} showPro={Boolean(access)} />
 

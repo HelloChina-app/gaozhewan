@@ -62,6 +62,19 @@ export type TopicCard = {
   headlines: string[];
   materials: Source[];
   publishedAt: string;
+  updatedAt?: string;
+  body: BodyBlock[];
+};
+
+export type TopicCluster = {
+  slug: string;
+  title: string;
+  description: string;
+  eyebrow: string;
+  publishedAt: string;
+  updatedAt?: string;
+  topicIds: string[];
+  body: BodyBlock[];
 };
 
 const contentRoot = join(process.cwd(), "content");
@@ -119,7 +132,7 @@ function loadPosts(): Post[] {
 
 function loadTopicCards(): TopicCard[] {
   return readMarkdownDir(join(contentRoot, "topic-cards")).map(
-    ({ slug, data }) => ({
+    ({ slug, data, body }) => ({
       id: str(data.id) || slug,
       title: str(data.title),
       heat: str(data.heat),
@@ -133,7 +146,24 @@ function loadTopicCards(): TopicCard[] {
       angles: list(data.angles),
       headlines: list(data.headlines),
       materials: parsePairs(list(data.materials)),
-      publishedAt: str(data.publishedAt)
+      publishedAt: str(data.publishedAt),
+      updatedAt: str(data.updatedAt) || undefined,
+      body: parseBody(body)
+    })
+  );
+}
+
+function loadTopicClusters(): TopicCluster[] {
+  return readMarkdownDir(join(contentRoot, "topic-clusters")).map(
+    ({ slug, data, body }) => ({
+      slug,
+      title: str(data.title),
+      description: str(data.description),
+      eyebrow: str(data.eyebrow, "主题指南"),
+      publishedAt: str(data.publishedAt),
+      updatedAt: str(data.updatedAt) || undefined,
+      topicIds: list(data.topicIds),
+      body: parseBody(body)
     })
   );
 }
@@ -141,6 +171,8 @@ function loadTopicCards(): TopicCard[] {
 export const posts: Post[] = loadPosts();
 
 export const topicCards: TopicCard[] = loadTopicCards();
+
+export const topicClusters: TopicCluster[] = loadTopicClusters();
 
 export const tools: Tool[] = [
   {
@@ -354,4 +386,12 @@ export function getSortedTopicCards() {
 
 export function getTopicCardById(id: string) {
   return topicCards.find((card) => card.id === id);
+}
+
+export function getTopicClusterBySlug(slug: string) {
+  return topicClusters.find((cluster) => cluster.slug === slug);
+}
+
+export function getTopicClustersForTopic(topicId: string) {
+  return topicClusters.filter((cluster) => cluster.topicIds.includes(topicId));
 }
