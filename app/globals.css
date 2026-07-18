@@ -1125,12 +1125,47 @@ main {
   margin-top: 4px;
 }
 
+.payment-method {
+  align-items: stretch;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 236px minmax(0, 1fr);
+  margin-top: 16px;
+}
+
+.payment-qr {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  text-align: center;
+}
+
+.payment-qr svg {
+  display: block;
+  height: auto;
+  max-width: 220px;
+  width: 100%;
+}
+
+.payment-qr strong {
+  font-size: 16px;
+}
+
+.payment-qr span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
 .wallet-address {
   border: 1px solid var(--line);
   border-radius: 8px;
   display: grid;
   gap: 10px;
-  margin-top: 16px;
   padding: 16px;
 }
 
@@ -1141,6 +1176,13 @@ main {
 
 .wallet-address .text-button {
   justify-self: start;
+}
+
+.wallet-address p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+  margin: auto 0 0;
 }
 
 .payment-warning {
@@ -1261,8 +1303,15 @@ main {
   }
 
   .payment-summary,
+  .payment-method,
   .checkout-steps {
     grid-template-columns: 1fr;
+  }
+
+  .payment-qr {
+    justify-self: center;
+    max-width: 236px;
+    width: 100%;
   }
 
   .compare-row strong {

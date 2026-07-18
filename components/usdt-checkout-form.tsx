@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { QRCodeSVG } from "qrcode.react";
 
 type CheckoutState =
   | { kind: "idle" }
@@ -128,12 +129,34 @@ export function UsdtCheckoutForm({
         </div>
       </div>
 
-      <div className="wallet-address">
-        <span>USDT 收款地址</span>
-        <code>{address}</code>
-        <button className="text-button" type="button" onClick={copyAddress}>
-          {copied ? "已复制" : "复制地址"}
-        </button>
+      <div className="payment-method">
+        <div className="payment-qr">
+          <QRCodeSVG
+            aria-label={`TRON 收款地址二维码：${address}`}
+            bgColor="#ffffff"
+            fgColor="#111111"
+            level="M"
+            marginSize={2}
+            role="img"
+            size={220}
+            title="扫描二维码填写 TRON 收款地址"
+            value={address}
+          />
+          <strong>扫码填写收款地址</strong>
+          <span>电脑端可直接用钱包扫描</span>
+        </div>
+
+        <div className="wallet-address">
+          <span>USDT 收款地址</span>
+          <code>{address}</code>
+          <button className="text-button" type="button" onClick={copyAddress}>
+            {copied ? "已复制" : "复制地址"}
+          </button>
+          <p>
+            二维码只包含收款地址，不会自动替你确认币种或金额。扫码后仍须选择
+            USDT，并核对网络为 {network}、金额为 {amount} USDT。
+          </p>
+        </div>
       </div>
 
       <div className="payment-warning" role="note">
