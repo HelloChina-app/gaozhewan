@@ -95,9 +95,9 @@ export default function PostIndexPage() {
       <section className="section section-dark">
         <div className="section-inner subscribe-band">
           <div>
-            <p className="eyebrow">早鸟名单</p>
-            <h2>如果你要搞选题，先加入前 100 名</h2>
-            <p>我们会优先把完整选题卡、早鸟价和抢先体验发给你。</p>
+            <p className="eyebrow">免费邮件订阅</p>
+            <h2>每周收一封值得继续跟的选题摘要</h2>
+            <p>选择搞选题方向，我们会优先发送全球信号、中文创作角度和 Pro 更新。</p>
           </div>
           <SubscribeForm source="topic-line" defaultInterest="搞选题" />
         </div>
