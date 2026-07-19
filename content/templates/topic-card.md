@@ -16,6 +16,9 @@ headlines:
   - 备选标题 1
   - 备选标题 2
   - 备选标题 3
+relatedTopicIds:
+  - 一个真实存在的相关选题 ID
+  - 另一个真实存在的相关选题 ID
 materials:
   - 素材名称 :: https://example.com/
 ---

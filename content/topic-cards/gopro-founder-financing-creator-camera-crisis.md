@@ -16,6 +16,10 @@ headlines:
   - GoPro 会倒吗？官方文件只证明风险很大，还没证明结局
   - 创始人再借 2000 万美元，GoPro 为什么走到出售路口
   - 如果 GoPro 真换主人，创作者现在最该备份的不是相机
+relatedTopicIds:
+  - openmontage-agentic-video-production
+  - youtube-ask-studio-prompt-injection-leak
+  - stripe-advent-paypal-bid-creator-payments
 materials:
   - GoPro 向 SEC 提交的创始人融资公告 :: https://www.sec.gov/Archives/edgar/data/1500435/000150043526000028/gpro2026-07x08exhibit991.htm
   - GoPro 第一季度官方业绩与销量数据 :: https://www.sec.gov/Archives/edgar/data/1500435/000150043526000015/gpro2026-3x31ex991xer.htm

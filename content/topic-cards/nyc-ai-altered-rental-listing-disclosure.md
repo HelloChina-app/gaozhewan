@@ -16,6 +16,10 @@ headlines:
   - AI 修房图不是不能用，纽约真正要管的是你有没有说
   - 从虚拟软装到生成式照骗：纽约准备给租房图片加披露标签
   - 一条被写成「禁用 AI 图片」的政策，其实只走到披露承诺
+relatedTopicIds:
+  - ideogram-4-open-weight-image-model
+  - decoy-font-two-messages-anti-ai-experiment
+  - design-md-visual-identity-for-agents
 materials:
   - 纽约市长办公室官方发布、23 项行动与实施路径 :: https://www.nyc.gov/mayors-office/news/2026/07/mayor-mamdani-releases--rental-ripoff-report---outlining-new-act
   - PetaPixel 独立报道与行业语境 :: https://petapixel.com/2026/07/16/mayor-mamdani-says-landlords-cant-secretly-use-ai-images-to-advertise-properties/

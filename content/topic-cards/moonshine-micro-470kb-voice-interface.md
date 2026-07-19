@@ -16,6 +16,10 @@ headlines:
   - 470 KiB 内存让芯片听懂命令，但它还不是一个迷你 Whisper
   - 80 美分芯片也能开口说话：Moonshine Micro 把语音界面缩到了哪一步
   - 别被「不到 500 KB」骗了：这套离线语音方案能做什么、不能做什么
+relatedTopicIds:
+  - apple-speechanalyzer-vs-whisper-benchmark
+  - kokoro-local-cpu-tts-for-creators
+  - small-ai-offline-models-global-trend
 materials:
   - Moonshine Micro 官方仓库、内存预算与许可证 :: https://github.com/moonshine-ai/moonshine/tree/main/micro
   - 项目作者 Pete Warden 发布说明与 50 词限制 :: https://petewarden.com/2026/07/14/launching-moonshine-micro/

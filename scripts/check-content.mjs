@@ -95,6 +95,7 @@ for (const fileName of readDir(join(contentRoot, "posts"))) {
 assert(postCount > 0, "No posts found in content/posts");
 
 const topicIds = new Set();
+const topicRelations = [];
 let cardCount = 0;
 for (const fileName of readDir(join(contentRoot, "topic-cards"))) {
   const { data, body } = parseFrontmatter(
@@ -114,6 +115,11 @@ for (const fileName of readDir(join(contentRoot, "topic-cards"))) {
   assert(listLen(data.angles) >= 3, `${fileName}: at least 3 angles required`);
   assert(listLen(data.headlines) >= 3, `${fileName}: at least 3 headlines required`);
   assertPairs(data.materials, "materials", fileName, 1);
+  if (data.relatedTopicIds) {
+    assert(listLen(data.relatedTopicIds) >= 1 && listLen(data.relatedTopicIds) <= 6, `${fileName}: relatedTopicIds must contain 1 to 6 ids`);
+    assert(new Set(data.relatedTopicIds).size === data.relatedTopicIds.length, `${fileName}: relatedTopicIds must not contain duplicates`);
+    topicRelations.push({ fileName, id: data.id || fileName.replace(/\.md$/, ""), relatedTopicIds: data.relatedTopicIds });
+  }
   if (data.updatedAt) {
     assert(body.trim().length >= 900, `${fileName}: deep-read body must be at least 900 characters`);
   }
@@ -122,6 +128,12 @@ for (const fileName of readDir(join(contentRoot, "topic-cards"))) {
   cardCount++;
 }
 assert(cardCount > 0, "No topic cards found in content/topic-cards");
+for (const relation of topicRelations) {
+  for (const topicId of relation.relatedTopicIds) {
+    assert(topicId !== relation.id, `${relation.fileName}: relatedTopicIds must not reference itself`);
+    assert(topicIds.has(topicId), `${relation.fileName}: unknown relatedTopicId ${topicId}`);
+  }
+}
 
 let clusterCount = 0;
 for (const fileName of readDir(join(contentRoot, "topic-clusters"))) {

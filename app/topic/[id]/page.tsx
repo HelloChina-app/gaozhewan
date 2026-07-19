@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { TopicCardFull } from "@/components/topic-card-full";
 import { TopicCardPreview } from "@/components/topic-card-preview";
 import {
-  getSortedTopicCards,
+  getRelatedTopicCards,
   getTopicCardById,
   getTopicClustersForTopic
 } from "@/lib/content";
@@ -56,9 +56,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
     notFound();
   }
 
-  const more = getSortedTopicCards()
-    .filter((item) => item.id !== card.id)
-    .slice(0, 3);
+  const more = getRelatedTopicCards(card);
   const clusters = getTopicClustersForTopic(card.id);
   const description = truncateText(card.heat, 150);
   const jsonLd = {
@@ -71,6 +69,16 @@ export default async function TopicPage({ params }: TopicPageProps) {
     inLanguage: "zh-CN",
     mainEntityOfPage: `${site.url}/topic/${card.id}`,
     citation: card.materials.map((material) => material.url),
+    relatedLink: more.map((item) => `${site.url}/topic/${item.id}`),
+    ...(clusters.length > 0
+      ? {
+          isPartOf: clusters.map((cluster) => ({
+            "@type": "CollectionPage",
+            name: cluster.title,
+            url: `${site.url}/topics/${cluster.slug}`
+          }))
+        }
+      : {}),
     author: { "@type": "Organization", name: site.name },
     publisher: { "@type": "Organization", name: site.name, url: site.url }
   };
@@ -126,8 +134,8 @@ export default async function TopicPage({ params }: TopicPageProps) {
           <section className="section">
             <div className="section-head">
               <div>
-                <p className="eyebrow">更多选题</p>
-                <h2>最近的选题卡</h2>
+                <p className="eyebrow">相关阅读</p>
+                <h2>沿着这个问题继续读</h2>
               </div>
               <Link className="text-button" href="/topics">
                 全部选题卡

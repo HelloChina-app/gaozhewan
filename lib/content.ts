@@ -61,6 +61,7 @@ export type TopicCard = {
   angles: string[];
   headlines: string[];
   materials: Source[];
+  relatedTopicIds: string[];
   publishedAt: string;
   updatedAt?: string;
   body: BodyBlock[];
@@ -146,6 +147,7 @@ function loadTopicCards(): TopicCard[] {
       angles: list(data.angles),
       headlines: list(data.headlines),
       materials: parsePairs(list(data.materials)),
+      relatedTopicIds: list(data.relatedTopicIds),
       publishedAt: str(data.publishedAt),
       updatedAt: str(data.updatedAt) || undefined,
       body: parseBody(body)
@@ -394,4 +396,30 @@ export function getTopicClusterBySlug(slug: string) {
 
 export function getTopicClustersForTopic(topicId: string) {
   return topicClusters.filter((cluster) => cluster.topicIds.includes(topicId));
+}
+
+export function getRelatedTopicCards(card: TopicCard, limit = 3) {
+  const candidates: TopicCard[] = [];
+  const seen = new Set([card.id]);
+  const add = (candidate: TopicCard | undefined) => {
+    if (!candidate || seen.has(candidate.id) || candidates.length >= limit) return;
+    seen.add(candidate.id);
+    candidates.push(candidate);
+  };
+
+  for (const topicId of card.relatedTopicIds) {
+    add(getTopicCardById(topicId));
+  }
+
+  for (const cluster of getTopicClustersForTopic(card.id)) {
+    for (const topicId of cluster.topicIds) {
+      add(getTopicCardById(topicId));
+    }
+  }
+
+  for (const candidate of getSortedTopicCards()) {
+    add(candidate);
+  }
+
+  return candidates;
 }
