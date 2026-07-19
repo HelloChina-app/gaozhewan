@@ -3,7 +3,7 @@ title: 本地优先、自托管与数字主权实践
 description: 从邮箱、分析与云服务迁移，到本地 AI、笔记和代码托管，按数据敏感度、退出成本与维护负担选择真正可持续的工具栈。
 eyebrow: 本地优先与自托管
 publishedAt: 2026-07-18
-updatedAt: 2026-07-18
+updatedAt: 2026-07-19
 topicIds:
   - moving-digital-stack-to-europe
   - files-md-open-source-obsidian-alternative
@@ -11,6 +11,7 @@ topicIds:
   - nanocoder-local-first-coding-agent
   - kokoro-local-cpu-tts-for-creators
   - small-ai-offline-models-global-trend
+  - moonshine-micro-470kb-voice-interface
   - leaving-github-for-forgejo
   - chatto-open-source-self-hosted-chat
 ---
@@ -30,7 +31,7 @@ topicIds:
 
 ## 一套现实的混合栈
 
-内容源文件、知识库与备份优先采用开放格式和本地副本；适合离线的 AI 推理按设备能力逐步引入；聊天、代码托管等服务只有在团队具备运维能力时才自托管。支付、邮件送达和边缘网络等高合规基础设施可以继续采购成熟服务，但要定期导出、降低专有依赖并准备第二供应商。
+内容源文件、知识库与备份优先采用开放格式和本地副本；适合离线的 AI 推理按设备能力逐步引入。Moonshine Micro 这类微控制器语音方案还说明，本地优先不只发生在电脑和手机：当任务可以约束为有限命令时，家电、玩具和控制器也能在不上传音频的情况下完成交互。聊天、代码托管等多人服务则只有在团队具备运维能力时才自托管。支付、邮件送达和边缘网络等高合规基础设施可以继续采购成熟服务，但要定期导出、降低专有依赖并准备第二供应商。
 
 ## 推荐阅读顺序
 
