@@ -43,6 +43,7 @@ for (const fileName of [".env.local", ".env"]) {
 
 const requiredProductionVars = [
   "NEXT_PUBLIC_SITE_URL",
+  "RESEND_API_KEY",
   "USDT_NETWORK",
   "USDT_WALLET_ADDRESS",
   "USDT_PRICE",

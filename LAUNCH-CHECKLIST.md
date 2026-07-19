@@ -24,16 +24,19 @@
    - 部署前运行 `npm run check:env:production`。
 
 2. 邮件订阅
-   - 在 Resend 创建 Audience。
-   - 配置 `RESEND_API_KEY` 和 `RESEND_AUDIENCE_ID`。
-   - 确认发信域名 DNS 通过验证。
+   - 在 Resend 添加 `gaozhewan.com`，并在 Cloudflare 配置 SPF、DKIM 后确认域名通过验证。
+   - 创建独立的 Full access API Key，并仅在 Vercel Production 配置 `RESEND_API_KEY`。
+   - 配置 `SUBSCRIBE_FROM_EMAIL` 与 `PAYMENT_FROM_EMAIL`，发件地址必须属于已验证域名。
+   - 检查 `/api/health`：`email.deliveryConfigured` 与 `email.newsletterConfigured` 均应为 `true`。
 
 3. 公众号二维码
    - 用正式公众号二维码替换 `public/wechat-qr-placeholder.svg`。
 
 4. 付费承接
-   - MVP 早鸟阶段可先用人工收款、小报童或知识星球承接。
-   - 站内支付接入前，`/pricing` 保持早鸟名单收集，不直接收款。
+   - 只接受收银台指定网络的 USDT，不展示或承诺法币付款方式。
+   - 在 Vercel Production 配置 `USDT_NETWORK`、`USDT_WALLET_ADDRESS`、`USDT_PRICE`、`PRO_ACCESS_SECRET` 和 `USDT_ORDER_STORE=vercel-blob`。
+   - 检查 `/api/health`：`checkoutConfigured` 与 `automaticVerification` 均应为 `true`。
+   - 用一笔独立的小额测试交易验证扫码、TxID 核验、访问链接和邮件回执全链路后再扩大流量。
 
 5. 首批真实内容
    - 至少准备 7 天每日“全球信号”。

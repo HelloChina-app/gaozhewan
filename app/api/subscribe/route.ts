@@ -24,9 +24,8 @@ export async function POST(request: Request) {
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const audienceId = process.env.RESEND_AUDIENCE_ID;
 
-  if (!apiKey || !audienceId) {
+  if (!apiKey) {
     if (isLocalRequest) {
       return NextResponse.json({
         message: `已记录${interest}意向。本地演示模式未写入 Resend。`
@@ -35,8 +34,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       {
-        message:
-          "订阅接口已接通，但还没有配置 RESEND_API_KEY 和 RESEND_AUDIENCE_ID。"
+        message: "订阅接口已接通，但还没有配置 RESEND_API_KEY。"
       },
       { status: 503 }
     );
@@ -45,7 +43,7 @@ export async function POST(request: Request) {
   let response: Response;
 
   try {
-    response = await fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
+    response = await fetch("https://api.resend.com/contacts", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,

@@ -4,9 +4,7 @@ import { getUsdtCheckoutConfig } from "@/lib/usdt";
 export function GET() {
   const checkout = getUsdtCheckoutConfig();
   const emailDeliveryConfigured = Boolean(process.env.RESEND_API_KEY);
-  const newsletterConfigured = Boolean(
-    process.env.RESEND_API_KEY && process.env.RESEND_AUDIENCE_ID
-  );
+  const newsletterConfigured = emailDeliveryConfigured;
 
   return NextResponse.json(
     {

@@ -72,10 +72,13 @@ $env:Path = "C:\Users\Main\gaozhewan\.tools\node-v24.16.0-win-x64;" + $env:Path
 
 ```bash
 RESEND_API_KEY=...
-RESEND_AUDIENCE_ID=...
+SUBSCRIBE_FROM_EMAIL=Gaozhewan <news@gaozhewan.com>
+PAYMENT_FROM_EMAIL=Gaozhewan Payments <news@gaozhewan.com>
 ```
 
-未配置时，订阅接口会返回配置缺失提示，不会静默丢数据。
+`RESEND_API_KEY` 需要 Full access 权限，因为服务端同时使用最新的 `POST /contacts` 接口写入联系人，并发送 USDT 订单邮件。Resend 不再要求 Audience ID。发信前还需要在 Resend 验证 `gaozhewan.com` 的 SPF 和 DKIM 记录。
+
+未配置时，订阅接口会返回配置缺失提示，不会静默丢数据；`/api/health` 的 `email` 字段会报告联系人写入和邮件交付是否完成配置。
 
 在 `localhost` 本地演示时，即使没有配置 Resend，订阅表单也会返回成功提示；部署到正式域名后仍需要配置环境变量。
 
