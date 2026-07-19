@@ -10,12 +10,16 @@ import {
 import { site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const latestContentDate = [...posts, ...topicCards, ...topicClusters]
-    .map((item) => ("updatedAt" in item ? item.updatedAt : undefined) || item.publishedAt)
+  const latestContentDate = [
+    ...posts.map((post) => post.publishedAt),
+    ...topicCards.map((card) => card.updatedAt || card.publishedAt),
+    ...topicClusters.map((cluster) => cluster.updatedAt || cluster.publishedAt),
+    ...tools.map((tool) => tool.guide?.updatedAt || tool.guide?.publishedAt)
+  ]
     .filter(Boolean)
     .sort()
     .at(-1);
-  const contentHubs = new Set(["", "/post", "/weekly", "/topics"]);
+  const contentHubs = new Set(["", "/post", "/tools", "/weekly", "/topics"]);
   const routes = [
     "",
     "/post",
@@ -47,8 +51,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...tools.map((tool) => ({
       url: `${site.url}/tools/${tool.slug}`,
+      ...(tool.guide?.updatedAt || tool.guide?.publishedAt
+        ? { lastModified: new Date(tool.guide.updatedAt || tool.guide.publishedAt) }
+        : {}),
       changeFrequency: "monthly" as const,
-      priority: 0.6
+      priority: tool.guide ? 0.75 : 0.6
     })),
     ...topicCards.map((card) => ({
       url: `${site.url}/topic/${card.id}`,

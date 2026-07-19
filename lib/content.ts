@@ -49,6 +49,17 @@ export type Tool = {
   affiliateUrl?: string;
   affiliateProvider?: string;
   featured?: boolean;
+  guide?: ToolGuide;
+};
+
+export type ToolGuide = {
+  slug: string;
+  title: string;
+  description: string;
+  publishedAt: string;
+  updatedAt?: string;
+  sources: Source[];
+  body: BodyBlock[];
 };
 
 export type TopicCard = {
@@ -170,13 +181,32 @@ function loadTopicClusters(): TopicCluster[] {
   );
 }
 
+function loadToolGuides(): Map<string, ToolGuide> {
+  return new Map(
+    readMarkdownDir(join(contentRoot, "tool-guides")).map(({ slug, data, body }) => [
+      slug,
+      {
+        slug,
+        title: str(data.title),
+        description: str(data.description),
+        publishedAt: str(data.publishedAt),
+        updatedAt: str(data.updatedAt) || undefined,
+        sources: parsePairs(list(data.sources)),
+        body: parseBody(body)
+      }
+    ])
+  );
+}
+
 export const posts: Post[] = loadPosts();
 
 export const topicCards: TopicCard[] = loadTopicCards();
 
 export const topicClusters: TopicCluster[] = loadTopicClusters();
 
-export const tools: Tool[] = [
+const toolGuides = loadToolGuides();
+
+const baseTools: Tool[] = [
   {
     slug: "perplexity",
     name: "Perplexity",
@@ -336,6 +366,11 @@ export const tools: Tool[] = [
     scores: { novelty: 6.8, viral: 7.3, accessible: 7.0 }
   }
 ];
+
+export const tools: Tool[] = baseTools.map((tool) => ({
+  ...tool,
+  guide: toolGuides.get(tool.slug)
+}));
 
 export const categories = Array.from(new Set(tools.map((tool) => tool.category)));
 

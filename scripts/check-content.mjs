@@ -94,6 +94,23 @@ for (const fileName of readDir(join(contentRoot, "posts"))) {
 }
 assert(postCount > 0, "No posts found in content/posts");
 
+let toolGuideCount = 0;
+for (const fileName of readDir(join(contentRoot, "tool-guides"))) {
+  const { data, body } = parseFrontmatter(
+    readFileSync(join(contentRoot, "tool-guides", fileName), "utf8")
+  );
+  for (const key of ["title", "description", "publishedAt", "updatedAt"]) {
+    assert(typeof data[key] === "string" && data[key], `${fileName}: ${key} is required`);
+  }
+  for (const field of ["publishedAt", "updatedAt"]) {
+    assert(/^\d{4}-\d{2}-\d{2}$/.test(data[field]), `${fileName}: ${field} must be YYYY-MM-DD`);
+  }
+  assertPairs(data.sources, "sources", fileName, 2);
+  assert(body.trim().length >= 1200, `${fileName}: body must be at least 1200 characters`);
+  console.log(`tool-guides/${fileName} ok`);
+  toolGuideCount++;
+}
+
 const topicIds = new Set();
 const topicRelations = [];
 let cardCount = 0;
@@ -158,4 +175,4 @@ for (const fileName of readDir(join(contentRoot, "topic-clusters"))) {
 }
 assert(clusterCount > 0, "No topic clusters found in content/topic-clusters");
 
-console.log(`Content check passed. ${postCount} posts, ${cardCount} topic cards, ${clusterCount} topic clusters.`);
+console.log(`Content check passed. ${postCount} posts, ${cardCount} topic cards, ${clusterCount} topic clusters, ${toolGuideCount} tool guides.`);
