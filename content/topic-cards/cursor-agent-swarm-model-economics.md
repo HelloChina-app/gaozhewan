@@ -1,6 +1,6 @@
 ---
 title: Cursor 用 agent swarm 重写 SQLite：模型混搭把成本拉开近 8 倍
-heat: Cursor 7 月 20 日公布新版 agent swarm 实验：多个规划 agent 拆分任务，较便宜的 worker 执行，再由专门角色处理冲突和审查；团队让系统仅凭 835 页 SQLite 文档、在看不到 SQLite 源码、测试套件、二进制与互联网的条件下用 Rust 重建数据库。官方称新版四种模型组合在 4 小时时通过 held-out SQL 测试套件的 73% 至 85%，之后都达到 100%；单次实验成本从 Opus 4.8 规划加 Composer 2.5 执行的 1339 美元，到全程 GPT-5.5 的 10565 美元，相差约 7.9 倍。截至 Asia/Katmandu 7 月 21 日，Hacker News 讨论为 128 分、51 条评论。事实边界必须前置：全部成绩、成本和人工复核过程来自 Cursor 自家实验，尚无独立复现；通过 sqllogictest 不等于与生产 SQLite 在性能、安全、崩溃恢复、扩展和全部 API 上等价，公开 minisqlite 仓库也未显示可直接假定的许可证。
+heat: Cursor 7 月 20 日公布新版 agent swarm 实验：多个规划 agent 拆分任务，较便宜的 worker 执行，再由专门角色处理冲突和审查；团队让系统仅凭 835 页 SQLite 文档、在看不到 SQLite 源码、测试套件、二进制与互联网的条件下用 Rust 重建数据库。官方称新版四种模型组合在 4 小时时通过 held-out SQL 测试套件的 73% 至 85%，之后都达到 100%；单次实验成本从 Opus 4.8 规划加 Composer 2.5 执行的 1339 美元，到全程 GPT-5.5 的 10565 美元，相差约 7.9 倍。截至 Asia/Katmandu 7 月 21 日复核时，Hacker News 讨论为 150 分、63 条评论。事实边界必须前置：全部成绩、成本和人工复核过程来自 Cursor 自家实验，尚无独立复现；通过 sqllogictest 不等于与生产 SQLite 在性能、安全、崩溃恢复、扩展和全部 API 上等价，公开 minisqlite 仓库也未显示可直接假定的许可证。
 window: 72h
 competition: 高
 publishedAt: 2026-07-21
@@ -23,7 +23,7 @@ relatedTopicIds:
 materials:
   - Cursor 官方 agent swarm 实验、成绩与成本数据 :: https://cursor.com/blog/agent-swarm-model-economics
   - Cursor 公布的 minisqlite 代码仓库 :: https://github.com/cursor/minisqlite
-  - Hacker News 独立讨论（截至 7 月 21 日 128 分 / 51 评论） :: https://news.ycombinator.com/item?id=48982535
+  - Hacker News 独立讨论（截至 7 月 21 日复核时 150 分 / 63 评论） :: https://news.ycombinator.com/item?id=48982535
   - SQLite 官方 sqllogictest 说明 :: https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: Nativ 把本地模型装进 Mac 工作台：224 星之外先看 26 系统门槛
-heat: Blaizzy/nativ 仓库与首个正式标记版本 v0.0.1 都在 7 月 20 日公开；截至 Asia/Katmandu 7 月 21 日，GitHub API 记录为 224 星、16 forks，DMG 资产累计 775 次下载，Hacker News 讨论为 187 分、73 条评论。项目用 SwiftUI 包装 MLX-VLM，可在 Apple Silicon 上管理模型、聊天、查看 token 速度与内存压力，并通过本机 OpenAI/Anthropic 兼容接口连接 Codex、Claude Code、Pi、Hermes 和 OpenCode。事实边界必须前置：这是只有一个 release、8 个初始提交量级的新项目，不代表已经过长期稳定性或安全审计；运行要求是 Apple Silicon 与 macOS 26 或更新版本，不是所有 Mac。模型下载和首次构建仍需联网，模型效果、上下文、内存占用与许可证各不相同；“本地推理”不能被写成任何外接工具、下载源或更新流程都永不联网。
+title: Nativ 把本地模型装进 Mac 工作台：261 星之外先看 26 系统门槛
+heat: Blaizzy/nativ 仓库与首个正式标记版本 v0.0.1 都在 7 月 20 日公开；截至 Asia/Katmandu 7 月 21 日复核时，GitHub API 记录为 261 星、19 forks，DMG 资产累计 931 次下载，Hacker News 讨论为 217 分、80 条评论。项目用 SwiftUI 包装 MLX-VLM，可在 Apple Silicon 上管理模型、聊天、查看 token 速度与内存压力，并通过本机 OpenAI/Anthropic 兼容接口连接 Codex、Claude Code、Pi、Hermes 和 OpenCode。事实边界必须前置：这是只有一个 release、8 个初始提交量级的新项目，不代表已经过长期稳定性或安全审计；运行要求是 Apple Silicon 与 macOS 26 或更新版本，不是所有 Mac。模型下载和首次构建仍需联网，模型效果、上下文、内存占用与许可证各不相同；“本地推理”不能被写成任何外接工具、下载源或更新流程都永不联网。
 window: 72h
 competition: 中
 publishedAt: 2026-07-21
@@ -13,7 +13,7 @@ angles:
   - 隐私边界向：解释推理留在本机、模型和依赖下载、软件更新、第三方编码工具联网是四条不同数据路径，教读者逐一核对而不是只看“no cloud”口号
   - 选型避坑向：按 macOS 版本、统一内存、模型许可证、量化格式和本机 API 认证做一张检查表，帮助创作者判断旧 Mac 是否值得升级或继续使用云端服务
 headlines:
-  - 224 星的 Nativ 想让 Mac 变成本地 AI 工作台，先别忽略 macOS 26
+  - 261 星的 Nativ 想让 Mac 变成本地 AI 工作台，先别忽略 macOS 26
   - 不登录、不订阅、本机跑模型：Nativ v0.0.1 到底适合谁
   - Codex 接本地模型只差一个端口？真正要核对的是内存、许可和数据路径
 relatedTopicIds:
@@ -24,7 +24,7 @@ materials:
   - Nativ 官方仓库、功能与运行要求 :: https://github.com/Blaizzy/nativ
   - Nativ v0.0.1 发布与 DMG :: https://github.com/Blaizzy/nativ/releases/tag/v0.0.1
   - Nativ 官方产品页与模型示例 :: https://blaizzy.github.io/nativ/
-  - Hacker News 独立讨论（截至 7 月 21 日 187 分 / 73 评论） :: https://news.ycombinator.com/item?id=48982681
+  - Hacker News 独立讨论（截至 7 月 21 日复核时 217 分 / 80 评论） :: https://news.ycombinator.com/item?id=48982681
   - MLX-VLM 上游推理与服务端项目 :: https://github.com/Blaizzy/mlx-vlm
 ---
 

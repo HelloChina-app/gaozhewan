@@ -1,6 +1,6 @@
 ---
 title: Jelly UI 把原生表单做成果冻：好玩之前先过动效与可访问性
-heat: Jelly UI 官方页面展示了一个零依赖、单脚本接入的 Web Components 组件库，项目自称包含 40 个自定义元素，支持暗色模式、RTL，并内置达到 WCAG AA 对比度的颜色 token。截至 Asia/Katmandu 7 月 21 日，Hacker News 讨论为 359 分、139 条评论。它把按钮、开关、滑块等真实表单控件与软体物理视觉结合，截图和交互演示很适合设计类内容传播。事实边界必须前置：官网的“WCAG AA”明确描述的是颜色 token，不能外推为 40 个组件已经通过完整键盘、读屏、焦点、缩放和高对比度审计；柔软回弹也不等于原生控件语义自动保留。官网未展示独立性能基准，低端手机、多组件同屏、prefers-reduced-motion 和无 JavaScript 降级都要实测，不能把展示页效果直接当生产可用结论。
+heat: Jelly UI 官方页面展示了一个零依赖、单脚本接入的 Web Components 组件库，项目自称包含 40 个自定义元素，支持暗色模式、RTL，并内置达到 WCAG AA 对比度的颜色 token。截至 Asia/Katmandu 7 月 21 日复核时，Hacker News 讨论为 393 分、143 条评论。它把按钮、开关、滑块等真实表单控件与软体物理视觉结合，截图和交互演示很适合设计类内容传播。事实边界必须前置：官网的“WCAG AA”明确描述的是颜色 token，不能外推为 40 个组件已经通过完整键盘、读屏、焦点、缩放和高对比度审计；柔软回弹也不等于原生控件语义自动保留。官网未展示独立性能基准，低端手机、多组件同屏、prefers-reduced-motion 和无 JavaScript 降级都要实测，不能把展示页效果直接当生产可用结论。
 window: 72h
 competition: 中
 publishedAt: 2026-07-21
@@ -23,7 +23,7 @@ relatedTopicIds:
 materials:
   - Jelly UI 官方展示、组件数量与接入方式 :: https://jelly-ui.com/
   - Jelly UI 浏览器分发脚本 :: https://jelly-ui.com/package.js
-  - Hacker News 独立讨论（截至 7 月 21 日 359 分 / 139 评论） :: https://news.ycombinator.com/item?id=48981620
+  - Hacker News 独立讨论（截至 7 月 21 日复核时 393 分 / 143 评论） :: https://news.ycombinator.com/item?id=48981620
   - MDN prefers-reduced-motion 实现说明 :: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion
 ---
 
