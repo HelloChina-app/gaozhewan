@@ -1,6 +1,6 @@
 ---
 title: Bento 把编辑器塞进 560 KB HTML：单文件演示也有协作信任边界
-heat: Bento/Slides 把文稿数据、字体、图表、动画、播放器和编辑器装进约 560 KB 的单个 .bento.html，浏览器可直接编辑、演示、打印和保存；项目还提供 AES-GCM 端到端加密协作、CRDT 合并、签名更新和纯离线模式。仓库 7 月 17 日创建，7 月 22 日发布 v1.0.7；截至 Asia/Katmandu 7 月 23 日复核时，Hacker News 讨论为 666 分、152 条评论，认证 GitHub API 显示 473 星、29 forks。事实边界必须前置：加密、盲中继与数十万次 CRDT 收敛检查来自项目自述和源码说明，未见独立安全审计；持有文件即持有房间密钥和成员资格，presence 名称不是身份凭证，企业级签名帧仍只是设计。编辑器以桌面为主，手机主要适合查看和演示；浏览器不能直接写回时会退化为下载新文件。Bento/Docs 与 Bento/Sheets 仍是路线图，不能把 Slides 1.0 写成完整 Office 套件已经交付。
+heat: Bento/Slides 把文稿数据、字体、图表、动画、播放器和编辑器装进约 560 KB 的单个 .bento.html，浏览器可直接编辑、演示、打印和保存；项目还提供 AES-GCM 端到端加密协作、CRDT 合并、签名更新和纯离线模式。仓库 7 月 17 日创建，7 月 22 日发布 v1.0.7；截至 Asia/Katmandu 7 月 23 日复核时，Hacker News 讨论为 707 分、160 条评论，认证 GitHub API 显示 539 星、33 forks。事实边界必须前置：加密、盲中继与数十万次 CRDT 收敛检查来自项目自述和源码说明，未见独立安全审计；持有文件即持有房间密钥和成员资格，presence 名称不是身份凭证，企业级签名帧仍只是设计。编辑器以桌面为主，手机主要适合查看和演示；浏览器不能直接写回时会退化为下载新文件。Bento/Docs 与 Bento/Sheets 仍是路线图，不能把 Slides 1.0 写成完整 Office 套件已经交付。
 window: 72h
 competition: 中
 publishedAt: 2026-07-23
@@ -23,7 +23,7 @@ relatedTopicIds:
 materials:
   - Bento 官方网站、单文件能力、离线模式与隐私说明 :: https://bento.page/
   - Bento 官方仓库、架构、协作限制与 v1.0.7 :: https://github.com/nyblnet/bento
-  - Hacker News 独立讨论（截至 7 月 23 日复核时 666 分 / 152 评论） :: https://news.ycombinator.com/item?id=49008211
+  - Hacker News 独立讨论（截至 7 月 23 日复核时 707 分 / 160 评论） :: https://news.ycombinator.com/item?id=49008211
 ---
 
 ## 先说结论：最有价值的不是“替代 PowerPoint”，而是把可编辑交付物重新变成文件

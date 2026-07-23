@@ -1,6 +1,6 @@
 ---
 title: GigaToken 把分词推到 GB/s：1000 倍不是所有工作负载的通行证
-heat: GigaToken 作者把 SIMD、预分词专用实现、缓存和减少 Python/线程通信组合成 Rust 分词器，项目 README 在双路 AMD EPYC 9565 上以 11.9 GB OpenWebText 测得 GPT-2 24.53 GB/s，并报告相对 Hugging Face Tokenizers 989 倍；Apple M4 Max 的 GPT-2 项目自测为 8.79 GB/s、1268 倍。截至 Asia/Katmandu 7 月 23 日复核时，Hacker News 讨论为 375 分、73 条评论，认证 GitHub API 显示仓库 1237 星、46 forks。事实边界必须前置：这些数字来自作者自测而非独立基准，而且 GigaToken 读取完整 11.9 GB 文件，Hugging Face 和 tiktoken 对照分别只取预切分的前 100 MB 与 1 GB；作者解释未缓存的对照吞吐应近似均匀，但不同 I/O、文本分布、批大小和机器仍需重测。接近 1000 倍主要出现在最快原生 API 与部分 BPE 词表，兼容模式会付出性能成本，SentencePiece 提升明显较小、WordPiece 尚不支持，Windows 测试不足且作者建议优先用 WSL；仓库没有正式 Release，不能直接写成生产可无风险替换。
+heat: GigaToken 作者把 SIMD、预分词专用实现、缓存和减少 Python/线程通信组合成 Rust 分词器，项目 README 在双路 AMD EPYC 9565 上以 11.9 GB OpenWebText 测得 GPT-2 24.53 GB/s，并报告相对 Hugging Face Tokenizers 989 倍；Apple M4 Max 的 GPT-2 项目自测为 8.79 GB/s、1268 倍。截至 Asia/Katmandu 7 月 23 日复核时，Hacker News 讨论为 408 分、81 条评论，认证 GitHub API 显示仓库 1326 星、47 forks。事实边界必须前置：这些数字来自作者自测而非独立基准，而且 GigaToken 读取完整 11.9 GB 文件，Hugging Face 和 tiktoken 对照分别只取预切分的前 100 MB 与 1 GB；作者解释未缓存的对照吞吐应近似均匀，但不同 I/O、文本分布、批大小和机器仍需重测。接近 1000 倍主要出现在最快原生 API 与部分 BPE 词表，兼容模式会付出性能成本，SentencePiece 提升明显较小、WordPiece 尚不支持，Windows 测试不足且作者建议优先用 WSL；仓库没有正式 Release，不能直接写成生产可无风险替换。
 window: 72h
 competition: 中
 publishedAt: 2026-07-23
@@ -22,7 +22,7 @@ relatedTopicIds:
   - bonsai-27b-phone-local-agent
 materials:
   - GigaToken 官方仓库、基准方法、兼容模式与已知限制 :: https://github.com/marcelroed/gigatoken
-  - Hacker News 独立讨论（截至 7 月 23 日复核时 375 分 / 73 评论） :: https://news.ycombinator.com/item?id=49010167
+  - Hacker News 独立讨论（截至 7 月 23 日复核时 408 分 / 81 评论） :: https://news.ycombinator.com/item?id=49010167
   - Hugging Face Tokenizers 官方文档与对照接口 :: https://huggingface.co/docs/tokenizers/
 ---
 

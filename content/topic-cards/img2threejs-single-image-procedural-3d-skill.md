@@ -1,6 +1,6 @@
 ---
 title: img2threejs 不生成网格文件：让 agent 用代码重建单图 3D
-heat: img2threejs 把一张参考图拆成对象规格，再按 blockout、结构、形体、材质、表面、灯光、交互和优化等阶段，让 coding agent 生成由 Three.js primitive、shader 与程序化几何组成的 TypeScript 工厂；结果保留 pivot、socket 和 collider，目标是可继续动画和交互，而不是下载一个静态 mesh。仓库 7 月 15 日创建、7 月 21 日发布 v1.0；截至 Asia/Katmandu 7 月 23 日复核时，认证 GitHub API 显示 2069 星、163 forks。Reddit 的独立使用讨论展示了 Codex 工作流，但用户明确说成品仍经过约半天自然语言微调，不能把示例写成“一次提示即完成”。事实边界必须前置：项目自己承认单图看不到背面、不能保证精确几何，硬表面物体是强项，人物仍是风格化重建；投影优先的 likeness v1.3、SkinnedMesh/morph target/glTF 导出 v1.4 都还在路线图。所谓 token-efficient 是相对项目自身流程设计的主张，没有统一外部成本基准，最终质量仍依赖宿主 agent 的视觉判断、浏览器渲染、参考图和多轮人工反馈。
+heat: img2threejs 把一张参考图拆成对象规格，再按 blockout、结构、形体、材质、表面、灯光、交互和优化等阶段，让 coding agent 生成由 Three.js primitive、shader 与程序化几何组成的 TypeScript 工厂；结果保留 pivot、socket 和 collider，目标是可继续动画和交互，而不是下载一个静态 mesh。仓库 7 月 15 日创建、7 月 21 日发布 v1.0；截至 Asia/Katmandu 7 月 23 日复核时，认证 GitHub API 显示 2125 星、170 forks。Reddit 的独立使用讨论展示了 Codex 工作流，但用户明确说成品仍经过约半天自然语言微调，不能把示例写成“一次提示即完成”。事实边界必须前置：项目自己承认单图看不到背面、不能保证精确几何，硬表面物体是强项，人物仍是风格化重建；投影优先的 likeness v1.3、SkinnedMesh/morph target/glTF 导出 v1.4 都还在路线图。所谓 token-efficient 是相对项目自身流程设计的主张，没有统一外部成本基准，最终质量仍依赖宿主 agent 的视觉判断、浏览器渲染、参考图和多轮人工反馈。
 window: 1 周
 competition: 低
 publishedAt: 2026-07-23
