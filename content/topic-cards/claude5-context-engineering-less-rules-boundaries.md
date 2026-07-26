@@ -1,6 +1,6 @@
 ---
 title: Claude Code 删掉 80% 系统提示词：新模型要“少管”不等于没有护栏
-heat: Anthropic 于 2026 年 7 月 24 日披露，面向 Claude Opus 5、Claude Fable 5 等较新模型时，Claude Code 删除了超过 80% 的系统提示词，且公司内部 coding evaluations 没有测到可衡量的损失；文章把新做法概括为让模型使用判断、设计更清楚的工具接口、按需渐进加载上下文、减少重复指令、使用自动记忆和提供高保真参考。截至 Asia/Katmandu 7 月 26 日复核时，对应 Hacker News 讨论为 172 分、118 条评论。事实边界必须前置：80% 和“无可衡量损失”都是 Anthropic 自述，未公开原提示词长度、删除清单、评测集、置信区间或不同任务分项，不能改写成独立研究结论；结论明确针对较先进的 Claude 5 模型与 Claude Code 工作流，不能自动外推到旧模型、其他厂商模型或所有中文创作任务。官方仍建议在高度重要领域保留明确约束，涉及删除、付款、发布、隐私和生产环境的权限护栏不能因为“少写规则”而移除。
+heat: Anthropic 于 2026 年 7 月 24 日披露，面向 Claude Opus 5、Claude Fable 5 等较新模型时，Claude Code 删除了超过 80% 的系统提示词，且公司内部 coding evaluations 没有测到可衡量的损失；文章把新做法概括为让模型使用判断、设计更清楚的工具接口、按需渐进加载上下文、减少重复指令、使用自动记忆和提供高保真参考。截至 Asia/Katmandu 7 月 26 日复核时，对应 Hacker News 讨论为 212 分、136 条评论。事实边界必须前置：80% 和“无可衡量损失”都是 Anthropic 自述，未公开原提示词长度、删除清单、评测集、置信区间或不同任务分项，不能改写成独立研究结论；结论明确针对较先进的 Claude 5 模型与 Claude Code 工作流，不能自动外推到旧模型、其他厂商模型或所有中文创作任务。官方仍建议在高度重要领域保留明确约束，涉及删除、付款、发布、隐私和生产环境的权限护栏不能因为“少写规则”而移除。
 window: 72h
 competition: 高
 publishedAt: 2026-07-26
@@ -22,7 +22,7 @@ relatedTopicIds:
   - anthropic-skills-open-standard-ecosystem
 materials:
   - Anthropic 原始文章、发布日期、80% 自述与六组新旧做法 :: https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models
-  - Hacker News 独立讨论（截至 7 月 26 日复核时 172 分 / 118 评论） :: https://news.ycombinator.com/item?id=49051361
+  - Hacker News 独立讨论（截至 7 月 26 日复核时 212 分 / 136 评论） :: https://news.ycombinator.com/item?id=49051361
   - Reddit ClaudeAI 独立讨论与“80% 口径”质疑 :: https://www.reddit.com/r/ClaudeAI/comments/1v649j8/anthropic_cut_80_of_claude_codes_system_prompt/
 ---
 

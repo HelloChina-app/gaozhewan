@@ -1,6 +1,6 @@
 ---
 title: GM 押注钠离子储能：4 GWh 工厂尚未投产，先别写成锂电替代
-heat: General Motors 与 Peak Energy 于 2026 年 6 月公布合作，由 GM 在密歇根电池实验室开发面向固定储能的钠离子电芯，Peak 将其集成进电网储能系统；Peak 又在 7 月 8 日宣布于萨克拉门托建设年产最高 4 GWh 的系统工厂，计划 2027 年第一季度开始生产和出货。IEEE Spectrum 于 7 月 23 日更新的报道让话题再次进入技术社区；截至 Asia/Katmandu 7 月 26 日复核时，Hacker News 讨论为 129 分、50 条评论。事实边界必须前置：工厂尚未投产，4 GWh 是规划年产能，不是已交付容量；Peak 所称生命周期成本低 20%、约 20,000 次循环、96% 往返效率、无需主动冷却和 2028 年电芯价格追平 LFP，主要来自公司与 GM 实验室测试或预测，尚不是大规模长期独立运行数据。独立报道指出钠离子当前能量密度更低、单体成本仍高于成熟锂离子体系，北美市场份额接近零；它更可能先补充固定储能，而不是已证明全面替代 LFP 或用于所有电动车。
+heat: General Motors 与 Peak Energy 于 2026 年 6 月公布合作，由 GM 在密歇根电池实验室开发面向固定储能的钠离子电芯，Peak 将其集成进电网储能系统；Peak 又在 7 月 8 日宣布于萨克拉门托建设年产最高 4 GWh 的系统工厂，计划 2027 年第一季度开始生产和出货。IEEE Spectrum 于 7 月 23 日更新的报道让话题再次进入技术社区；截至 Asia/Katmandu 7 月 26 日复核时，Hacker News 讨论为 152 分、60 条评论。事实边界必须前置：工厂尚未投产，4 GWh 是规划年产能，不是已交付容量；Peak 所称生命周期成本低 20%、约 20,000 次循环、96% 往返效率、无需主动冷却和 2028 年电芯价格追平 LFP，主要来自公司与 GM 实验室测试或预测，尚不是大规模长期独立运行数据。独立报道指出钠离子当前能量密度更低、单体成本仍高于成熟锂离子体系，北美市场份额接近零；它更可能先补充固定储能，而不是已证明全面替代 LFP 或用于所有电动车。
 window: 1 周
 competition: 中
 publishedAt: 2026-07-26
@@ -25,7 +25,7 @@ materials:
   - Peak Energy 原始工厂公告、4 GWh 规划与 2027 年一季度目标 :: https://peakenergy.com/news/latest/gigafactory-announcement
   - IEEE Spectrum 独立技术报道与公司测试数字 :: https://spectrum.ieee.org/sodium-ion-battery-peak-energy
   - Inside Climate News 独立报道、能量密度和市场规模边界 :: https://insideclimatenews.org/news/18062026/inside-clean-energy-general-motors-sodium-ion-batteries/
-  - Hacker News 独立讨论（截至 7 月 26 日复核时 129 分 / 50 评论） :: https://news.ycombinator.com/item?id=49051947
+  - Hacker News 独立讨论（截至 7 月 26 日复核时 152 分 / 60 评论） :: https://news.ycombinator.com/item?id=49051947
 ---
 
 ## 先说结论：这是一场值得跟踪的量产实验，不是替代赛已经结束

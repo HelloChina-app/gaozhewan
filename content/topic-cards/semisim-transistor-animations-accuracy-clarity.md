@@ -1,6 +1,6 @@
 ---
 title: 三组晶体管动画同时展示“准确”和“好懂”：科普可视化别只追真实感
-heat: Brandon Li 用自制 SemiSim 制作了 NPN BJT、n 沟道 MOSFET 和 n 沟道 JFET 三组动画：蓝点与红点分别表示电子和空穴，白色闪光表示复合事件；第一组用扩散与漂移电流合成的速度移动载流子但不直接画扩散，第二组同时呈现扩散和漂移、更接近模型却更凌乱，第三组再叠加端子电压与电流探针。作者把页面动画以 CC BY 4.0 许可发布；截至 Asia/Katmandu 7 月 26 日复核时，Hacker News 讨论为 136 分、15 条评论，7 月 14 日的 Reddit Electronics 原始帖也形成独立技术讨论。事实边界必须前置：SemiSim 官方说明它是教育工具，使用二维网格、离散 Maxwell 与漂移-扩散方程的简化模型；其限制页明确列出真实系统中的多种现象无法覆盖，并说明部分材料参数为教学效果而调整，不能把动画当作具体芯片的器件仿真、工程验收或微观实拍。第二组只是“在该模型内更准确”，不等于完整还原真实载流子运动。
+heat: Brandon Li 用自制 SemiSim 制作了 NPN BJT、n 沟道 MOSFET 和 n 沟道 JFET 三组动画：蓝点与红点分别表示电子和空穴，白色闪光表示复合事件；第一组用扩散与漂移电流合成的速度移动载流子但不直接画扩散，第二组同时呈现扩散和漂移、更接近模型却更凌乱，第三组再叠加端子电压与电流探针。作者把页面动画以 CC BY 4.0 许可发布；截至 Asia/Katmandu 7 月 26 日复核时，Hacker News 讨论为 144 分、16 条评论，7 月 14 日的 Reddit Electronics 原始帖也形成独立技术讨论。事实边界必须前置：SemiSim 官方说明它是教育工具，使用二维网格、离散 Maxwell 与漂移-扩散方程的简化模型；其限制页明确列出真实系统中的多种现象无法覆盖，并说明部分材料参数为教学效果而调整，不能把动画当作具体芯片的器件仿真、工程验收或微观实拍。第二组只是“在该模型内更准确”，不等于完整还原真实载流子运动。
 window: 1 周
 competition: 低
 publishedAt: 2026-07-26
@@ -24,7 +24,7 @@ materials:
   - Brandon Li 原始动画页、三组呈现方法与 CC BY 4.0 许可 :: https://brandonli.net/semisim/animations
   - SemiSim 官方原理与限制说明 :: https://brandonli.net/semisim/info
   - Reddit Electronics 原始帖与独立技术讨论 :: https://www.reddit.com/r/electronics/comments/1uwerdo/transistor_animations_oc/
-  - Hacker News 独立讨论（截至 7 月 26 日复核时 136 分 / 15 评论） :: https://news.ycombinator.com/item?id=49039868
+  - Hacker News 独立讨论（截至 7 月 26 日复核时 144 分 / 16 评论） :: https://news.ycombinator.com/item?id=49039868
 ---
 
 ## 先说结论：好的科普不是在“准确”和“易懂”之间二选一
