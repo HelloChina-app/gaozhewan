@@ -34,10 +34,10 @@ export default function HomePage() {
       href: "/tools"
     },
     {
-      title: "搞项目",
-      desc: "从新产品和开源趋势里找可做的小项目",
-      status: "开放预约",
-      href: "/projects"
+      title: "搞着玩实验室",
+      desc: "提交真实问题，我们帮你验证并做出第一版",
+      status: "开放征集",
+      href: "/lab"
     },
     {
       title: "搞副业",
@@ -116,6 +116,22 @@ export default function HomePage() {
           <Link className="signal-cta" href="/topics">
             去选题工作台挑今天写哪条
             <span aria-hidden="true">→</span>
+          </Link>
+        </div>
+      </section>
+
+      <section className="section section-lab-cta">
+        <div className="section-inner lab-home-cta">
+          <div>
+            <p className="eyebrow">搞着玩实验室 · 首批 3 个席位</p>
+            <h2>不只给灵感，开始把用户的创意做出来</h2>
+            <p>
+              免费提交真实问题；入选后可以选择创意诊断、原型冲刺或 MVP
+              共建。固定范围交付，只接受 TRC20 USDT。
+            </p>
+          </div>
+          <Link className="button" href="/lab">
+            提交我的创意
           </Link>
         </div>
       </section>

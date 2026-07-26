@@ -9,6 +9,7 @@ type CheckoutState =
   | { kind: "error"; mailto?: string; message: string }
   | {
       accessUrl?: string;
+      fulfillment: "lab-service" | "pro-access";
       kind: "success";
       orderId: string;
       receiptSent: boolean;
@@ -20,13 +21,23 @@ type UsdtCheckoutFormProps = {
   amount: string;
   automaticVerification: boolean;
   network: string;
+  productId?: string;
+  productName?: string;
+  referenceId?: string;
+  successHref?: string;
+  successLabel?: string;
 };
 
 export function UsdtCheckoutForm({
   address,
   amount,
   automaticVerification,
-  network
+  network,
+  productId = "pro-yearly",
+  productName = "搞选题 Pro 年度版",
+  referenceId,
+  successHref = "/lab",
+  successLabel = "返回搞着玩实验室"
 }: UsdtCheckoutFormProps) {
   const [state, setState] = useState<CheckoutState>({ kind: "idle" });
   const [copied, setCopied] = useState(false);
@@ -57,6 +68,8 @@ export function UsdtCheckoutForm({
           txHash: formData.get("txHash"),
           senderAddress: formData.get("senderAddress"),
           note: formData.get("note"),
+          productId,
+          referenceId,
           networkConfirmed: formData.get("networkConfirmed") === "yes",
           company: formData.get("company")
         })
@@ -65,6 +78,7 @@ export function UsdtCheckoutForm({
         accessUrl?: string;
         error?: string;
         fallbackEmail?: string;
+        fulfillment?: "lab-service" | "pro-access";
         orderId?: string;
         receiptSent?: boolean;
         verified?: boolean;
@@ -76,10 +90,12 @@ export function UsdtCheckoutForm({
           const txHash = String(formData.get("txHash") || "");
           const senderAddress = String(formData.get("senderAddress") || "");
           const note = String(formData.get("note") || "");
-          const subject = `搞着玩 Pro USDT 核验：${txHash.slice(0, 12)}`;
+          const subject = `${productName} USDT 核验：${txHash.slice(0, 12)}`;
           const body = [
-            "请核验以下搞着玩 Pro USDT 付款：",
+            `请核验以下${productName} USDT 付款：`,
             "",
+            `产品 ID：${productId}`,
+            `实验室创意编号：${referenceId || "不适用"}`,
             `客户邮箱：${email}`,
             `金额：${amount} USDT`,
             `网络：${network}`,
@@ -102,6 +118,7 @@ export function UsdtCheckoutForm({
 
       setState({
         accessUrl: result.accessUrl,
+        fulfillment: result.fulfillment || "pro-access",
         kind: "success",
         orderId: result.orderId,
         receiptSent: Boolean(result.receiptSent),
@@ -119,6 +136,10 @@ export function UsdtCheckoutForm({
   return (
     <div className="checkout-panel">
       <div className="payment-summary">
+        <div>
+          <span>服务</span>
+          <strong>{productName}</strong>
+        </div>
         <div>
           <span>应付</span>
           <strong>{amount} USDT</strong>
@@ -167,17 +188,28 @@ export function UsdtCheckoutForm({
         <div className="order-success" role="status">
           <p className="eyebrow">订单已登记</p>
           <h2>{state.orderId}</h2>
-          {state.verified && state.accessUrl ? (
+          {state.verified &&
+          state.fulfillment === "pro-access" &&
+          state.accessUrl ? (
             <>
               <p>链上核验已通过，该 TxID 已登记并锁定，不能重复开通。</p>
               <a className="button" href={state.accessUrl}>
                 立即解锁 365 天 Pro
               </a>
             </>
+          ) : state.verified && state.fulfillment === "lab-service" ? (
+            <>
+              <p>
+                链上核验已通过，付款已与创意编号 {referenceId} 绑定。我们会按提交范围确认排期和下一步。
+              </p>
+              <a className="button" href={successHref}>
+                {successLabel}
+              </a>
+            </>
           ) : (
             <>
               <p>
-                我们会人工核对链上到账情况，通常在 12 小时内把一年期 Pro 访问链接发送到你的邮箱。
+                我们会人工核对链上到账情况，通常在 12 小时内处理该订单。
               </p>
               <p>
                 {state.receiptSent
@@ -190,7 +222,9 @@ export function UsdtCheckoutForm({
       ) : (
         <form className="checkout-form" onSubmit={onSubmit}>
           <label>
-            接收访问链接的邮箱
+            {productId === "pro-yearly"
+              ? "接收访问链接的邮箱"
+              : "与创意提交一致的邮箱"}
             <input
               autoComplete="email"
               name="email"
@@ -199,6 +233,12 @@ export function UsdtCheckoutForm({
               type="email"
             />
           </label>
+          {referenceId ? (
+            <div className="checkout-reference">
+              <span>实验室创意编号</span>
+              <strong>{referenceId}</strong>
+            </div>
+          ) : null}
           <label>
             交易哈希（TxID）
             <input

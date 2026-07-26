@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { labIdeaStoreEnabled } from "@/lib/lab-ideas";
 import { getUsdtCheckoutConfig } from "@/lib/usdt";
 
 export function GET() {
@@ -13,6 +14,10 @@ export function GET() {
       email: {
         deliveryConfigured: emailDeliveryConfigured,
         newsletterConfigured
+      },
+      lab: {
+        intakeConfigured: labIdeaStoreEnabled(),
+        paymentsConfigured: checkout.enabled
       },
       monetization: {
         asset: "USDT",

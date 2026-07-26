@@ -1226,7 +1226,7 @@ main {
 .payment-summary {
   display: grid;
   gap: 12px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
 .payment-summary div {
@@ -1363,6 +1363,375 @@ main {
 
 .order-success h2 {
   margin-top: 0;
+}
+
+.checkout-reference {
+  background: #ecfaf7;
+  border: 1px solid #b8e6db;
+  border-radius: 8px;
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+}
+
+.checkout-reference span {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.checkout-reference strong {
+  overflow-wrap: anywhere;
+}
+
+.checkout-back {
+  margin-top: 24px;
+  text-align: center;
+}
+
+/* 搞着玩实验室 */
+.lab-hero {
+  align-items: center;
+  display: grid;
+  gap: 48px;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  min-height: 640px;
+  padding-block: 86px;
+}
+
+.lab-hero h1 {
+  font-size: clamp(48px, 7vw, 86px);
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+  margin: 18px 0 24px;
+  max-width: 880px;
+}
+
+.lab-hero > div > p:not(.eyebrow) {
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1.8;
+  max-width: 760px;
+}
+
+.lab-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.lab-trust-row span,
+.lab-status {
+  background: #ecfaf7;
+  border: 1px solid #b8e6db;
+  border-radius: 999px;
+  color: #047a66;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 6px 10px;
+}
+
+.lab-callout {
+  background: var(--ink);
+  border-radius: 14px;
+  box-shadow: 8px 8px 0 var(--green);
+  color: #ffffff;
+  padding: 30px;
+}
+
+.lab-callout strong {
+  display: block;
+  font-size: 42px;
+  line-height: 1;
+  margin: 14px 0 18px;
+}
+
+.lab-callout p:not(.eyebrow) {
+  color: #d8d8d8;
+  line-height: 1.7;
+}
+
+.lab-callout .text-button {
+  color: #ffffff;
+}
+
+.lab-step-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.lab-step-grid .value-row > strong {
+  color: var(--green);
+  display: block;
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.lab-submit-layout {
+  align-items: start;
+  display: grid;
+  gap: 42px;
+  grid-template-columns: minmax(260px, 0.6fr) minmax(0, 1.4fr);
+}
+
+.lab-submit-layout > div:first-child {
+  position: sticky;
+  top: 100px;
+}
+
+.lab-submit-layout h2 {
+  font-size: 44px;
+  margin: 10px 0 16px;
+}
+
+.lab-submit-layout > div:first-child > p:not(.eyebrow),
+.lab-submit-notes {
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.lab-submit-notes {
+  border-left: 3px solid var(--green);
+  margin-top: 26px;
+  padding-left: 16px;
+}
+
+.lab-idea-form,
+.lab-submit-success {
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 5px 5px 0 var(--ink);
+  display: grid;
+  gap: 18px;
+  padding: 24px;
+}
+
+.lab-form-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.lab-form-grid label {
+  display: grid;
+  font-weight: 800;
+  gap: 7px;
+}
+
+.lab-field-wide {
+  grid-column: 1 / -1;
+}
+
+.lab-form-grid input,
+.lab-form-grid select,
+.lab-form-grid textarea {
+  background: #ffffff;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  color: var(--ink);
+  font: inherit;
+  min-width: 0;
+  padding: 11px 13px;
+  width: 100%;
+}
+
+.lab-form-grid textarea {
+  resize: vertical;
+}
+
+.lab-submit-success h2 {
+  font-size: 34px;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.lab-pricing-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lab-price-card {
+  background: #ffffff;
+  border-radius: 10px;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.lab-price-card h3 {
+  font-size: 25px;
+  margin: 8px 0 0;
+}
+
+.lab-price-card .price strong {
+  font-size: 52px;
+}
+
+.lab-price-card > p:not(.eyebrow),
+.lab-price-card li {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.lab-price-card ul {
+  margin: 8px 0 18px;
+  padding-left: 20px;
+}
+
+.lab-price-card .button {
+  margin-top: auto;
+  text-align: center;
+}
+
+.lab-price-note {
+  color: #cfcfcf;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 20px auto 0;
+  max-width: 900px;
+  text-align: center;
+}
+
+.lab-project-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lab-project-card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+  padding: 22px;
+}
+
+.lab-project-card .lab-status {
+  align-self: flex-start;
+}
+
+.lab-project-card h3 {
+  font-size: 23px;
+  margin: 18px 0 10px;
+}
+
+.lab-project-card p {
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.lab-project-card small {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  line-height: 1.6;
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+.lab-project-card .text-button {
+  margin-top: 16px;
+}
+
+.lab-boundary {
+  align-items: start;
+  background: #fff3f0;
+  border: 1px solid #f5c4bd;
+  border-radius: 12px;
+  display: grid;
+  gap: 32px;
+  grid-template-columns: 0.75fr 1.25fr;
+  padding: 30px;
+}
+
+.lab-boundary h2 {
+  font-size: 34px;
+  margin: 10px 0 0;
+}
+
+.lab-boundary ul {
+  line-height: 1.8;
+  margin: 0;
+}
+
+.section-lab-cta {
+  background: #ddff48;
+}
+
+.lab-home-cta {
+  align-items: center;
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 1fr auto;
+}
+
+.lab-home-cta h2 {
+  font-size: 38px;
+  margin: 8px 0 12px;
+}
+
+.lab-home-cta p:not(.eyebrow) {
+  line-height: 1.7;
+  margin: 0;
+  max-width: 760px;
+}
+
+@media (max-width: 900px) {
+  .lab-hero,
+  .lab-submit-layout,
+  .lab-boundary {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-hero {
+    min-height: auto;
+    padding-block: 62px;
+  }
+
+  .lab-step-grid,
+  .lab-pricing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lab-project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-submit-layout > div:first-child {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .lab-hero h1 {
+    font-size: 46px;
+  }
+
+  .lab-step-grid,
+  .lab-form-grid,
+  .lab-pricing-grid,
+  .lab-home-cta {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-field-wide {
+    grid-column: auto;
+  }
+
+  .lab-idea-form,
+  .lab-submit-success,
+  .lab-boundary {
+    padding: 18px;
+  }
+
+  .lab-home-cta .button {
+    justify-self: start;
+  }
 }
 
 .checkout-steps {

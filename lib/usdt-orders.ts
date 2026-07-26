@@ -9,6 +9,8 @@ export type StoredUsdtOrder = {
   emailHash: string;
   orderId: string;
   paidAtomic: string;
+  productId?: string;
+  referenceId?: string;
   txHash: string;
   v: 1;
 };

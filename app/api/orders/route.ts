@@ -1,9 +1,14 @@
 import { randomBytes } from "node:crypto";
 import { NextResponse } from "next/server";
 import { createProAccessToken } from "@/lib/pro-access";
+import { readLabIdea } from "@/lib/lab-ideas";
 import { site } from "@/lib/site";
 import { verifyConfirmedTronUsdtTransfer } from "@/lib/tron-usdt";
-import { getUsdtCheckoutConfig } from "@/lib/usdt";
+import {
+  getUsdtCheckoutConfigForProduct,
+  PRO_PRODUCT_ID,
+  type UsdtCheckoutConfig
+} from "@/lib/usdt";
 import {
   automaticUsdtOrdersEnabled,
   hashOrderEmail,
@@ -19,6 +24,8 @@ type OrderInput = {
   email?: unknown;
   networkConfirmed?: unknown;
   note?: unknown;
+  productId?: unknown;
+  referenceId?: unknown;
   senderAddress?: unknown;
   txHash?: unknown;
 };
@@ -51,7 +58,36 @@ function createOrderId() {
   return `GZW-${day}-${randomBytes(3).toString("hex").toUpperCase()}`;
 }
 
-function accessResult(order: StoredUsdtOrder, email: string) {
+function storedOrderMatches(
+  order: StoredUsdtOrder,
+  checkout: UsdtCheckoutConfig,
+  referenceId: string
+) {
+  const storedProductId = order.productId || PRO_PRODUCT_ID;
+  return (
+    storedProductId === checkout.productId &&
+    (checkout.fulfillment !== "lab-service" ||
+      order.referenceId === referenceId)
+  );
+}
+
+function orderResult(
+  order: StoredUsdtOrder,
+  checkout: UsdtCheckoutConfig,
+  email: string
+) {
+  if (checkout.fulfillment === "lab-service") {
+    return {
+      fulfillment: checkout.fulfillment,
+      ok: true,
+      orderId: order.orderId,
+      productId: checkout.productId,
+      receiptSent: false,
+      referenceId: order.referenceId,
+      verified: true
+    };
+  }
+
   const token = createProAccessToken({
     v: 1,
     email,
@@ -63,8 +99,10 @@ function accessResult(order: StoredUsdtOrder, email: string) {
   return token
     ? {
         accessUrl: `/api/access/redeem?token=${encodeURIComponent(token)}`,
+        fulfillment: checkout.fulfillment,
         ok: true,
         orderId: order.orderId,
+        productId: checkout.productId,
         receiptSent: false,
         verified: true
       }
@@ -113,16 +151,21 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "请求内容过大。" }, { status: 413 });
   }
 
-  const checkout = getUsdtCheckoutConfig();
-  if (!checkout.enabled) {
-    return NextResponse.json({ error: "USDT 收银台暂未开放。" }, { status: 503 });
-  }
-
   let input: OrderInput;
   try {
     input = (await request.json()) as OrderInput;
   } catch {
     return NextResponse.json({ error: "订单数据格式无效。" }, { status: 400 });
+  }
+
+  const productId = text(input.productId, 80) || PRO_PRODUCT_ID;
+  const checkout = getUsdtCheckoutConfigForProduct(productId);
+  if (!checkout) {
+    return NextResponse.json({ error: "付款产品无效。" }, { status: 400 });
+  }
+
+  if (!checkout.enabled) {
+    return NextResponse.json({ error: "USDT 收银台暂未开放。" }, { status: 503 });
   }
 
   if (text(input.company, 200)) {
@@ -133,6 +176,7 @@ export async function POST(request: Request) {
   const txHash = text(input.txHash, 160);
   const senderAddress = text(input.senderAddress, 180);
   const note = text(input.note, 500);
+  const referenceId = text(input.referenceId, 80).toUpperCase();
 
   if (!isEmail(email)) {
     return NextResponse.json({ error: "请输入有效邮箱。" }, { status: 400 });
@@ -147,6 +191,42 @@ export async function POST(request: Request) {
       { error: "请先确认 USDT 网络和金额。" },
       { status: 400 }
     );
+  }
+
+  if (checkout.fulfillment === "lab-service") {
+    if (!/^GZL-\d{8}-[0-9A-F]{8}$/.test(referenceId)) {
+      return NextResponse.json(
+        { error: "实验室创意编号无效，请先提交创意。" },
+        { status: 400 }
+      );
+    }
+
+    let idea: Awaited<ReturnType<typeof readLabIdea>>;
+    try {
+      idea = await readLabIdea(referenceId);
+    } catch {
+      return NextResponse.json(
+        { error: "暂时无法读取实验室创意，请稍后重试。" },
+        { status: 503 }
+      );
+    }
+
+    if (!idea) {
+      return NextResponse.json(
+        { error: "没有找到该实验室创意，请返回重新提交。" },
+        { status: 404 }
+      );
+    }
+
+    if (
+      idea.contactEmail !== email ||
+      idea.selectedPackageId !== checkout.productId
+    ) {
+      return NextResponse.json(
+        { error: "邮箱或服务档位与创意提交记录不一致。" },
+        { status: 409 }
+      );
+    }
   }
 
   const normalizedTxHash = txHash.replace(/^0x/i, "").toLowerCase();
@@ -164,7 +244,14 @@ export async function POST(request: Request) {
           );
         }
 
-        const result = accessResult(existing, email);
+        if (!storedOrderMatches(existing, checkout, referenceId)) {
+          return NextResponse.json(
+            { error: "该交易哈希已经用于其他产品或项目。" },
+            { status: 409 }
+          );
+        }
+
+        const result = orderResult(existing, checkout, email);
         return result
           ? NextResponse.json(result, {
               status: 202,
@@ -194,6 +281,8 @@ export async function POST(request: Request) {
         emailHash,
         orderId: createOrderId(),
         paidAtomic: verification.valueAtomic,
+        productId: checkout.productId,
+        referenceId: referenceId || undefined,
         txHash: normalizedTxHash
       });
 
@@ -204,7 +293,14 @@ export async function POST(request: Request) {
         );
       }
 
-      const result = accessResult(order, email);
+      if (!storedOrderMatches(order, checkout, referenceId)) {
+        return NextResponse.json(
+          { error: "该交易哈希已经用于其他产品或项目。" },
+          { status: 409 }
+        );
+      }
+
+      const result = orderResult(order, checkout, email);
       return result
         ? NextResponse.json(result, {
             status: 202,
@@ -242,6 +338,8 @@ export async function POST(request: Request) {
   const orderText = [
     `订单号：${orderId}`,
     `产品：${checkout.planName}`,
+    `产品 ID：${checkout.productId}`,
+    `实验室创意编号：${referenceId || "不适用"}`,
     `金额：${checkout.amount} USDT`,
     `网络：${checkout.network}`,
     `收款地址：${checkout.address}`,
@@ -274,19 +372,31 @@ export async function POST(request: Request) {
   const receiptResponse = await sendEmail(apiKey, {
     from,
     to: [email],
-    subject: `搞着玩 Pro 订单已登记：${orderId}`,
+    subject: `${checkout.planName}订单已登记：${orderId}`,
     text: [
       `你的订单 ${orderId} 已登记。`,
+      `产品：${checkout.planName}`,
+      ...(referenceId ? [`实验室创意编号：${referenceId}`] : []),
       `待核验：${checkout.amount} USDT / ${checkout.network}`,
       `交易哈希：${txHash}`,
       "",
-      "订单提交不等于付款确认。核验通过后，我们会在 12 小时内把一年期 Pro 访问链接发送到本邮箱。",
+      checkout.fulfillment === "pro-access"
+        ? "订单提交不等于付款确认。核验通过后，我们会在 12 小时内把一年期 Pro 访问链接发送到本邮箱。"
+        : "订单提交不等于付款确认。核验通过后，我们会按实验室创意编号确认范围和排期。",
       `如需帮助，请联系 ${site.email}。`
     ].join("\n")
   });
 
   return NextResponse.json(
-    { ok: true, orderId, receiptSent: receiptResponse.ok },
+    {
+      fulfillment: checkout.fulfillment,
+      ok: true,
+      orderId,
+      productId: checkout.productId,
+      receiptSent: receiptResponse.ok,
+      referenceId: referenceId || undefined,
+      verified: false
+    },
     {
       status: 202,
       headers: { "Cache-Control": "no-store" }
