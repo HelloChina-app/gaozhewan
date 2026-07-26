@@ -1,4 +1,9 @@
-export const interestOptions = ["搞选题", "搞工具", "搞项目", "搞副业"] as const;
+export const interestOptions = [
+  "搞选题",
+  "搞工具",
+  "自己做副业",
+  "实验室共建"
+] as const;
 
 export type Interest = (typeof interestOptions)[number];
 

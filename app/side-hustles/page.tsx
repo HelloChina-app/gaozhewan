@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SubscribeForm } from "@/components/subscribe-form";
 
 export const metadata: Metadata = {
@@ -26,11 +27,19 @@ export default function SideHustlesPage() {
   return (
     <section className="page-shell">
       <div className="page-title">
-        <p className="eyebrow">搞副业 · 开放预约</p>
-        <h1>把全球玩法拆成能验证的副业方案</h1>
+        <p className="eyebrow">搞项目 · 自己做</p>
+        <h1>先用最低成本验证一个副业方向</h1>
         <p>
-          先留下你想做的副业方向，我们会优先把你最需要的方案做扎实、做出来。
+          这里提供免费案例、工具和验证思路，由你自己执行。先证明有人需要，再决定要不要投入更多时间和钱。
         </p>
+        <div className="hero-actions">
+          <Link className="button" href="/tools">
+            先看工具
+          </Link>
+          <Link className="text-button" href="/lab">
+            已有想法，找实验室共建
+          </Link>
+        </div>
       </div>
 
       <div className="value-list topic-positioning">
@@ -45,11 +54,13 @@ export default function SideHustlesPage() {
       <section className="section">
         <div className="subscribe-band">
           <div>
-            <p className="eyebrow">抢先体验</p>
-            <h2>如果你想搞副业，先告诉我们</h2>
-            <p>后续会优先把副业案例拆解和工具组合发给选择“搞副业”的用户。</p>
+            <p className="eyebrow">免费订阅</p>
+            <h2>把适合自己验证的方案发给你</h2>
+            <p>
+              我们会优先发送副业案例拆解、工具组合和低成本验证方法，不出售收入保证。
+            </p>
           </div>
-          <SubscribeForm source="side-hustles-page" defaultInterest="搞副业" />
+          <SubscribeForm source="side-hustles-page" defaultInterest="自己做副业" />
         </div>
       </section>
     </section>

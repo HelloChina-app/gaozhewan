@@ -13,8 +13,7 @@ export const navItems = [
   { href: "/", label: "首页" },
   { href: "/post", label: "搞选题" },
   { href: "/tools", label: "搞工具" },
-  { href: "/lab", label: "实验室" },
-  { href: "/side-hustles", label: "搞副业" },
+  { href: "/projects", label: "搞项目" },
   { href: "/pricing", label: "搞选题 Pro" },
   { href: "/subscribe", label: "订阅" }
 ];

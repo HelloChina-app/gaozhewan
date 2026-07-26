@@ -45,6 +45,10 @@ export default function LabPage() {
           <p>
             从真实问题开始。你提交需求和目标，我们负责甄选、核验、拆范围，并和你一起把想法变成可以演示、测试或交付给首批用户的产品。
           </p>
+          <p className="lab-path-note">
+            实验室适合已经有明确问题、希望共同交付的人。还在找方向？
+            <Link href="/side-hustles">先走免费自助路径</Link>。
+          </p>
           <div className="hero-actions">
             <a className="button" href="#submit">
               提交创意

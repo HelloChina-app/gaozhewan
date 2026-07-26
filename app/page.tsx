@@ -34,16 +34,10 @@ export default function HomePage() {
       href: "/tools"
     },
     {
-      title: "搞着玩实验室",
-      desc: "提交真实问题，我们帮你验证并做出第一版",
-      status: "开放征集",
-      href: "/lab"
-    },
-    {
-      title: "搞副业",
-      desc: "把流量玩法、工具组合和案例变成可执行方案",
-      status: "开放预约",
-      href: "/side-hustles"
+      title: "搞项目",
+      desc: "自己验证副业方向，或找实验室一起做出第一版",
+      status: "两种方式",
+      href: "/projects"
     }
   ];
 
@@ -54,7 +48,7 @@ export default function HomePage() {
           <p className="eyebrow">GAOZHEWAN · START WITH GLOBAL SIGNALS</p>
           <h1>搞着玩</h1>
           <p>
-            搞着玩帮你把全球新奇事物，变成可以立刻动手的选题、工具、项目和副业灵感。
+            搞着玩帮你把全球新奇事物，变成可以立刻动手的选题、工具和项目方案。
           </p>
           <div className="hero-actions">
             <Link className="button" href={`/post/${latestPost.slug}`}>
@@ -123,16 +117,20 @@ export default function HomePage() {
       <section className="section section-lab-cta">
         <div className="section-inner lab-home-cta">
           <div>
-            <p className="eyebrow">搞着玩实验室 · 首批 3 个席位</p>
-            <h2>不只给灵感，开始把用户的创意做出来</h2>
+            <p className="eyebrow">搞项目 · 两种方式</p>
+            <h2>你可以自己做，也可以找我们一起做</h2>
             <p>
-              免费提交真实问题；入选后可以选择创意诊断、原型冲刺或 MVP
-              共建。固定范围交付，只接受 TRC20 USDT。
+              想低成本试水，就从免费副业方案和工具开始；已经有明确创意，就提交给实验室，按固定范围共建第一版。
             </p>
           </div>
-          <Link className="button" href="/lab">
-            提交我的创意
-          </Link>
+          <div className="hero-actions">
+            <Link className="button" href="/side-hustles">
+              我想自己做
+            </Link>
+            <Link className="text-button" href="/lab">
+              找实验室共建
+            </Link>
+          </div>
         </div>
       </section>
 

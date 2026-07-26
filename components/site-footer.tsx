@@ -10,8 +10,7 @@ export function SiteFooter() {
       </div>
       <div className="footer-links">
         <Link href="/about">关于</Link>
-        <Link href="/lab">搞着玩实验室</Link>
-        <Link href="/side-hustles">搞副业</Link>
+        <Link href="/projects">搞项目</Link>
         <Link href="/topics">选题卡</Link>
         <Link href="/weekly">周刊</Link>
         <Link href="/privacy">隐私政策</Link>

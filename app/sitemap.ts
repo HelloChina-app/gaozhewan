@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/post",
     "/tools",
+    "/projects",
     "/lab",
     "/side-hustles",
     "/weekly",

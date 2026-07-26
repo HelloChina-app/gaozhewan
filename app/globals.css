@@ -1681,6 +1681,83 @@ main {
   max-width: 760px;
 }
 
+.project-hub {
+  padding-bottom: 20px;
+}
+
+.project-path-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.project-path-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.project-path-card h2 {
+  font-size: 34px;
+  margin: 8px 0 12px;
+}
+
+.project-path-card > p:not(.eyebrow) {
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.project-path-card ul {
+  line-height: 1.8;
+  margin: 22px 0 26px;
+  padding-left: 20px;
+}
+
+.project-path-card .button {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.project-decision-note {
+  align-items: center;
+  background: var(--ink);
+  border-radius: 10px;
+  color: #ffffff;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  padding: 28px;
+}
+
+.project-decision-note h2 {
+  font-size: 30px;
+  margin: 8px 0 0;
+}
+
+.project-decision-note > p {
+  color: #d7d7d7;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.lab-path-note {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 16px;
+}
+
+.lab-path-note a {
+  color: var(--ink);
+  font-weight: 800;
+  margin-left: 4px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 @media (max-width: 900px) {
   .lab-hero,
   .lab-submit-layout,
@@ -1715,7 +1792,9 @@ main {
   .lab-step-grid,
   .lab-form-grid,
   .lab-pricing-grid,
-  .lab-home-cta {
+  .lab-home-cta,
+  .project-path-grid,
+  .project-decision-note {
     grid-template-columns: 1fr;
   }
 
