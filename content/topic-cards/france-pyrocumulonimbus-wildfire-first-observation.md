@@ -1,6 +1,6 @@
 ---
 title: 法国山火第一次观测到“火积雨云”：会制造闪电的不是一朵普通烟云
-heat: 法国吉伦特省消防负责人 Marc Vermeulen 表示，7 月 24 日山火上空形成了该国首次观测到的 pyrocumulonimbus（火积雨云/火生积雨云）；截至 Asia/Katmandu 7 月 27 日复核时，相关 Hacker News 讨论为 191 分、102 条评论。AP 7 月 26 日快照称吉伦特已有约 4.2 万公顷烧毁、该地区约 22 万人撤离，并引述当局称火场多次形成能产生闪电的自维持火暴；Météo-France 同期记录法国 7 月 4 至 19 日经历 16 天热浪。事实边界必须前置：“法国首次”是消防部门对本国观测记录的表述，不是全球首次，火积雨云在澳大利亚、加拿大和美国等地已有研究；它能产生强上升气流、阵风和闪电，但不等于一定形成火龙卷。高温、干燥和风为此次火行为提供背景，不代表单次云体已经完成正式气候归因；火情与撤离数字仍在变化，发布时必须标注核验时间。AP、AFP、TF1 等报道文字、照片和视频受版权保护，中文二创应转述事实、链接来源并使用自制示意图或另获许可素材。
+heat: 法国吉伦特省消防负责人 Marc Vermeulen 表示，7 月 24 日山火上空形成了该国首次观测到的 pyrocumulonimbus（火积雨云/火生积雨云）；截至 Asia/Katmandu 7 月 27 日复核时，相关 Hacker News 讨论为 224 分、130 条评论。AP 7 月 26 日快照称吉伦特已有约 4.2 万公顷烧毁、该地区约 22 万人撤离，并引述当局称火场多次形成能产生闪电的自维持火暴；Météo-France 同期记录法国 7 月 4 至 19 日经历 16 天热浪。事实边界必须前置：“法国首次”是消防部门对本国观测记录的表述，不是全球首次，火积雨云在澳大利亚、加拿大和美国等地已有研究；它能产生强上升气流、阵风和闪电，但不等于一定形成火龙卷。高温、干燥和风为此次火行为提供背景，不代表单次云体已经完成正式气候归因；火情与撤离数字仍在变化，发布时必须标注核验时间。AP、AFP、TF1 等报道文字、照片和视频受版权保护，中文二创应转述事实、链接来源并使用自制示意图或另获许可素材。
 window: 48h
 competition: 中
 publishedAt: 2026-07-27
@@ -24,7 +24,7 @@ materials:
   - 法国地方报道与吉伦特消防负责人对首次观测的说明 :: https://www.ladepeche.fr/2026/07/25/incendie-un-orage-de-feu-quest-ce-que-le-pyrocumulonimbus-ce-phenomene-completement-inedit-en-france-13484029.php
   - AP 独立现场报道、火情数字与闪电风险快照 :: https://apnews.com/article/europe-wildfires-france-spain-bordeaux-5b9b063bdcf9b69867fa71ba31be8aa5
   - Météo-France 官方 7 月热浪复盘 :: https://meteofrance.com/actualites-et-dossiers/actualites/retour-sur-la-2e-vague-de-chaleur-de-lete-du-4-au-19-juillet-2026
-  - Hacker News 独立讨论（截至 7 月 27 日复核时 191 分 / 102 评论） :: https://news.ycombinator.com/item?id=49060495
+  - Hacker News 独立讨论（截至 7 月 27 日复核时 224 分 / 130 评论） :: https://news.ycombinator.com/item?id=49060495
 ---
 
 ## 先说结论：火大到一定程度，真的会“造天气”

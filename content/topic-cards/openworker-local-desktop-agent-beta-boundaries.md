@@ -1,6 +1,6 @@
 ---
-title: 吴恩达 OpenWorker 一周冲到 6873 星：本地桌面 agent 离中文生产力工具还差哪些门
-heat: andrewyng/openworker 7 月 20 日建仓、7 月 23 日发布 v0.1.6，截至 Asia/Katmandu 7 月 27 日复核时已有 6873 星、917 forks，采用 MIT 许可。官方把它定位为“交付成品而非只聊天”的本地桌面 AI coworker：可读写文件、运行终端、连接 25+ 服务，支持自带 OpenAI、Anthropic、Google 等 API key，也可接 Ollama 本地模型；外部写入、发送与命令执行走审批。事实边界必须前置：项目仍明确标注 open beta；Windows 安装包尚未代码签名，会触发 SmartScreen，官方没有 Linux 成品包；一个仍开放的 i18n issue 指出界面字符串目前全是英文。所谓 local-first 只表示 agent 循环、会话与密钥主要存本机，调用云模型、OAuth 连接器和可选 Cloud 仍会联网，不能写成“所有数据永不离机”或已经过独立安全审计。MIT 只覆盖仓库代码，不自动授权第三方模型、连接器内容、品牌标识或演示素材。
+title: 吴恩达 OpenWorker 一周冲到 7035 星：本地桌面 agent 离中文生产力工具还差哪些门
+heat: andrewyng/openworker 7 月 20 日建仓、7 月 23 日发布 v0.1.6，截至 Asia/Katmandu 7 月 27 日复核时已有 7035 星、946 forks，采用 MIT 许可。官方把它定位为“交付成品而非只聊天”的本地桌面 AI coworker：可读写文件、运行终端、连接 25+ 服务，支持自带 OpenAI、Anthropic、Google 等 API key，也可接 Ollama 本地模型；外部写入、发送与命令执行走审批。事实边界必须前置：项目仍明确标注 open beta；Windows 安装包尚未代码签名，会触发 SmartScreen，官方没有 Linux 成品包；一个仍开放的 i18n issue 指出界面字符串目前全是英文。所谓 local-first 只表示 agent 循环、会话与密钥主要存本机，调用云模型、OAuth 连接器和可选 Cloud 仍会联网，不能写成“所有数据永不离机”或已经过独立安全审计。MIT 只覆盖仓库代码，不自动授权第三方模型、连接器内容、品牌标识或演示素材。
 window: 1 周
 competition: 高
 publishedAt: 2026-07-27
@@ -13,7 +13,7 @@ angles:
   - 本地与隐私拆解向：把本机状态、云模型请求、OAuth 连接器、可选 OpenWorker Cloud 分成四条数据路径，逐项核对内容、密钥、元数据和遥测去向；Ollama 可本地推理不代表整个工作流自动离线
   - 中文化与采用门槛向：当前公开 issue 指向英文硬编码，Windows 未签名且 Linux 无成品包；评估中文输入输出、界面翻译、国内模型兼容、SmartScreen 提示和连接器可用性，再判断它是不是普通用户能直接安装的工具
 headlines:
-  - 6873 星的 OpenWorker 不只聊天，但“本地”到底本地到哪一层
+  - 7035 星的 OpenWorker 不只聊天，但“本地”到底本地到哪一层
   - 吴恩达把桌面 agent 开源了：中文用户先过英文界面和未签名安装包
   - 让 AI 交付文档而不是列待办：OpenWorker v0.1.6 实测该看什么
 relatedTopicIds:
@@ -31,7 +31,7 @@ materials:
 
 OpenWorker 想改变的不是聊天框样式，而是任务的终点。用户可以要求它准备客户简报、整理日历、更新表格或草拟 Slack 回复；本地 Python agent server 负责拆步骤，桌面界面展示过程，最终结果落成文件或待确认动作。官方强调，发送消息、改日历、运行命令等有后果的操作要先审批；无人值守任务遇到审批时会停在 inbox，而不是悄悄扩大权限。
 
-这对中文创作者很有吸引力，因为“搜资料后给我一份可编辑文档”比“告诉我下一步该做什么”更接近真实生产。但 6873 星只能说明关注度快速增长，不能替代稳定性、权限隔离、中文体验和长期维护验证。项目自己标注 open beta，Windows 构建尚未代码签名，Linux 用户还在 issue 中请求 deb 或 AppImage；当前 i18n issue 则明确指出界面全部是英文。把它写成“人人可用的成熟办公替代品”会越过现有证据。
+这对中文创作者很有吸引力，因为“搜资料后给我一份可编辑文档”比“告诉我下一步该做什么”更接近真实生产。但 7035 星只能说明关注度快速增长，不能替代稳定性、权限隔离、中文体验和长期维护验证。项目自己标注 open beta，Windows 构建尚未代码签名，Linux 用户还在 issue 中请求 deb 或 AppImage；当前 i18n issue 则明确指出界面全部是英文。把它写成“人人可用的成熟办公替代品”会越过现有证据。
 
 ## “在本机运行”至少要拆成四件事
 

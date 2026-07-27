@@ -1,6 +1,6 @@
 ---
 title: PGSimCity 把 PostgreSQL 画成一座 3D 城市：最值得学的是它主动标出的“不准确”
-heat: Nikolay Samokhvalov 7 月 25 日公开 PGSimCity v0.1，把 shared_buffers、WAL、checkpoint、autovacuum、锁、堆页、B-tree 与主从复制画成可步行探索的 3D 城市；截至 Asia/Katmandu 7 月 27 日复核时，Hacker News 讨论为 121 分、19 条评论，GitHub 仓库为 19 星、Apache-2.0 许可。事实边界必须前置：作者在启动页和 README 两次声明这是“早期、未经审阅、几乎肯定含有错误”的手写教学模型，不是模拟器；浏览器里没有运行 PostgreSQL 源码，也不解析 SQL，1024 个缓冲帧和粒子数量都为可观看性而缩放，不能用它验证查询计划、性能、故障恢复或具体版本行为。项目代码可按 Apache-2.0 使用，但二次发布仍需保留许可证与 NOTICE；PostgreSQL 名称是商标，不能暗示得到官方背书。
+heat: Nikolay Samokhvalov 7 月 25 日公开 PGSimCity v0.1，把 shared_buffers、WAL、checkpoint、autovacuum、锁、堆页、B-tree 与主从复制画成可步行探索的 3D 城市；截至 Asia/Katmandu 7 月 27 日复核时，Hacker News 讨论为 245 分、32 条评论，GitHub 仓库为 29 星、Apache-2.0 许可。事实边界必须前置：作者在启动页和 README 两次声明这是“早期、未经审阅、几乎肯定含有错误”的手写教学模型，不是模拟器；浏览器里没有运行 PostgreSQL 源码，也不解析 SQL，1024 个缓冲帧和粒子数量都为可观看性而缩放，不能用它验证查询计划、性能、故障恢复或具体版本行为。项目代码可按 Apache-2.0 使用，但二次发布仍需保留许可证与 NOTICE；PostgreSQL 名称是商标，不能暗示得到官方背书。
 window: 72h
 competition: 低
 publishedAt: 2026-07-27
@@ -14,7 +14,7 @@ angles:
   - 许可与准确性向：项目代码为 Apache-2.0，改编需保留许可证和 NOTICE，PostgreSQL 商标不随代码授权；截图、讲解与二创应明确写“独立教育原型”，并用官方文档或真实实例复核每个机制
 headlines:
   - 把 PostgreSQL 走成一座城：PGSimCity 如何解释 WAL、缓存和 vacuum
-  - 121 分的数据库可视化先给自己打警告：它不是 PostgreSQL 模拟器
+  - 245 分的数据库可视化先给自己打警告：它不是 PostgreSQL 模拟器
   - 长事务为什么让表越变越胖？这座 3D 城市把过程演给你看
 relatedTopicIds:
   - beam-engine-interactive-explainer-threejs-fable
@@ -24,7 +24,7 @@ materials:
   - PGSimCity 原始交互页面与 v0.1 准确性警告 :: https://nikolays.github.io/PGSimCity/
   - PGSimCity 官方仓库、模型说明与 Apache-2.0 许可 :: https://github.com/NikolayS/PGSimCity
   - PostgreSQL 官方体系结构文档，用于复核进程与内存模型 :: https://www.postgresql.org/docs/current/tutorial-arch.html
-  - Hacker News 独立讨论（截至 7 月 27 日复核时 121 分 / 19 评论） :: https://news.ycombinator.com/item?id=49063754
+  - Hacker News 独立讨论（截至 7 月 27 日复核时 245 分 / 32 评论） :: https://news.ycombinator.com/item?id=49063754
 ---
 
 ## 先说结论：这不是一台藏在网页里的 PostgreSQL
