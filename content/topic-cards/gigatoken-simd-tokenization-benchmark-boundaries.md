@@ -23,7 +23,7 @@ relatedTopicIds:
 materials:
   - GigaToken 官方仓库、基准方法、兼容模式与已知限制 :: https://github.com/marcelroed/gigatoken
   - Hacker News 独立讨论（截至 7 月 23 日复核时 408 分 / 81 评论） :: https://news.ycombinator.com/item?id=49010167
-  - Hugging Face Tokenizers 官方文档与对照接口 :: https://huggingface.co/docs/tokenizers/
+  - Hugging Face Tokenizers 官方仓库与对照接口 :: https://github.com/huggingface/tokenizers
 ---
 
 ## 先说结论：这是一条值得复现的工程路线，不是一张可直接采购的倍数海报

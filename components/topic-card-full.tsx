@@ -60,7 +60,8 @@ export function TopicCardFull({
           </div>
 
           <div className="topic-section">
-            <SectionTitle>素材包</SectionTitle>
+            <SectionTitle>核验来源</SectionTitle>
+            <p>来源始终公开；Pro 的价值是把它们整理进可执行的写作角度、标题模板和复制简报。</p>
             {card.materials.map((material) => (
               <a
                 href={material.url}
@@ -78,7 +79,7 @@ export function TopicCardFull({
           {card.materials.length > 0 ? (
             <div className="topic-section topic-sources-public">
               <SectionTitle>公开核验来源</SectionTitle>
-              <p>事实与热度可免费核验；Pro 只锁定写作角度、标题模板和执行素材包。</p>
+              <p>事实与热度可免费核验；Pro 只锁定写作角度、标题模板、竞争度、时效窗口和复制简报。</p>
               {card.materials.map((material) => (
                 <a
                   href={material.url}

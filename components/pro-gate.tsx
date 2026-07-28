@@ -19,7 +19,7 @@ export function ProGate({
         <p className="eyebrow">解锁完整选题</p>
         <Heading>这篇还能直接拆成 {anglesCount} 个写作角度</Heading>
         <p>
-          搞选题 Pro 用户可见竞争度、时效窗口、素材链接和 {templatesCount} 个标题模板，适合直接改成公众号、小红书或视频脚本。
+          核验来源永久免费公开；搞选题 Pro 解锁竞争度、时效窗口、复制简报和 {templatesCount} 个标题模板，适合直接改成公众号、小红书或视频脚本。
         </p>
       </div>
       <div className="locked-lines" aria-hidden="true">

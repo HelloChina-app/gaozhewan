@@ -27,7 +27,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: tool.guide?.title || `${tool.name} - 工具实测与选题角度`,
+    title: tool.guide?.title || `${tool.name} - 工具介绍与选题角度`,
     description: tool.guide?.description || tool.description,
     alternates: {
       canonical: `/tools/${tool.slug}`
@@ -69,12 +69,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
     name: tool.name,
     description: tool.description,
     applicationCategory: tool.category,
-    url: tool.url,
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD"
-    }
+    url: tool.url
   };
   const guideJsonLd = guide
     ? {
@@ -172,7 +167,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
           </div>
           <div className="value-list">
             <div className="value-row">
-              <h3>先测后写</h3>
+              <h3>先核验，再实测</h3>
               <p>
                 用一个具体任务实测 {tool.name}，记录它擅长和不擅长的地方，再决定写成评测、教程还是对比。
               </p>
@@ -249,7 +244,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
           </Link>
           。来源：
           <a href={tool.url} rel={rel} target="_blank">
-            {site.name}
+            {tool.name} 官方网站
           </a>
         </p>
       </aside>

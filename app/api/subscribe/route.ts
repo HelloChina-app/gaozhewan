@@ -1,17 +1,51 @@
 ﻿import { NextResponse } from "next/server";
 
 import { normalizeInterest } from "@/lib/interests";
+import { getRequestKey, takeRateLimit } from "@/lib/request-guard";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: Request) {
+  const contentLength = Number(request.headers.get("content-length") || "0");
+  if (contentLength > 4_000) {
+    return NextResponse.json(
+      { message: "请求内容过大。" },
+      { status: 413 }
+    );
+  }
+
+  const rateLimit = takeRateLimit(getRequestKey(request, "subscribe"), {
+    limit: 6,
+    windowMs: 10 * 60 * 1000
+  });
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { message: "提交过于频繁，请稍后再试。" },
+      {
+        status: 429,
+        headers: { "Retry-After": String(rateLimit.retryAfterSeconds) }
+      }
+    );
+  }
+
   const requestHost = new URL(request.url).hostname;
   const isLocalRequest = ["localhost", "127.0.0.1", "::1"].includes(
     requestHost
   );
   const body = (await request.json().catch(() => null)) as
-    | { email?: string; source?: string; interest?: string }
+    | {
+        company?: string;
+        email?: string;
+        source?: string;
+        interest?: string;
+      }
     | null;
+  if (body?.company?.trim()) {
+    return NextResponse.json(
+      { message: "订阅请求已收到。" },
+      { status: 202 }
+    );
+  }
   const email = body?.email?.trim().toLowerCase();
   const source = body?.source?.trim().slice(0, 80) || "website";
   const interest = normalizeInterest(body?.interest);
@@ -71,11 +105,11 @@ export async function POST(request: Request) {
   }
 
   if (!response.ok) {
-    const detail = await response.text();
+    console.error(`Resend contact write failed with status ${response.status}`);
 
     return NextResponse.json(
-      { message: detail || "订阅失败，请稍后再试。" },
-      { status: response.status }
+      { message: "订阅服务暂时不可用，请稍后再试。" },
+      { status: 502 }
     );
   }
 

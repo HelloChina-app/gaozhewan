@@ -16,6 +16,6 @@ headlines:
   - 把代码搬回自己家：Forgejo 自托管到底值不值
   - 数字主权焦虑下，开发者开始给自己留一条后路
 materials:
-  - 原文 · Leaving GitHub for Forgejo :: https://jorijn.com/en/blog/leaving-github-for-forgejo/
   - Hacker News 讨论 :: https://news.ycombinator.com/item?id=48121266
+  - Forgejo 用户指南引用的 Codeberg 迁移文档 :: https://docs.codeberg.org/advanced/migrating-repos/
 ---

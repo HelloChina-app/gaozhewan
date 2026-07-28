@@ -17,7 +17,7 @@ export default function WeeklyPage() {
         <p className="eyebrow">周刊</p>
         <h1>每周五，把全球信号扫一遍</h1>
         <p>
-          周刊免费版保留摘要，Pro 版提供完整 10 条素材链和可直接改写的标题模板。
+          周刊免费公开摘要与核验来源；Pro 工作台额外提供可直接改写的角度、标题模板和复制简报。
         </p>
       </div>
 

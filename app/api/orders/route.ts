@@ -1,7 +1,14 @@
-import { randomBytes } from "node:crypto";
+import { createHash, randomBytes } from "node:crypto";
 import { NextResponse } from "next/server";
+import {
+  emailDeliveryConfigured,
+  getTransactionalFromEmail,
+  sendTransactionalEmail
+} from "@/lib/email";
 import { createProAccessToken } from "@/lib/pro-access";
-import { readLabIdea } from "@/lib/lab-ideas";
+import { readLabIdea, type StoredLabIdea } from "@/lib/lab-ideas";
+import { notifyVerifiedOrder } from "@/lib/notifications";
+import { getRequestKey, takeRateLimit } from "@/lib/request-guard";
 import { site } from "@/lib/site";
 import { verifyConfirmedTronUsdtTransfer } from "@/lib/tron-usdt";
 import {
@@ -38,24 +45,17 @@ function isEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && value.length <= 254;
 }
 
-async function sendEmail(
-  apiKey: string,
-  payload: Record<string, unknown>
-) {
-  return fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(payload),
-    cache: "no-store"
-  });
-}
-
 function createOrderId() {
   const day = new Date().toISOString().slice(0, 10).replaceAll("-", "");
   return `GZW-${day}-${randomBytes(3).toString("hex").toUpperCase()}`;
+}
+
+function createManualOrderId(txHash: string) {
+  return `GZW-MAN-${txHash.slice(0, 10).toUpperCase()}`;
+}
+
+function emailPayloadHash(value: string) {
+  return createHash("sha256").update(value).digest("base64url").slice(0, 16);
 }
 
 function storedOrderMatches(
@@ -109,6 +109,35 @@ function orderResult(
     : null;
 }
 
+async function verifiedOrderResult(
+  order: StoredUsdtOrder,
+  checkout: UsdtCheckoutConfig,
+  email: string,
+  idea?: StoredLabIdea | null
+) {
+  const result = orderResult(order, checkout, email);
+  if (!result) return null;
+
+  let receiptSent = false;
+  try {
+    const notifications = await notifyVerifiedOrder({
+      accessUrl: "accessUrl" in result ? result.accessUrl : undefined,
+      checkout,
+      email,
+      idea,
+      order
+    });
+    receiptSent = notifications.customerDelivered;
+  } catch (error) {
+    console.error(
+      "Verified order notification failed:",
+      error instanceof Error ? error.name : "unknown"
+    );
+  }
+
+  return { ...result, receiptSent };
+}
+
 function verificationError(
   reason:
     | "invalid_tx_hash"
@@ -151,6 +180,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "请求内容过大。" }, { status: 413 });
   }
 
+  const rateLimit = takeRateLimit(getRequestKey(request, "usdt-order"), {
+    limit: 12,
+    windowMs: 15 * 60 * 1000
+  });
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { error: "核验请求过于频繁，请稍后再试。" },
+      {
+        status: 429,
+        headers: { "Retry-After": String(rateLimit.retryAfterSeconds) }
+      }
+    );
+  }
+
   let input: OrderInput;
   try {
     input = (await request.json()) as OrderInput;
@@ -177,6 +220,7 @@ export async function POST(request: Request) {
   const senderAddress = text(input.senderAddress, 180);
   const note = text(input.note, 500);
   const referenceId = text(input.referenceId, 80).toUpperCase();
+  let labIdea: StoredLabIdea | null = null;
 
   if (!isEmail(email)) {
     return NextResponse.json({ error: "请输入有效邮箱。" }, { status: 400 });
@@ -201,9 +245,8 @@ export async function POST(request: Request) {
       );
     }
 
-    let idea: Awaited<ReturnType<typeof readLabIdea>>;
     try {
-      idea = await readLabIdea(referenceId);
+      labIdea = await readLabIdea(referenceId);
     } catch {
       return NextResponse.json(
         { error: "暂时无法读取实验室创意，请稍后重试。" },
@@ -211,7 +254,7 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!idea) {
+    if (!labIdea) {
       return NextResponse.json(
         { error: "没有找到该实验室创意，请返回重新提交。" },
         { status: 404 }
@@ -219,8 +262,8 @@ export async function POST(request: Request) {
     }
 
     if (
-      idea.contactEmail !== email ||
-      idea.selectedPackageId !== checkout.productId
+      labIdea.contactEmail !== email ||
+      labIdea.selectedPackageId !== checkout.productId
     ) {
       return NextResponse.json(
         { error: "邮箱或服务档位与创意提交记录不一致。" },
@@ -251,7 +294,12 @@ export async function POST(request: Request) {
           );
         }
 
-        const result = orderResult(existing, checkout, email);
+        const result = await verifiedOrderResult(
+          existing,
+          checkout,
+          email,
+          labIdea
+        );
         return result
           ? NextResponse.json(result, {
               status: 202,
@@ -300,7 +348,12 @@ export async function POST(request: Request) {
         );
       }
 
-      const result = orderResult(order, checkout, email);
+      const result = await verifiedOrderResult(
+        order,
+        checkout,
+        email,
+        labIdea
+      );
       return result
         ? NextResponse.json(result, {
             status: 202,
@@ -318,8 +371,7 @@ export async function POST(request: Request) {
     }
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
+  if (!emailDeliveryConfigured()) {
     return NextResponse.json(
       {
         error: "自动登记暂不可用，请使用页面下方的邮件登记。",
@@ -329,11 +381,8 @@ export async function POST(request: Request) {
     );
   }
 
-  const orderId = createOrderId();
-  const from =
-    process.env.PAYMENT_FROM_EMAIL ||
-    process.env.SUBSCRIBE_FROM_EMAIL ||
-    "Gaozhewan <news@gaozhewan.com>";
+  const orderId = createManualOrderId(normalizedTxHash);
+  const from = getTransactionalFromEmail();
   const operator = process.env.ORDER_NOTIFICATION_EMAIL || site.email;
   const orderText = [
     `订单号：${orderId}`,
@@ -350,16 +399,31 @@ export async function POST(request: Request) {
     "",
     "请人工确认：币种为 USDT、网络与收款地址正确、到账金额足够、确认数达标且 TxID 未被其他订单使用。"
   ].join("\n");
+  const receiptText = [
+    `你的订单 ${orderId} 已登记。`,
+    `产品：${checkout.planName}`,
+    ...(referenceId ? [`实验室创意编号：${referenceId}`] : []),
+    `待核验：${checkout.amount} USDT / ${checkout.network}`,
+    `交易哈希：${txHash}`,
+    "",
+    checkout.fulfillment === "pro-access"
+      ? "订单提交不等于付款确认。核验通过后，页面会立即生成一年期 Pro 访问链接；邮件服务可用时也会发送副本。"
+      : "订单提交不等于付款确认。核验通过后，我们会按实验室创意编号确认范围和排期。",
+    `如需帮助，请联系 ${site.email}。`
+  ].join("\n");
 
-  const operatorResponse = await sendEmail(apiKey, {
-    from,
-    to: [operator],
-    reply_to: email,
-    subject: `[USDT 待核验] ${orderId}`,
-    text: orderText
+  const operatorResponse = await sendTransactionalEmail({
+    idempotencyKey: `manual-order/${normalizedTxHash}/operator/${emailPayloadHash(orderText)}`,
+    payload: {
+      from,
+      to: [operator],
+      reply_to: email,
+      subject: `[USDT 待核验] ${orderId}`,
+      text: orderText
+    }
   });
 
-  if (!operatorResponse.ok) {
+  if (!operatorResponse.delivered) {
     return NextResponse.json(
       {
         error: "自动登记暂不可用，请使用页面下方的邮件登记。",
@@ -369,22 +433,14 @@ export async function POST(request: Request) {
     );
   }
 
-  const receiptResponse = await sendEmail(apiKey, {
-    from,
-    to: [email],
-    subject: `${checkout.planName}订单已登记：${orderId}`,
-    text: [
-      `你的订单 ${orderId} 已登记。`,
-      `产品：${checkout.planName}`,
-      ...(referenceId ? [`实验室创意编号：${referenceId}`] : []),
-      `待核验：${checkout.amount} USDT / ${checkout.network}`,
-      `交易哈希：${txHash}`,
-      "",
-      checkout.fulfillment === "pro-access"
-        ? "订单提交不等于付款确认。核验通过后，我们会在 12 小时内把一年期 Pro 访问链接发送到本邮箱。"
-        : "订单提交不等于付款确认。核验通过后，我们会按实验室创意编号确认范围和排期。",
-      `如需帮助，请联系 ${site.email}。`
-    ].join("\n")
+  const receiptResponse = await sendTransactionalEmail({
+    idempotencyKey: `manual-order/${normalizedTxHash}/customer/${emailPayloadHash(receiptText)}`,
+    payload: {
+      from,
+      to: [email],
+      subject: `${checkout.planName}订单已登记：${orderId}`,
+      text: receiptText
+    }
   });
 
   return NextResponse.json(
@@ -393,7 +449,7 @@ export async function POST(request: Request) {
       ok: true,
       orderId,
       productId: checkout.productId,
-      receiptSent: receiptResponse.ok,
+      receiptSent: receiptResponse.delivered,
       referenceId: referenceId || undefined,
       verified: false
     },

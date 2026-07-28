@@ -167,7 +167,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             <p className="eyebrow">{access ? "Pro 已解锁" : "搞选题 Pro"}</p>
             <h2>
               {access
-                ? "完整角度、标题模板和素材包已显示"
+                ? "完整角度、标题模板和复制简报已显示"
                 : "使用 USDT 开通完整选题卡"}
             </h2>
           </div>

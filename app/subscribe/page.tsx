@@ -7,7 +7,7 @@ import { getUsdtCheckoutConfig } from "@/lib/usdt";
 export const metadata: Metadata = {
   title: "免费订阅 AI 工具与全球选题周刊",
   description:
-    "免费订阅搞着玩邮件，按你关注的方向接收全球新奇信号、AI 工具实测、项目案例和中文创作选题；需要完整素材包时可用 USDT 开通 Pro。"
+    "免费订阅搞着玩邮件，按你关注的方向接收全球新奇信号、AI 工具核验、实验室案例和中文创作选题；需要完整执行简报时可用 USDT 开通 Pro。"
 };
 
 export default function SubscribePage() {
@@ -53,7 +53,7 @@ export default function SubscribePage() {
           <p className="eyebrow">免费邮件订阅</p>
           <h1>订阅 AI 工具与全球选题周刊</h1>
           <p>
-            选你最想搞的方向，我们就把那条线的全球信号、工具实测和中文案例优先发给你：搞选题、搞工具、自己玩 DIY
+            选你最想搞的方向，我们就把那条线的全球信号、工具核验和中文案例优先发给你：搞选题、搞工具、自己玩 DIY
             还是一起玩共建。
           </p>
         </div>
@@ -83,7 +83,7 @@ export default function SubscribePage() {
             <p className="eyebrow">需要完整写作包？</p>
             <h2>搞选题 Pro：每天 3 张可直接开写的选题卡</h2>
             <p>
-              免费订阅负责发现和筛选；Pro 补全写作角度、标题模板、竞争度、时效窗口与素材链，适合需要稳定产出的创作者和内容团队。
+              免费内容负责发现、筛选并公开核验来源；Pro 补全写作角度、标题模板、竞争度、时效窗口与复制简报，适合需要稳定产出的创作者和内容团队。
             </p>
             <div className="subscribe-actions">
               <Link className="button" href="/checkout">

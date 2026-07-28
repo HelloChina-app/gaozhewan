@@ -4,17 +4,17 @@
 
 - Next.js App Router MVP：母品牌“搞着玩”，核心命题“搞着玩”
 - 第一条商业主线：搞选题 / 搞选题 Pro
-- 扩展入口：搞工具、搞项目、搞副业
+- 扩展入口：搞工具、搞着玩实验室、自己玩 DIY
 - 订阅表单：邮箱、开搞方向、来源字段
 - 本地演示兜底：`localhost` 缺少 Resend 配置时仍可演示提交成功
 - SEO 基础：metadata、Open Graph 图、sitemap、robots
 - 工具详情页 `/tools/[slug]`：关联文章内链、SoftwareApplication 结构化数据、已纳入 sitemap
-- 上线体量内容：17 个工具、5 篇文章（含 2 篇常青方法论）、3 张 Pro 选题卡
+- 当前内容体量：17 个工具、11 篇文章、100+ 张选题卡，并由每日任务持续更新
 - 浏览器图标与 Web App manifest
 - 健康检查：`/api/health`
 - 安全响应头：`X-Content-Type-Options`、`X-Frame-Options`、`Referrer-Policy`、`Permissions-Policy`
 - 环境变量检查脚本：`npm run check:env:production`
-- 本地依赖安全审计：`npm audit --audit-level=moderate` 0 漏洞
+- 本地依赖安全审计纳入发布前质量门；每次升级后重新运行
 
 ## 需要人工配置
 

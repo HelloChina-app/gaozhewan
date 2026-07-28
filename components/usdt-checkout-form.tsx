@@ -223,7 +223,7 @@ export function UsdtCheckoutForm({
         <form className="checkout-form" onSubmit={onSubmit}>
           <label>
             {productId === "pro-yearly"
-              ? "接收访问链接的邮箱"
+              ? "用于订单匹配与接收访问副本的邮箱"
               : "与创意提交一致的邮箱"}
             <input
               autoComplete="email"

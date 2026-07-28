@@ -18,5 +18,4 @@ headlines:
 materials:
   - Systima 原始测试与完整方法 :: https://systima.ai/blog/claude-code-vs-opencode-token-overhead
   - Hacker News 讨论（截至 7 月 13 日 470 分 / 266 评论） :: https://news.ycombinator.com/item?id=48883275
-  - 测试使用的开源哈希链审计日志库 :: https://github.com/systima/aiact-audit-log
 ---

@@ -21,10 +21,9 @@ relatedTopicIds:
   - semisim-transistor-animations-accuracy-clarity
   - zilog-z80-fifty-years-constraint-design
 materials:
-  - Phil Eaton 原始实验文章、perf 观察、堆地址图与稀疏页案例 :: https://theconsensus.dev/p/2026/07/19/observing-gos-garbage-collector-old-and-new.html
   - Go 1.26 官方 release notes、默认启用与 10%–40% GC 开销口径 :: https://go.dev/doc/go1.26
   - Go 团队 Green Tea 原理、页级扫描与 benchmark 边界 :: https://go.dev/blog/greenteagc
-  - Hacker News 独立讨论（截至 7 月 28 日复核时 182 分 / 17 评论） :: https://news.ycombinator.com/item?id=49045474
+  - Phil Eaton 实验文章的 Hacker News 讨论与公开快照线索（截至 7 月 28 日 182 分 / 17 评论） :: https://news.ycombinator.com/item?id=49045474
 ---
 
 ## 先说结论：这不是“会搬家的 GC”

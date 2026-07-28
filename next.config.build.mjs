@@ -1,2 +1,5 @@
 import base from './next.config.mjs';
-export default { ...base, distDir: '.next-ci' };
+
+const buildConfig = { ...base, distDir: '.next-ci' };
+
+export default buildConfig;

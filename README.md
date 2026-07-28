@@ -5,7 +5,7 @@
 ## 当前实现
 
 - Next.js App Router 项目骨架
-- 首页、搞选题、搞工具、搞项目、搞副业、周刊、订阅、定价、关于页
+- 首页、搞选题、搞工具、搞着玩实验室、自己玩 DIY、周刊、订阅、定价、关于页
 - 搞着玩指数组件、搞选题 Pro 留白区块、示例选题卡
 - SEO 基础：metadata、sitemap、robots、Article 与 SoftwareApplication JSON-LD
 - Resend Audience 邮件订阅 API，本地缺少配置时可演示提交
@@ -14,14 +14,15 @@
 - RSS feed `/feed.xml`，首页自动发现，footer 可订阅
 - SEO 基础：metadata、sitemap（含文章/工具/选题卡/标签页）、robots、Article 与 SoftwareApplication JSON-LD
 - Resend Audience 邮件订阅 API，本地缺少配置时可演示提交
-- 5 篇示例文章（含 2 篇常青方法论）、17 个工具卡片、选题卡（每日自动增长）
+- 11 篇文章、17 个工具卡片、100+ 张选题卡（每日自动增长）
 - 文件驱动内容：新增 `content/posts/*.md` 或 `content/topic-cards/*.md` 即可发布，无需改代码（详见 `content/README.md`）
 - 选题信号抓取脚本 `npm run signals`：从 Hacker News / GitHub 拉候选，生成待人工核验的选题卡草稿
 
-## 自动化（Claude 定时任务）
+## 自动化（Codex 定时任务）
 
-- `daily-signal-draft`（每天 8:00）：抓真实信号 → AI 补全成选题卡（带日期、去重）→ 发布到 `content/topic-cards/` → 其余留草稿 → 校验 → 汇报。
-- `weekly-digest`（每周五 9:00）：把本周发布的选题卡聚合成一篇 `weekly` 周刊文章。
+- `automation`（每天 8:00、10:00）：把当天真实信号补足到 3 张选题卡（带日期、去重）→ 校验 → 发布 → 验证生产。
+- `weekly-digest`（每周五 9:00）：把本周发布的选题卡聚合成一篇 `weekly` 周刊文章，并完成 CI、部署与生产验证。
+- `seo-geo`（每周一 9:00）：强化一组 SEO/GEO 内容与站内结构，并完成发布验证。
 - 红线：只基于真实抓取的事实和链接产出，绝不编造数据/来源；不确定降级为 `_drafts/` 草稿。
 
 ## 产品架构
@@ -29,7 +30,7 @@
 - 母品牌：搞着玩
 - 核心命题：搞着玩
 - MVP 主线：搞选题，把全球信号变成中文创作者可发布的选题资产
-- 后续方向：搞工具、搞项目、搞副业
+- 后续方向：搞工具、搞着玩实验室、自己玩 DIY
 
 ## 本地运行
 

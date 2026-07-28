@@ -10,6 +10,8 @@ import {
   saveLabIdea,
   type StoredLabIdea
 } from "@/lib/lab-ideas";
+import { notifyLabIdeaSubmitted } from "@/lib/notifications";
+import { getRequestKey, takeRateLimit } from "@/lib/request-guard";
 
 export const runtime = "nodejs";
 
@@ -45,6 +47,20 @@ export async function POST(request: Request) {
   const contentLength = Number(request.headers.get("content-length") || "0");
   if (contentLength > 24_000) {
     return NextResponse.json({ error: "提交内容过大。" }, { status: 413 });
+  }
+
+  const rateLimit = takeRateLimit(getRequestKey(request, "lab-idea"), {
+    limit: 5,
+    windowMs: 30 * 60 * 1000
+  });
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { error: "提交过于频繁，请稍后再试。" },
+      {
+        status: 429,
+        headers: { "Retry-After": String(rateLimit.retryAfterSeconds) }
+      }
+    );
   }
 
   let input: IdeaInput;
@@ -146,6 +162,17 @@ export async function POST(request: Request) {
     );
   }
 
+  let receiptDelivered = false;
+  try {
+    const notifications = await notifyLabIdeaSubmitted(idea);
+    receiptDelivered = notifications.customerDelivered;
+  } catch (error) {
+    console.error(
+      "Lab idea notification failed:",
+      error instanceof Error ? error.name : "unknown"
+    );
+  }
+
   const selectedPackage = getLabServicePackage(selectedPackageId);
   const checkoutUrl = selectedPackage
     ? `/lab/checkout?product=${encodeURIComponent(selectedPackage.id)}&idea=${encodeURIComponent(idea.ideaId)}`
@@ -157,8 +184,12 @@ export async function POST(request: Request) {
       ideaId: idea.ideaId,
       message:
         selectedPackageId === LAB_FREE_SUBMISSION_ID
-          ? "创意已私密保存。入选后我们会通过邮箱联系你。"
-          : "创意已私密保存。你可以继续使用 USDT 启动所选服务。",
+          ? receiptDelivered
+            ? "创意已私密保存，确认邮件已发送。入选后我们会通过邮箱联系你。"
+            : "创意已私密保存。请保存编号；邮件通知暂未送达。"
+          : receiptDelivered
+            ? "创意已私密保存，确认邮件已发送。你可以继续使用 USDT 启动所选服务。"
+            : "创意已私密保存。请保存编号并继续使用 USDT 启动所选服务。",
       ok: true
     },
     {

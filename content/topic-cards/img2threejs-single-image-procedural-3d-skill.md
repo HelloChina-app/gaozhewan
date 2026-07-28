@@ -21,8 +21,7 @@ relatedTopicIds:
   - design-md-visual-identity-for-agents
   - agentic-coding
 materials:
-  - img2threejs 官方仓库、分阶段流程、路线图与诚实限制 :: https://github.com/hoainho/img2threejs
-  - 官方实时案例 gallery 与可检查 TypeScript 源码 :: https://hoainho.github.io/img2threejs-showcase/
+  - img2threejs 官方仓库、分阶段流程、路线图与诚实限制 :: https://github.com/img2threejs/img2threejs
   - Reddit 独立实测讨论：Codex 工作流仍经过约半天微调 :: https://www.reddit.com/r/TopologyAI/comments/1v1fywl/img2threejs_and_codex_experiments/
   - Reddit AI Game Dev 交叉讨论与使用问题 :: https://www.reddit.com/r/aigamedev/comments/1v169hl/img2threejs_and_codex_experiments/
 ---

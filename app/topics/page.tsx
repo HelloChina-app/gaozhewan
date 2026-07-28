@@ -31,7 +31,7 @@ export default async function TopicsPage() {
         <p>
           {access
             ? "Pro 已解锁：搜索完整写作包，按竞争度、分数或时效窗口筛选。"
-            : "免费版可浏览全球信号摘要和搞着玩指数；Pro 解锁写作角度、标题模板、素材包、竞争度与时效窗口。"}
+            : "免费版可浏览全球信号摘要、搞着玩指数和核验来源；Pro 解锁写作角度、标题模板、复制简报、竞争度与时效窗口。"}
         </p>
       </div>
 
@@ -64,7 +64,7 @@ export default async function TopicsPage() {
             <p>
               {access
                 ? `当前访问授权：${access.email}`
-                : "只接受 USDT。付款经链上确认后，通过邮件发放一年期访问链接。"}
+                : "只接受 USDT。付款经链上确认后，成功页立即生成一年期访问链接；邮件服务可用时也会发送副本。"}
             </p>
           </div>
           {access ? null : (

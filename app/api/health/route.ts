@@ -1,22 +1,28 @@
 import { NextResponse } from "next/server";
+import { emailDeliveryConfigured } from "@/lib/email";
 import { labIdeaStoreEnabled } from "@/lib/lab-ideas";
 import { getUsdtCheckoutConfig } from "@/lib/usdt";
 
 export function GET() {
   const checkout = getUsdtCheckoutConfig();
-  const emailDeliveryConfigured = Boolean(process.env.RESEND_API_KEY);
-  const newsletterConfigured = emailDeliveryConfigured;
+  const deliveryConfigured = emailDeliveryConfigured();
+  const newsletterConfigured = deliveryConfigured;
 
   return NextResponse.json(
     {
       ok: true,
       service: "gaozhewan",
       email: {
-        deliveryConfigured: emailDeliveryConfigured,
-        newsletterConfigured
+        deliveryConfigured,
+        newsletterConfigured,
+        operatorNotificationsConfigured: deliveryConfigured,
+        operatorRecipientExplicitlyConfigured: Boolean(
+          process.env.ORDER_NOTIFICATION_EMAIL
+        )
       },
       lab: {
         intakeConfigured: labIdeaStoreEnabled(),
+        notificationsConfigured: deliveryConfigured,
         paymentsConfigured: checkout.enabled
       },
       monetization: {

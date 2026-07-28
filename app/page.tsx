@@ -29,7 +29,7 @@ export default function HomePage() {
     },
     {
       title: "搞工具",
-      desc: "先测全球工具，再判断值不值得写",
+      desc: "先核验官网与定位，再决定值不值得测和写",
       status: "已上线",
       href: "/tools"
     },
@@ -202,7 +202,7 @@ export default function HomePage() {
           <div className="section-head">
             <div>
               <p className="eyebrow">工具库</p>
-              <h2>全球工具，先测后写</h2>
+              <h2>全球工具，先核验再决定要不要测</h2>
             </div>
             <Link className="text-button" href="/tools">
               浏览工具库
@@ -225,7 +225,7 @@ export default function HomePage() {
             <p className="eyebrow">邮件订阅</p>
             <h2>把全球新奇信号发到你的邮箱</h2>
             <p>
-              每天一条最值得写的全球信号，直接发到你邮箱。免费，随时退订。
+              邮件服务开放后，每周发送一封值得继续跟的全球信号摘要。免费，随时退订；未开放时不会收集邮箱。
             </p>
           </div>
           <SubscribeForm source="home" />

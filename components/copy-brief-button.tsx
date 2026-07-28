@@ -65,7 +65,7 @@ export function CopyBriefButton({ card }: { card: TopicCard }) {
         {labels[state]}
       </button>
       <span aria-live="polite" className="copy-brief-hint">
-        标题模板、写作角度、素材链接，一份 Markdown 直接粘进你的编辑器。
+        标题模板、写作角度和公开核验来源，一份 Markdown 直接粘进你的编辑器。
       </span>
     </div>
   );

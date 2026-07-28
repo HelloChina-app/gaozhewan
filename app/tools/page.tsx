@@ -6,7 +6,7 @@ import { cx } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "工具库",
-  description: "适合中文内容创作者实测、选题和改写的全球工具信号库。"
+  description: "适合中文内容创作者核验、选题和改写的全球工具信号库。"
 };
 
 type ToolsPageProps = {
@@ -24,9 +24,9 @@ export default async function ToolsPage({ searchParams }: ToolsPageProps) {
     <section className="page-shell">
       <div className="page-title">
         <p className="eyebrow">工具库</p>
-        <h1>全球工具，先测后写</h1>
+        <h1>全球工具，先核验再决定要不要测</h1>
         <p>
-          每个工具都先测过，再决定值不值得写。每张卡片都给出分类、标签、官网链接和搞着玩指数，帮你快速判断要不要用。
+          每张卡片先核验官网、定位和公开信息；有完整指南的工具会明确给出深读与来源。真正的“实测”只在完成具体任务验证后使用，不拿工具收录冒充体验结论。
         </p>
       </div>
 
