@@ -1,6 +1,6 @@
 ---
-title: 把 Python 运行时随工具一起发：4286 星 Standalone Builds 不是“一键单文件”
-heat: python-build-standalone 提供面向特定系统与架构、尽量减少运行时依赖的可再分发 Python 构建；项目最新 20260718 release 于 7 月 18 日发布，包含 CPython 3.15.0b4 等更新，截至 Asia/Katmandu 7 月 28 日复核时 GitHub 为 4286 星、300 forks，7 月 28 日形成的 Hacker News 讨论为 116 分、23 条评论。它适合给桌面工具、离线 AI 应用或安装器内嵌 Python，但交付物首先是“Python 发行版/运行时”，不是把任意脚本和依赖自动变成单个 exe；官方文档明确把单文件解释器指向另一个 PyOxy 项目。目标架构、系统库、第三方原生扩展、证书、Tk、pip 入口和各依赖许可证仍需逐项验证；Windows 构建可能没有 pip.exe，但可通过 python.exe -m pip 使用 pip。20260718 中的 CPython 3.15.0b4 是测试版本，不能因它出现在 release 就当成稳定生产默认；Linux 新 syscall 能否运行还取决于实际 kernel/glibc，官方说明不支持时可能抛出 OSError。
+title: 把 Python 运行时随工具一起发：4289 星 Standalone Builds 不是“一键单文件”
+heat: python-build-standalone 提供面向特定系统与架构、尽量减少运行时依赖的可再分发 Python 构建；项目最新 20260718 release 于 7 月 18 日发布，包含 CPython 3.15.0b4 等更新，截至 Asia/Katmandu 7 月 28 日复核时 GitHub 为 4289 星、300 forks，7 月 28 日形成的 Hacker News 讨论为 125 分、27 条评论。它适合给桌面工具、离线 AI 应用或安装器内嵌 Python，但交付物首先是“Python 发行版/运行时”，不是把任意脚本和依赖自动变成单个 exe；官方文档明确把单文件解释器指向另一个 PyOxy 项目。目标架构、系统库、第三方原生扩展、证书、Tk、pip 入口和各依赖许可证仍需逐项验证；Windows 构建可能没有 pip.exe，但可通过 python.exe -m pip 使用 pip。20260718 中的 CPython 3.15.0b4 是测试版本，不能因它出现在 release 就当成稳定生产默认；Linux 新 syscall 能否运行还取决于实际 kernel/glibc，官方说明不支持时可能抛出 OSError。
 window: 1 周
 competition: 中
 publishedAt: 2026-07-28
@@ -14,7 +14,7 @@ angles:
   - 兼容与许可清单向：固定目标 OS/架构并实机测试 SSL、SQLite、Tk、证书和含 C/Rust 扩展的包；python-build-standalone 仓库是 MPL-2.0，但最终安装包还要汇总 CPython、OpenSSL、SQLite、第三方 wheel 与业务素材各自的许可，不能只贴一个仓库许可证
 headlines:
   - 用户不用装 Python：怎样把解释器和你的离线工具一起交付
-  - 4286 星 Python Standalone Builds 火了，但它不是一键生成 exe
+  - 4289 星 Python Standalone Builds 火了，但它不是一键生成 exe
   - 打包 Python 工具前先分清：可移植运行时、安装包和单文件不是一回事
 relatedTopicIds:
   - openworker-local-desktop-agent-beta-boundaries
@@ -24,7 +24,7 @@ materials:
   - Python Standalone Builds 官方文档、运行时目标与行为差异 :: https://gregoryszorc.com/docs/python-build-standalone/main/
   - Astral 维护的项目仓库、源码与 MPL-2.0 许可 :: https://github.com/astral-sh/python-build-standalone
   - 20260718 原始发布说明、CPython 3.15.0b4 与 Linux 兼容性变化 :: https://github.com/astral-sh/python-build-standalone/releases/tag/20260718
-  - Hacker News 独立讨论（截至 7 月 28 日复核时 116 分 / 23 评论） :: https://news.ycombinator.com/item?id=49073942
+  - Hacker News 独立讨论（截至 7 月 28 日复核时 125 分 / 27 评论） :: https://news.ycombinator.com/item?id=49073942
 ---
 
 ## 先说结论：它解决的是“带上 Python”，不是自动完成整个产品

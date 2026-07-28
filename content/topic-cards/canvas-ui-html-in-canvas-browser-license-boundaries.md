@@ -1,6 +1,6 @@
 ---
-title: Canvas UI 12 天冲到 2300 星：把 WebGL 盖在真 HTML 上，先过浏览器与许可两道门
-heat: DavidHDev/canvas-ui 7 月 16 日创建，用 canvas 与 WebGL 在真实、仍可选择和点击的 HTML 上叠加 Liquid、Glass、Shatter、VHS 等效果；项目 README 列出 25 个组件并支持 React、Solid、Preact、Vue、Svelte 与 vanilla，截至 Asia/Katmandu 7 月 28 日复核时为 2300 星、99 forks，7 月 24 日 CSS Script 已有独立介绍，Best of JS 也收录了项目。最关键的事实边界是，多数组件依赖仍属实验性的 html-in-canvas/canvas-draw-element：完整效果目前要求 Chrome 或 Edge 140+ 开启 flag，生产域名需申请 origin trial；其他浏览器会回退为普通 HTML 或 WebGL overlay，能打开不等于视觉、性能和交互完全等价。项目不是纯 MIT，而是自定义 “MIT + Commons Clause”：允许在应用、网站或产品中使用，包括商业用途，但禁止销售、再许可或重新分发组件本身、组件合集或移植版本；二创教程不能只写“MIT 随便卖”。仓库自述的降级、可访问性与性能仍需在目标设备上独立测试，尤其要尊重 reduced motion、键盘操作和低端手机。
+title: Canvas UI 12 天冲到 2306 星：把 WebGL 盖在真 HTML 上，先过浏览器与许可两道门
+heat: DavidHDev/canvas-ui 7 月 16 日创建，用 canvas 与 WebGL 在真实、仍可选择和点击的 HTML 上叠加 Liquid、Glass、Shatter、VHS 等效果；项目 README 列出 25 个组件并支持 React、Solid、Preact、Vue、Svelte 与 vanilla，截至 Asia/Katmandu 7 月 28 日复核时为 2306 星、99 forks，7 月 24 日 CSS Script 已有独立介绍，Best of JS 也收录了项目。最关键的事实边界是，多数组件依赖仍属实验性的 html-in-canvas/canvas-draw-element：完整效果目前要求 Chrome 或 Edge 140+ 开启 flag，生产域名需申请 origin trial；其他浏览器会回退为普通 HTML 或 WebGL overlay，能打开不等于视觉、性能和交互完全等价。项目不是纯 MIT，而是自定义 “MIT + Commons Clause”：允许在应用、网站或产品中使用，包括商业用途，但禁止销售、再许可或重新分发组件本身、组件合集或移植版本；二创教程不能只写“MIT 随便卖”。仓库自述的降级、可访问性与性能仍需在目标设备上独立测试，尤其要尊重 reduced motion、键盘操作和低端手机。
 window: 1 周
 competition: 中
 publishedAt: 2026-07-28

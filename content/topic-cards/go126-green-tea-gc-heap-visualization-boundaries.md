@@ -1,6 +1,6 @@
 ---
 title: 把 Go 垃圾回收画成堆地图：Green Tea 更快，但不会搬走稀疏页里的活对象
-heat: Phil Eaton 7 月 19 日发布的实验文章用 perf、对象地址和字符图观察 Go 1.26 默认启用的 Green Tea GC，并专门展示非移动式回收器面对稀疏 span/page 时的残余内存问题；截至 Asia/Katmandu 7 月 28 日复核时，7 月 25 日形成的 Hacker News 讨论为 176 分、17 条评论。Go 官方发布说明称，重度使用 GC 的真实程序预计可减少约 10%–40% 的“垃圾回收开销”，较新的 amd64 平台还可能因向量扫描再减少约 10%；这些数字不是整套应用的吞吐、延迟或内存占用保证，具体结果取决于对象布局、堆结构与硬件。Green Tea 已是 Go 1.26 默认项而非测试开关，但仍是非移动 mark-sweep 设计；文章标题中的“move through the heap”不能改写成“会搬动对象或自动压缩内存”。官方允许在构建时用 GOEXPERIMENT=nogreenteagc 暂时退出，并预计 Go 1.27 移除该退出项，生产迁移仍应以自身 benchmark、profile 和回归监控为准。
+heat: Phil Eaton 7 月 19 日发布的实验文章用 perf、对象地址和字符图观察 Go 1.26 默认启用的 Green Tea GC，并专门展示非移动式回收器面对稀疏 span/page 时的残余内存问题；截至 Asia/Katmandu 7 月 28 日复核时，7 月 25 日形成的 Hacker News 讨论为 182 分、17 条评论。Go 官方发布说明称，重度使用 GC 的真实程序预计可减少约 10%–40% 的“垃圾回收开销”，较新的 amd64 平台还可能因向量扫描再减少约 10%；这些数字不是整套应用的吞吐、延迟或内存占用保证，具体结果取决于对象布局、堆结构与硬件。Green Tea 已是 Go 1.26 默认项而非测试开关，但仍是非移动 mark-sweep 设计；文章标题中的“move through the heap”不能改写成“会搬动对象或自动压缩内存”。官方允许在构建时用 GOEXPERIMENT=nogreenteagc 暂时退出，并预计 Go 1.27 移除该退出项，生产迁移仍应以自身 benchmark、profile 和回归监控为准。
 window: 1 周
 competition: 中
 publishedAt: 2026-07-28
@@ -24,7 +24,7 @@ materials:
   - Phil Eaton 原始实验文章、perf 观察、堆地址图与稀疏页案例 :: https://theconsensus.dev/p/2026/07/19/observing-gos-garbage-collector-old-and-new.html
   - Go 1.26 官方 release notes、默认启用与 10%–40% GC 开销口径 :: https://go.dev/doc/go1.26
   - Go 团队 Green Tea 原理、页级扫描与 benchmark 边界 :: https://go.dev/blog/greenteagc
-  - Hacker News 独立讨论（截至 7 月 28 日复核时 176 分 / 17 评论） :: https://news.ycombinator.com/item?id=49045474
+  - Hacker News 独立讨论（截至 7 月 28 日复核时 182 分 / 17 评论） :: https://news.ycombinator.com/item?id=49045474
 ---
 
 ## 先说结论：这不是“会搬家的 GC”
