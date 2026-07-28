@@ -17,6 +17,7 @@ export function SiteFooter() {
         <Link href="/pricing">搞选题 Pro</Link>
         <Link href="/subscribe">订阅</Link>
         <a href="/feed.xml">RSS</a>
+        <a href="/llms.txt">AI 索引</a>
         <a href={`mailto:${site.email}`}>{site.email}</a>
       </div>
     </footer>

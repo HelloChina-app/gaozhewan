@@ -6,7 +6,18 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "自己 DIY 一个具身智能体：SO-101 + LeRobot",
   description:
-    "从 SO-101 开源机械臂与 LeRobot 开始，公开预算、采购、组装、遥操作、数据采集和首个动作训练，自己 DIY 一个会动手的 AI。"
+    "从 SO-101 开源机械臂与 LeRobot 开始，公开预算、采购、组装、遥操作、数据采集和首个动作训练，自己 DIY 一个会动手的 AI。",
+  alternates: {
+    canonical: "/lab/embodied-ai"
+  },
+  openGraph: {
+    title: "自己 DIY 一个具身智能体：SO-101 + LeRobot",
+    description:
+      "公开中国区采购清单、真实预算和六步实验路线，从零件到第一个可重复动作。",
+    type: "article",
+    url: `${site.url}/lab/embodied-ai`,
+    locale: "zh_CN"
+  }
 };
 
 const roadmap = [
@@ -49,9 +60,9 @@ const progress = [
     text: "以 SO-101 + LeRobot 为第一条路线，官方资料入口已经整理。"
   },
   {
-    status: "进行中",
-    title: "核对中国区采购清单",
-    text: "逐项确认型号、价格、打印服务与可替代零件，再发布可直接照买的版本。"
+    status: "已完成",
+    title: "发布中国区采购基线",
+    text: "已按官方 BOM 拆分单臂与主从双臂型号、数量、参考价格和遗漏成本；实际下单价格仍需动态复核。"
   },
   {
     status: "待开始",
@@ -104,7 +115,36 @@ export default function EmbodiedAiLabPage() {
       name: site.name,
       url: site.url
     },
+    citation: [
+      "https://github.com/TheRobotStudio/SO-ARM100",
+      "https://huggingface.co/docs/lerobot/en/so101",
+      "https://github.com/huggingface/lerobot"
+    ],
     about: ["具身智能", "SO-101", "LeRobot", "机器人学习", "DIY 机械臂"]
+  };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "首页",
+        item: site.url
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "实验室",
+        item: `${site.url}/lab`
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: "具身智能 DIY",
+        item: pageUrl
+      }
+    ]
   };
 
   return (
@@ -121,8 +161,11 @@ export default function EmbodiedAiLabPage() {
             <a className="button" href="#roadmap">
               看 6 步搭建路线
             </a>
-            <Link className="text-button" href="/lab#submit">
-              想做自己的版本
+            <Link
+              className="text-button"
+              href="/lab/embodied-ai/so101-china-bom"
+            >
+              看中国区采购清单
             </Link>
           </div>
           <div className="lab-trust-row" aria-label="实验原则">
@@ -197,8 +240,14 @@ export default function EmbodiedAiLabPage() {
             <h2>先公开成本，再决定玩多大</h2>
             <p>
               约 1,343 元只是官方仓库在中国区列出的主从双臂基础部件参考，不是我们的成交报价，也不代表最终总成本。
-              第一版采购清单会把打印件、摄像头、算力和替代件单独列出。
+              已发布的第一版采购清单把单臂与双臂、舵机减速比、打印件、摄像头和算力边界分别列出。
             </p>
+            <Link
+              className="text-button embodied-budget-link"
+              href="/lab/embodied-ai/so101-china-bom"
+            >
+              查看 SO-101 中国区完整 BOM
+            </Link>
           </div>
           <div className="embodied-budget-number">
             <span>基础 BOM 参考</span>
@@ -298,11 +347,14 @@ export default function EmbodiedAiLabPage() {
         </div>
       </section>
 
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
-      />
+      {[articleJsonLd, breadcrumbJsonLd].map((schema) => (
+        <script
+          key={schema["@type"]}
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
     </>
   );
 }

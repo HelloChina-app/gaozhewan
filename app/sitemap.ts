@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools",
     "/lab",
     "/lab/embodied-ai",
+    "/lab/embodied-ai/so101-china-bom",
     "/side-hustles",
     "/weekly",
     "/topics",
@@ -38,11 +39,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...routes.map((route) => ({
       url: `${site.url}${route}`,
-      ...(latestContentDate && contentHubs.has(route)
-        ? { lastModified: new Date(latestContentDate) }
-        : {}),
+      ...(route.startsWith("/lab")
+        ? { lastModified: new Date("2026-07-28") }
+        : latestContentDate && contentHubs.has(route)
+          ? { lastModified: new Date(latestContentDate) }
+          : {}),
       changeFrequency: "weekly" as const,
-      priority: route === "" ? 1 : 0.7
+      priority:
+        route === ""
+          ? 1
+          : route === "/lab/embodied-ai/so101-china-bom"
+            ? 0.8
+            : 0.7
     })),
     ...posts.map((post) => ({
       url: `${site.url}/post/${post.slug}`,

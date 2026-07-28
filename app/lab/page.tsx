@@ -2,11 +2,23 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LabIdeaForm } from "@/components/lab-idea-form";
 import { labProjects, labServicePackages } from "@/lib/lab";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "搞着玩实验室",
   description:
-    "自己动手玩公开实验，或提交创意与搞着玩实验室共同做出第一版；首个实验从 SO-101 与 LeRobot 具身智能 DIY 开始。"
+    "自己动手玩公开实验，或提交创意与搞着玩实验室共同做出第一版；首个实验从 SO-101 与 LeRobot 具身智能 DIY 开始。",
+  alternates: {
+    canonical: "/lab"
+  },
+  openGraph: {
+    title: "搞着玩实验室：公开实验，也把用户创意做出来",
+    description:
+      "查看 SO-101 具身智能 DIY 的真实预算与采购路线，或提交一个值得做出第一版的创意。",
+    type: "website",
+    url: `${site.url}/lab`,
+    locale: "zh_CN"
+  }
 };
 
 const selectionRules = [
@@ -89,6 +101,12 @@ export default function LabPage() {
           <Link className="text-button" href="/lab/embodied-ai">
             查看实验路线
           </Link>
+          <Link
+            className="text-button"
+            href="/lab/embodied-ai/so101-china-bom"
+          >
+            查看中国区采购清单
+          </Link>
         </aside>
       </section>
 
@@ -132,8 +150,11 @@ export default function LabPage() {
               <Link className="button" href="/lab/embodied-ai">
                 查看完整路线
               </Link>
-              <Link className="text-button" href="/subscribe">
-                订阅搭建更新
+              <Link
+                className="text-button"
+                href="/lab/embodied-ai/so101-china-bom"
+              >
+                先看采购清单
               </Link>
             </div>
           </div>
