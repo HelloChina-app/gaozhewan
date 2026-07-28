@@ -34,10 +34,10 @@ export default function HomePage() {
       href: "/tools"
     },
     {
-      title: "搞项目",
-      desc: "自己验证副业方向，或找实验室一起做出第一版",
-      status: "两种方式",
-      href: "/projects"
+      title: "实验室",
+      desc: "自己动手玩实验，或把创意和我们一起做出来",
+      status: "新实验",
+      href: "/lab"
     }
   ];
 
@@ -48,7 +48,7 @@ export default function HomePage() {
           <p className="eyebrow">GAOZHEWAN · START WITH GLOBAL SIGNALS</p>
           <h1>搞着玩</h1>
           <p>
-            搞着玩帮你把全球新奇事物，变成可以立刻动手的选题、工具和项目方案。
+            搞着玩帮你把全球新奇事物，变成可以立刻动手的选题、工具和公开实验。
           </p>
           <div className="hero-actions">
             <Link className="button" href={`/post/${latestPost.slug}`}>
@@ -117,18 +117,19 @@ export default function HomePage() {
       <section className="section section-lab-cta">
         <div className="section-inner lab-home-cta">
           <div>
-            <p className="eyebrow">搞项目 · 两种方式</p>
-            <h2>你可以自己做，也可以找我们一起做</h2>
+            <p className="eyebrow">实验室 · 自己玩 / 一起玩</p>
+            <h2>先把东西玩出来，再讨论它有多大</h2>
             <p>
-              想低成本试水，就从免费副业方案和工具开始；已经有明确创意，就提交给实验室，按固定范围共建第一版。
+              第一个公开实验从 SO-101 + LeRobot 开始，自己 DIY
+              一个会动手的 AI；你也可以提交创意，和我们共建第一版。
             </p>
           </div>
           <div className="hero-actions">
-            <Link className="button" href="/side-hustles">
-              我想自己做
+            <Link className="button" href="/lab/embodied-ai">
+              看具身智能 DIY
             </Link>
-            <Link className="text-button" href="/lab">
-              找实验室共建
+            <Link className="text-button" href="/lab#submit">
+              提交创意一起玩
             </Link>
           </div>
         </div>

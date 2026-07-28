@@ -60,6 +60,14 @@ export function isLabSelectionId(value: unknown): value is LabSelectionId {
 
 export const labProjects = [
   {
+    title: "自己 DIY 一个会动手的 AI",
+    status: "公开搭建中",
+    summary:
+      "从 SO-101 与 LeRobot 开始，公开预算、采购、组装、训练和第一次真实动作。",
+    result: "入门路线已经公开；实机采购与搭建进度将持续更新，不伪造完成状态。",
+    href: "/lab/embodied-ai"
+  },
+  {
     title: "搞着玩选题工作台",
     status: "已上线",
     summary: "把全球信号整理成可搜索、可核验、可直接开写的选题卡。",

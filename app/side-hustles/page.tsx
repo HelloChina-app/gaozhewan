@@ -27,7 +27,7 @@ export default function SideHustlesPage() {
   return (
     <section className="page-shell">
       <div className="page-title">
-        <p className="eyebrow">搞项目 · 自己做</p>
+        <p className="eyebrow">实验室 · 自己玩</p>
         <h1>先用最低成本验证一个副业方向</h1>
         <p>
           这里提供免费案例、工具和验证思路，由你自己执行。先证明有人需要，再决定要不要投入更多时间和钱。
@@ -37,7 +37,7 @@ export default function SideHustlesPage() {
             先看工具
           </Link>
           <Link className="text-button" href="/lab">
-            已有想法，找实验室共建
+            已有想法，和实验室一起玩
           </Link>
         </div>
       </div>
@@ -60,7 +60,7 @@ export default function SideHustlesPage() {
               我们会优先发送副业案例拆解、工具组合和低成本验证方法，不出售收入保证。
             </p>
           </div>
-          <SubscribeForm source="side-hustles-page" defaultInterest="自己做副业" />
+          <SubscribeForm source="side-hustles-page" defaultInterest="自己玩 DIY" />
         </div>
       </section>
     </section>
