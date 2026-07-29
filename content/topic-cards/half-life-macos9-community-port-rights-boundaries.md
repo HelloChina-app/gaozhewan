@@ -1,6 +1,6 @@
 ---
 title: 《Half-Life》28 年后跑上 Mac OS 9：社区移植成功，不等于 Valve 官方重发
-heat: Mac Classic 7 月 28 日报道 doctashay 基于 Xash3D FWGS 分支完成 PowerPC Mac OS 9 版《Half-Life》，页面称主线可从头玩到尾、支持多人，并提供 Blue Shift、Opposing Force 与 Uplink 相关入口；支持 G3/G4 和 Mac OS 9.0+，低于 8MB VRAM 的机器可能性能吃紧。截至 Asia/Katmandu 7 月 29 日复核时，Hacker News 讨论为 167 分、83 条评论；作者 7 月 14 日在 VintageApple 社区发布时获得 227 个赞，4 月的 Leopard 版本讨论已展示不同 Radeon 硬件可能出现低于 5 FPS 的兼容问题。必须把它写成社区 Xash3D 兼容引擎移植，而不是 Valve 在 2026 年发布官方 Mac OS 9 版；“引擎源码公开”也不等于《Half-Life》的关卡、音频、贴图和商标已开放。Xash3D 上游 README 要求用户复制合法取得的 `valve` 资源目录，只接受基于合法产品的问题，并警告第三方 repack 可能夹带恶意软件；doctashay 分支根目录没有独立 LICENSE 文件且 GitHub 未识别许可证，Mac Classic 下载页也未提供 Valve 授权说明。报道中的“完整可玩”和硬件门槛主要来自发布方与社区样本，不是覆盖所有 G3/G4、显卡和扩展包的独立基准。
+heat: Mac Classic 7 月 28 日报道 doctashay 基于 Xash3D FWGS 分支完成 PowerPC Mac OS 9 版《Half-Life》，页面称主线可从头玩到尾、支持多人，并提供 Blue Shift、Opposing Force 与 Uplink 相关入口；支持 G3/G4 和 Mac OS 9.0+，低于 8MB VRAM 的机器可能性能吃紧。截至 Asia/Katmandu 7 月 29 日复核时，Hacker News 讨论为 186 分、90 条评论；作者 7 月 14 日在 VintageApple 社区发布时获得 227 个赞，4 月的 Leopard 版本讨论已展示不同 Radeon 硬件可能出现低于 5 FPS 的兼容问题。必须把它写成社区 Xash3D 兼容引擎移植，而不是 Valve 在 2026 年发布官方 Mac OS 9 版；“引擎源码公开”也不等于《Half-Life》的关卡、音频、贴图和商标已开放。Xash3D 上游 README 要求用户复制合法取得的 `valve` 资源目录，只接受基于合法产品的问题，并警告第三方 repack 可能夹带恶意软件；doctashay 分支根目录没有独立 LICENSE 文件且 GitHub 未识别许可证，Mac Classic 下载页也未提供 Valve 授权说明。报道中的“完整可玩”和硬件门槛主要来自发布方与社区样本，不是覆盖所有 G3/G4、显卡和扩展包的独立基准。
 window: 72h
 competition: 低
 publishedAt: 2026-07-29
@@ -24,7 +24,7 @@ materials:
   - Mac Classic 原始发布报道、系统要求与功能声明 :: https://mac-classic.com/news/half-life-ported-to-mac-os-9/
   - doctashay 的 PowerPC Xash3D FWGS 公开源码分支 :: https://github.com/doctashay/xash3d-fwgs
   - Xash3D FWGS 上游对合法游戏资源、官方构建与恶意 repack 的说明 :: https://github.com/FWGS/xash3d-fwgs
-  - Hacker News 独立讨论（截至 7 月 29 日 167 分 / 83 评论） :: https://news.ycombinator.com/item?id=49089814
+  - Hacker News 独立讨论（截至 7 月 29 日 186 分 / 90 评论） :: https://news.ycombinator.com/item?id=49089814
   - 作者 7 月 14 日 VintageApple 发布与社区硬件讨论 :: https://www.reddit.com/r/VintageApple/comments/1uwl1pb/halflife_on_mac_os_9_by_popular_demand/
 ---
 

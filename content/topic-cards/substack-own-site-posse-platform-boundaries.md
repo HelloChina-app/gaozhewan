@@ -1,6 +1,6 @@
 ---
-title: Substack 写作者要不要自建站？431 分讨论背后先分清所有权与平台控制权
-heat: 马来西亚华裔写作者 Elizabeth Tai 6 月 10 日发布“Substack writers, you need a website”，主张把自有域名网站当内容原点，再用 Substack 做分发；文章 7 月 28 日进入 Hacker News 热榜，截至 Asia/Katmandu 7 月 29 日复核时为 431 分、215 条评论，原站也显示 69 条回应。它是一位长期独立写作者的经验与主张，不是 SEO 对照实验、平台事故报告或“所有人必须迁移”的行业结论。原文用“内容都属于平台”批评 `xx.substack.com`，但 Substack 7 月 20 日更新的 Publisher Agreement 明确写着创作者仍拥有原创内容，并把订阅者名单称为创作者控制的 List；真正的风险是域名、页面能力、搜索入口、支付关系和账号可用性仍受平台规则约束，不能把修辞误写成法律上的版权转移。Substack 官方当前支持自定义域名，收取一次性 50 美元，要求用 `www` 等子域并让根域 301 跳转；即使接入自定义域，邮件发件地址仍是 `@substack.com`。自建站也会带来托管、安全、备份、邮件送达与重复内容治理成本，POSSE 是架构选择，不是零成本万能答案。
+title: Substack 写作者要不要自建站？457 分讨论背后先分清所有权与平台控制权
+heat: 马来西亚华裔写作者 Elizabeth Tai 6 月 10 日发布“Substack writers, you need a website”，主张把自有域名网站当内容原点，再用 Substack 做分发；文章 7 月 28 日进入 Hacker News 热榜，截至 Asia/Katmandu 7 月 29 日复核时为 457 分、219 条评论，原站也显示 69 条回应。它是一位长期独立写作者的经验与主张，不是 SEO 对照实验、平台事故报告或“所有人必须迁移”的行业结论。原文用“内容都属于平台”批评 `xx.substack.com`，但 Substack 7 月 20 日更新的 Publisher Agreement 明确写着创作者仍拥有原创内容，并把订阅者名单称为创作者控制的 List；真正的风险是域名、页面能力、搜索入口、支付关系和账号可用性仍受平台规则约束，不能把修辞误写成法律上的版权转移。Substack 官方当前支持自定义域名，收取一次性 50 美元，要求用 `www` 等子域并让根域 301 跳转；即使接入自定义域，邮件发件地址仍是 `@substack.com`。自建站也会带来托管、安全、备份、邮件送达与重复内容治理成本，POSSE 是架构选择，不是零成本万能答案。
 window: 1 周
 competition: 中
 publishedAt: 2026-07-29
@@ -22,7 +22,7 @@ relatedTopicIds:
   - leaving-github-for-forgejo
 materials:
   - Elizabeth Tai 原始文章、POSSE 主张与作者经验边界 :: https://elizabethtai.com/2026/06/10/substack-writers-you-need-a-website/
-  - Hacker News 独立讨论（截至 7 月 29 日 431 分 / 215 评论） :: https://news.ycombinator.com/item?id=49086788
+  - Hacker News 独立讨论（截至 7 月 29 日 457 分 / 219 评论） :: https://news.ycombinator.com/item?id=49086788
   - Substack 自定义域官方说明、一次性 50 美元与子域限制 :: https://support.substack.com/hc/en-us/articles/360051222571-How-do-I-set-up-my-custom-domain-on-Substack
   - Substack 7 月 20 日 Publisher Agreement 的内容所有权、名单与平台处置条款 :: https://substack.com/pa
 ---

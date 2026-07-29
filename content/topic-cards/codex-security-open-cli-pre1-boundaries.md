@@ -1,6 +1,6 @@
 ---
-title: Codex Security 开源 CLI 一天冲到 1886 星：能扫描和打补丁，不等于代码自动安全
-heat: OpenAI 在 7 月 28 日公开 Codex Security 的 CLI 与 TypeScript SDK，仓库维护者在当天 Hacker News 讨论中明确称“刚刚开源”；截至 Asia/Katmandu 7 月 29 日复核时，GitHub 为 1886 星、103 forks，HN 为 370 分、109 条评论，npm 标签已从 0.1.0 更新到 0.1.1。它支持 Windows、macOS、Linux，安装要求 Node.js 22+，实际扫描和导出还需 Python 3.10+，并要使用 OpenAI 账户或 API key；这不是无需账户、完全离线的本地静态扫描器。仓库明确标注 1.0 前 minor 版本仍可能改变公共 API，扫描默认只生成报告，未完整覆盖或运行错误会以退出码 2 结束；“没有发现”不能写成“没有漏洞”，模型结论也不能替代人工复核、传统 SAST/依赖扫描、渗透测试或发布前安全审查。扫描产物可能包含源码片段、漏洞细节和复现步骤，官方要求输出目录位于被扫描仓库及其 Git worktree 之外；只可扫描自己拥有或得到明确授权的代码，不能把工具用于未经许可的目标。
+title: Codex Security 开源 CLI 一天冲到 2215 星：能扫描和打补丁，不等于代码自动安全
+heat: OpenAI 在 7 月 28 日公开 Codex Security 的 CLI 与 TypeScript SDK，仓库维护者在当天 Hacker News 讨论中明确称“刚刚开源”；截至 Asia/Katmandu 7 月 29 日复核时，GitHub 为 2215 星、116 forks，HN 为 401 分、126 条评论，npm 标签已从 0.1.0 更新到 0.1.1。它支持 Windows、macOS、Linux，安装要求 Node.js 22+，实际扫描和导出还需 Python 3.10+，并要使用 OpenAI 账户或 API key；这不是无需账户、完全离线的本地静态扫描器。仓库明确标注 1.0 前 minor 版本仍可能改变公共 API，扫描默认只生成报告，未完整覆盖或运行错误会以退出码 2 结束；“没有发现”不能写成“没有漏洞”，模型结论也不能替代人工复核、传统 SAST/依赖扫描、渗透测试或发布前安全审查。扫描产物可能包含源码片段、漏洞细节和复现步骤，官方要求输出目录位于被扫描仓库及其 Git worktree 之外；只可扫描自己拥有或得到明确授权的代码，不能把工具用于未经许可的目标。
 window: 72h
 competition: 高
 publishedAt: 2026-07-29
@@ -23,7 +23,7 @@ relatedTopicIds:
 materials:
   - OpenAI Codex Security 原始仓库、要求、命令、退出码与 Apache-2.0 许可 :: https://github.com/openai/codex-security
   - npm-v0.1.1 标签与 1.0 前版本线索 :: https://github.com/openai/codex-security/releases/tag/npm-v0.1.1
-  - Hacker News 独立讨论与维护者“刚刚开源”说明（截至 7 月 29 日 370 分 / 109 评论） :: https://news.ycombinator.com/item?id=49089755
+  - Hacker News 独立讨论与维护者“刚刚开源”说明（截至 7 月 29 日 401 分 / 126 评论） :: https://news.ycombinator.com/item?id=49089755
   - OpenAI 3 月产品说明与厂商测试数字口径 :: https://openai.com/index/codex-security-now-in-research-preview/
 ---
 
