@@ -1,6 +1,6 @@
 ---
-title: QM 5073 星：把团队智能体做成多人工作空间，但官方安全文档先列出 13 类缺口
-heat: yc-software 于 7 月 29 日创建 QM，定位为面向创业团队的“multiplayer agent harness for work”；截至 Asia/Katmandu 8 月 2 日复核时，GitHub 已有 5073 星、511 forks，Hacker News 讨论为 650 分、152 条评论。它让每个人和每个房间拥有独立 memory、文件、keychain 视图、权限、定时任务、Web app 与持久沙箱，可在 Slack 和网页使用，并允许 Pi、OpenCode、Codex、Claude Code 等不同 harness 驱动同一核心。限制必须前置：官方 SECURITY.md 明确称其为早期实验软件，隔离设计不是防泄漏承诺、认证或部署安全审查的替代；QM 不是加固过的公共多租户边界，命令策略可绕过，浏览器动作不经过部分核心审批，使用中的沙箱凭据为明文，自动内容筛查不完整，管理员可读敏感内容，持久数据可能无限期累积。部署还要求组织自有 Fly.io 或 AWS、身份邮件配置、模型/浏览器提供商与运维能力；GitHub 星数和 YC 背景不能证明中文团队已在生产验证成本、安全、准确率或权限隔离。
+title: QM 5215 星：把团队智能体做成多人工作空间，但官方安全文档先列出 13 类缺口
+heat: yc-software 于 7 月 29 日创建 QM，定位为面向创业团队的“multiplayer agent harness for work”；截至 Asia/Katmandu 8 月 2 日复核时，GitHub 已有 5215 星、534 forks，Hacker News 讨论为 650 分、152 条评论。它让每个人和每个房间拥有独立 memory、文件、keychain 视图、权限、定时任务、Web app 与持久沙箱，可在 Slack 和网页使用，并允许 Pi、OpenCode、Codex、Claude Code 等不同 harness 驱动同一核心。限制必须前置：官方 SECURITY.md 明确称其为早期实验软件，隔离设计不是防泄漏承诺、认证或部署安全审查的替代；QM 不是加固过的公共多租户边界，命令策略可绕过，浏览器动作不经过部分核心审批，使用中的沙箱凭据为明文，自动内容筛查不完整，管理员可读敏感内容，持久数据可能无限期累积。部署还要求组织自有 Fly.io 或 AWS、身份邮件配置、模型/浏览器提供商与运维能力；GitHub 星数和 YC 背景不能证明中文团队已在生产验证成本、安全、准确率或权限隔离。
 window: 1 周
 competition: 高
 publishedAt: 2026-08-02
@@ -14,7 +14,7 @@ angles:
   - 成本与运维向：核算 Fly.io 或 AWS、Postgres、对象存储、邮件登录、Slack、浏览器服务和多模型 token 的完整账单，再与一个共享聊天机器人或人工 SOP 比较；项目没有生产部署工作流，也没有足够第三方长期案例证明复杂度一定值得
 headlines:
   - 让全公司共用一个 AI，难点不是聊天而是权限：QM 的 scope 设计值得抄吗
-  - 5073 星 QM 实测前先读 SECURITY.md：官方自己列了哪些不能保证的事
+  - 5215 星 QM 实测前先读 SECURITY.md：官方自己列了哪些不能保证的事
   - Slack、网页、多模型和持久沙箱全装上，团队智能体的真实成本怎么算
 relatedTopicIds:
   - openworker-local-desktop-agent-beta-boundaries
