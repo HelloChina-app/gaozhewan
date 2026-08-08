@@ -1,6 +1,6 @@
 ---
 title: 一条 x86 指令怎样被拖到 62 秒：Assembly Hall of Shame 的反向性能实验
-heat: 安全研究者 Christopher Domas 于 8 月 6 日创建 MIT 许可仓库 Assembly Hall of Shame，反向寻找“单条指令能慢到什么程度”；README 当前榜首在作者的 AMD Ryzen 7 5800H 上，让 fxrstor64 从高延迟 MMIO 读取 512 字节状态，并用其他核心制造 PCIe 争用，记录 198,002,498,236 cycles、约 62 秒。截至 Asia/Katmandu 8 月 8 日 09:25，仓库为 307 星、2 forks，Hacker News 为 273 分、65 条评论。事实与安全边界必须前置：数据来自项目作者的特定硬件与方法，未见跨机器独立复现，排行榜按 CPU base clock 归一化也不是通用 CPU 性能榜；ARM 和 RISC-V 仍为 T.B.D.。多个案例涉及特权指令、未公开 MMIO、PCIe/GPU 寄存器或违反规范的访问，可能挂起、损坏状态或触发硬件异常，不能在日用机、生产机或不拥有的设备上照抄；MIT 许可证只覆盖代码权利，不是硬件安全保证。
+heat: 安全研究者 Christopher Domas 于 8 月 6 日创建 MIT 许可仓库 Assembly Hall of Shame，反向寻找“单条指令能慢到什么程度”；README 当前榜首在作者的 AMD Ryzen 7 5800H 上，让 fxrstor64 从高延迟 MMIO 读取 512 字节状态，并用其他核心制造 PCIe 争用，记录 198,002,498,236 cycles、约 62 秒。截至 Asia/Katmandu 8 月 8 日 10:03，仓库为 314 星、2 forks，Hacker News 为 281 分、65 条评论。事实与安全边界必须前置：数据来自项目作者的特定硬件与方法，未见跨机器独立复现，排行榜按 CPU base clock 归一化也不是通用 CPU 性能榜；ARM 和 RISC-V 仍为 T.B.D.。多个案例涉及特权指令、未公开 MMIO、PCIe/GPU 寄存器或违反规范的访问，可能挂起、损坏状态或触发硬件异常，不能在日用机、生产机或不拥有的设备上照抄；MIT 许可证只覆盖代码权利，不是硬件安全保证。
 window: 72h
 competition: 低
 publishedAt: 2026-08-08
@@ -22,7 +22,7 @@ relatedTopicIds:
   - codex-security-open-cli-pre1-boundaries
 materials:
   - Assembly Hall of Shame MIT 仓库、规则、x86 排行榜与作者测量 :: https://github.com/xoreaxeaxeax/asm-hall-of-shame
-  - Hacker News 独立讨论与热度快照（截至 8 月 8 日 09:25 为 273 分 / 65 评论） :: https://news.ycombinator.com/item?id=49214098
+  - Hacker News 独立讨论与热度快照（截至 8 月 8 日 10:03 为 281 分 / 65 评论） :: https://news.ycombinator.com/item?id=49214098
 ---
 
 ## 先说结论：它测的不是“这颗 CPU 有多慢”，而是单条指令能牵动多长的硬件路径

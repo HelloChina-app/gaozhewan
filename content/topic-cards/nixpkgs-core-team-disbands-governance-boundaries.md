@@ -1,6 +1,6 @@
 ---
 title: Nixpkgs 核心团队解散：开源项目真正稀缺的不是提交，而是可持续治理
-heat: Nixpkgs core team 两名成员于 Asia/Katmandu 8 月 8 日发布解散公告，回顾团队 10 个月内改革 committer 委派、加入 19 名新 committer、扩展 merge bot、推进 GitHub Enterprise Cloud 与初始自动化/AI 政策，同时说明角色负担、沟通失灵与人员流失已影响健康；截至 8 月 8 日 09:25，Hacker News 为 148 分、61 条评论。事实边界必须前置：解散的是负责方向、决策、协调与团队管理的 Nixpkgs core team，不是 NixOS、Nixpkgs 仓库或全部维护者停止运作；公告明确相关职责目前没有直接 owner，但 Steering Committee 仍是最终 backstop。公告是两名团队成员对长期模式的共同陈述，不是独立审计，也不能把对 Steering Committee 的批评归因给某一位成员或简化成单次冲突。
+heat: Nixpkgs core team 两名成员于 Asia/Katmandu 8 月 8 日发布解散公告，回顾团队 10 个月内改革 committer 委派、加入 19 名新 committer、扩展 merge bot、推进 GitHub Enterprise Cloud 与初始自动化/AI 政策，同时说明角色负担、沟通失灵与人员流失已影响健康；截至 8 月 8 日 10:03，Hacker News 为 169 分、71 条评论。事实边界必须前置：解散的是负责方向、决策、协调与团队管理的 Nixpkgs core team，不是 NixOS、Nixpkgs 仓库或全部维护者停止运作；公告明确相关职责目前没有直接 owner，但 Steering Committee 仍是最终 backstop。公告是两名团队成员对长期模式的共同陈述，不是独立审计，也不能把对 Steering Committee 的批评归因给某一位成员或简化成单次冲突。
 window: 72h
 competition: 中
 publishedAt: 2026-08-08
@@ -22,7 +22,7 @@ relatedTopicIds:
   - qm-multiplayer-work-agent-security-boundaries
 materials:
   - NixOS Discourse 原始解散公告、职责空缺与治理问题说明 :: https://discourse.nixos.org/t/the-nixpkgs-core-team-has-disbanded/79413
-  - Hacker News 独立讨论与热度快照（截至 8 月 8 日 09:25 为 148 分 / 61 评论） :: https://news.ycombinator.com/item?id=49217993
+  - Hacker News 独立讨论与热度快照（截至 8 月 8 日 10:03 为 169 分 / 71 评论） :: https://news.ycombinator.com/item?id=49217993
 ---
 
 ## 先说结论：仓库还在运转，但治理责任出现了真实空档

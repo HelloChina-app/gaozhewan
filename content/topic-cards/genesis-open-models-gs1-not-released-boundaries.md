@@ -1,6 +1,6 @@
 ---
 title: 美国 DOE 要做万亿参数科学开放权重模型：Genesis-Science-1 还在开发，不是现成替代品
-heat: 美国能源部 Genesis Open Models 官方页面与合作方 Arcee AI 于 7 月 22 日宣布共同开发 Genesis-Science-1，定位为面向科学研究的 trillion-parameter-class 开放权重模型，并计划在 2026 年稍晚发布权重、技术报告和公开演示；该项目于 8 月 7 日再次登上 Hacker News，截至 Asia/Katmandu 8 月 8 日 09:25 为 136 分、49 条评论。事实边界必须前置：官方措辞是“will be”“prepare it for release”，当前公告不是可下载模型发布，尚不能核验实际参数、中文能力、基准、推理成本、最终权重许可证或安全表现；open-weight 也不自动等于训练数据、训练代码和完整系统都开源。第一轮 foundation-stage 申请截止 8 月 6 日已经过去，post-training 轨道截止 8 月 25 日，贡献者需自行确认数据权利与处理条款。
+heat: 美国能源部 Genesis Open Models 官方页面与合作方 Arcee AI 于 7 月 22 日宣布共同开发 Genesis-Science-1，定位为面向科学研究的 trillion-parameter-class 开放权重模型，并计划在 2026 年稍晚发布权重、技术报告和公开演示；该项目于 8 月 7 日再次登上 Hacker News，截至 Asia/Katmandu 8 月 8 日 10:03 为 153 分、54 条评论。事实边界必须前置：官方措辞是“will be”“prepare it for release”，当前公告不是可下载模型发布，尚不能核验实际参数、中文能力、基准、推理成本、最终权重许可证或安全表现；open-weight 也不自动等于训练数据、训练代码和完整系统都开源。官方贡献页面当前列出的 foundation-stage 与 post-training 申请截止日分别是 8 月 14 日和 8 月 25 日，后续日期仍可能调整，贡献者需以官方页面为准并自行确认数据权利与处理条款。
 window: 1 周
 competition: 高
 publishedAt: 2026-08-08
@@ -10,7 +10,7 @@ viral: 8.6
 accessible: 7.6
 angles:
   - 中文模型选型事实核查向：把“美国 DOE 宣布开发”与“模型已经开放下载”分成两栏，再与 DeepSeek、Qwen、Kimi 等现成开放权重模型比较可获得性；在权重、许可证、技术报告和独立评测出现前，不制作性能排名或迁移教程
-  - 科学内容创作者机会向：解释项目征集科学文本、代码、工作流环境、评测、rubric 和 verifier 的两条贡献轨道，帮助高校与研究团队判断能贡献什么；必须说明第一轨截止日期已过、第二轨仍需申请，公开表单第一步只收描述与元数据，不代表材料自动获选或公开
+  - 科学内容创作者机会向：解释项目征集科学文本、代码、工作流环境、评测、rubric 和 verifier 的两条贡献轨道，帮助高校与研究团队判断能贡献什么；必须说明官方页面当前列出的两轨截止日分别为 8 月 14 日与 8 月 25 日、后续仍可能调整，公开表单第一步只收描述与元数据，不代表材料自动获选或公开
   - 开放性审计向：用“权重、架构、训练数据、训练代码、许可证、评测与治理”七层清单追踪 GS1 最终开放到哪一层；Arcee 对透明、可扩展和受治理执行环境的描述属于项目计划，尚没有发布制品或独立复现证明它已实现
 headlines:
   - DOE 的万亿参数科学模型还没发布：先别把 Genesis-Science-1 写成可下载神器
@@ -23,7 +23,7 @@ relatedTopicIds:
 materials:
   - DOE / Argonne Genesis Open Models 官方计划、贡献轨道与申请边界 :: https://genesisopenmodels.anl.gov/
   - Arcee AI 7 月 22 日原始公告、GS1 开发分工与计划发布时间 :: https://www.arcee.ai/blog/genesis-science-1
-  - Hacker News 独立讨论与热度快照（截至 8 月 8 日 09:25 为 136 分 / 49 评论） :: https://news.ycombinator.com/item?id=49216946
+  - Hacker News 独立讨论与热度快照（截至 8 月 8 日 10:03 为 153 分 / 54 评论） :: https://news.ycombinator.com/item?id=49216946
 ---
 
 ## 先说结论：这是值得追踪的公共科学基础设施计划，不是今天就能部署的模型
