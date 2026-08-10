@@ -2237,6 +2237,77 @@ main {
   color: #ffffff;
 }
 
+.so101-step-list {
+  display: grid;
+  gap: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.so101-step-list li {
+  align-items: start;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 54px minmax(0, 1fr);
+  padding: 24px;
+  scroll-margin-top: 96px;
+}
+
+.so101-step-list li > span {
+  color: var(--green);
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.so101-step-list h3 {
+  font-size: 21px;
+  margin: 0 0 8px;
+}
+
+.so101-step-list p {
+  color: var(--muted);
+  line-height: 1.75;
+  margin: 0;
+}
+
+.so101-command-block {
+  margin: 0 0 18px;
+}
+
+.so101-command-block > p {
+  font-weight: 900;
+  margin: 0 0 8px;
+}
+
+.so101-command-block pre {
+  background: #151515;
+  border-radius: 10px;
+  color: #f4f4f4;
+  margin: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 18px 20px;
+}
+
+.so101-command-block code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre;
+}
+
+.so101-troubleshooting-table {
+  min-width: 860px;
+}
+
+.so101-troubleshooting-table td {
+  line-height: 1.65;
+}
+
 @media (max-width: 900px) {
   .lab-hero,
   .lab-submit-layout,
@@ -2327,6 +2398,11 @@ main {
     font-size: 44px;
   }
 
+  .bom-answer strong {
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
   .bom-section {
     margin: 56px 0;
   }
@@ -2334,6 +2410,16 @@ main {
   .bom-warning,
   .bom-official-note {
     padding: 20px;
+  }
+
+  .so101-step-list li {
+    gap: 12px;
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  .so101-command-block pre {
+    padding: 16px;
   }
 }
 

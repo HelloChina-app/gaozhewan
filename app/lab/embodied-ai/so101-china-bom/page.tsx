@@ -104,7 +104,7 @@ export default function So101ChinaBomPage() {
     headline: "SO-101 中国区采购清单：单臂与双臂 BOM、型号和预算",
     description: metadata.description,
     datePublished: "2026-07-28",
-    dateModified: "2026-07-28",
+    dateModified: "2026-08-10",
     inLanguage: "zh-CN",
     mainEntityOfPage: pageUrl,
     author: {
@@ -185,6 +185,12 @@ export default function So101ChinaBomPage() {
             <a className="button" href="#dual-arm">
               直接看双臂清单
             </a>
+            <Link
+              className="text-button"
+              href="/lab/embodied-ai/so101-calibration"
+            >
+              买完后配置与校准
+            </Link>
             <Link className="text-button" href="/lab/embodied-ai">
               返回完整实验路线
             </Link>

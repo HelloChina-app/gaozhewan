@@ -20,6 +20,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .sort()
     .at(-1);
   const contentHubs = new Set(["", "/post", "/tools", "/weekly", "/topics"]);
+  const routeLastModified: Record<string, string> = {
+    "/lab": "2026-07-28",
+    "/lab/embodied-ai": "2026-08-10",
+    "/lab/embodied-ai/so101-china-bom": "2026-08-10",
+    "/lab/embodied-ai/so101-calibration": "2026-08-10"
+  };
   const routes = [
     "",
     "/post",
@@ -27,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/lab",
     "/lab/embodied-ai",
     "/lab/embodied-ai/so101-china-bom",
+    "/lab/embodied-ai/so101-calibration",
     "/side-hustles",
     "/weekly",
     "/topics",
@@ -39,8 +46,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...routes.map((route) => ({
       url: `${site.url}${route}`,
-      ...(route.startsWith("/lab")
-        ? { lastModified: new Date("2026-07-28") }
+      ...(routeLastModified[route]
+        ? { lastModified: new Date(routeLastModified[route]) }
         : latestContentDate && contentHubs.has(route)
           ? { lastModified: new Date(latestContentDate) }
           : {}),
@@ -48,7 +55,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority:
         route === ""
           ? 1
-          : route === "/lab/embodied-ai/so101-china-bom"
+          : route.startsWith("/lab/embodied-ai/so101-")
             ? 0.8
             : 0.7
     })),

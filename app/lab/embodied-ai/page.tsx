@@ -107,7 +107,7 @@ export default function EmbodiedAiLabPage() {
     headline: "自己 DIY 一个具身智能体：SO-101 + LeRobot",
     description: metadata.description,
     datePublished: "2026-07-28",
-    dateModified: "2026-07-28",
+    dateModified: "2026-08-10",
     inLanguage: "zh-CN",
     mainEntityOfPage: pageUrl,
     author: {
@@ -166,6 +166,12 @@ export default function EmbodiedAiLabPage() {
               href="/lab/embodied-ai/so101-china-bom"
             >
               看中国区采购清单
+            </Link>
+            <Link
+              className="text-button"
+              href="/lab/embodied-ai/so101-calibration"
+            >
+              看配置与校准教程
             </Link>
           </div>
           <div className="lab-trust-row" aria-label="实验原则">
