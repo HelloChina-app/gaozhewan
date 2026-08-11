@@ -48,14 +48,14 @@ export default function HomePage() {
           <p className="eyebrow">GAOZHEWAN · START WITH GLOBAL SIGNALS</p>
           <h1>搞着玩</h1>
           <p>
-            搞着玩帮你把全球新奇事物，变成可以立刻动手的选题、工具和公开实验。
+            全球信号、工具核验和 DIY 实验全部免费公开；如果你有一个真实问题，实验室也可以陪你把第一版做出来。
           </p>
           <div className="hero-actions">
             <Link className="button" href={`/post/${latestPost.slug}`}>
               先搞选题
             </Link>
-            <Link className="text-button" href="/pricing">
-              了解搞选题 Pro
+            <Link className="text-button" href="/lab#submit">
+              提交创意一起玩
             </Link>
           </div>
           <div className="play-lanes" aria-label="搞着玩产品入口">
@@ -101,7 +101,7 @@ export default function HomePage() {
                   <span className="signal-heat">{card.heat}</span>
                   <span className="signal-tags">
                     <em>{card.publishedAt}</em>
-                    <em>Pro 可解锁写作包</em>
+                    <em>角度与标题免费公开</em>
                   </span>
                 </span>
               </Link>
@@ -169,14 +169,14 @@ export default function HomePage() {
       <section className="section section-dark">
         <div className="section-inner pro-cta">
           <div>
-            <p className="eyebrow">搞选题 Pro</p>
-            <h2>每天 3 张选题卡，打开就能写</h2>
+            <p className="eyebrow">搞着玩实验室 · USDT ONLY</p>
+            <h2>不卖同一份内容，只帮你解决自己的问题</h2>
             <p>
-              每张卡含写作角度、标题模板、竞争度和时效窗口，免费版先看摘要。
+              创意免费提交；入选后可选择 29 USDT 诊断、299 USDT 原型冲刺或 999 USDT 起的固定范围 MVP 共建。
             </p>
           </div>
-          <Link className="button" href="/checkout">
-            使用 USDT 开通
+          <Link className="button" href="/pricing">
+            查看服务与边界
           </Link>
         </div>
       </section>
@@ -185,8 +185,8 @@ export default function HomePage() {
         <div className="section-inner">
           <div className="section-head">
             <div>
-              <p className="eyebrow">选题卡预览</p>
-              <h2>一张选题卡长什么样</h2>
+              <p className="eyebrow">免费选题工作台</p>
+              <h2>完整角度、标题和来源直接拿走</h2>
             </div>
           </div>
           <div className="topic-grid">

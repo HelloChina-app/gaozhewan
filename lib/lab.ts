@@ -71,15 +71,15 @@ export const labProjects = [
     title: "搞着玩选题工作台",
     status: "已上线",
     summary: "把全球信号整理成可搜索、可核验、可直接开写的选题卡。",
-    result: "每日内容生产、Pro 权限和公开素材链已经投入生产。",
+    result: "完整写作角度、标题模板、时效、竞争度与核验来源已经免费公开。",
     href: "/topics"
   },
   {
     title: "USDT 自动核验收银台",
     status: "已上线",
     summary: "只接受 TRC20 USDT，扫码付款后用交易哈希自动核验。",
-    result: "支付、订单去重、Blob 私有存储和访问权发放已形成闭环。",
-    href: "/checkout"
+    result: "实验室服务支持扫码付款、链上核验、订单去重和 Blob 私有存储。",
+    href: "/pricing"
   },
   {
     title: "用户创意共建",

@@ -2,10 +2,10 @@
   name: "搞着玩",
   domain: "gaozhewan.com",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://gaozhewan.com",
-  title: "搞着玩 · 把全球信号变成你的选题",
+  title: "搞着玩 · 免费信号、公开实验与创意共建",
   description:
-    "每天从 Hacker News、GitHub 等全球信号里挑出值得写的选题，附写作角度、标题模板和工具实测，帮中文创作者更快从「发现」到「开写」。",
-  slogan: "搞着玩，先从全球信号开始",
+    "免费整理全球新奇信号、AI 工具和具身智能 DIY；也在搞着玩实验室接收真实创意，用固定范围服务帮用户做出第一版。",
+  slogan: "先免费搞明白，再一起把东西做出来",
   email: "hello@gaozhewan.com"
 };
 
@@ -14,7 +14,7 @@ export const navItems = [
   { href: "/post", label: "搞选题" },
   { href: "/tools", label: "搞工具" },
   { href: "/lab", label: "实验室" },
-  { href: "/pricing", label: "搞选题 Pro" },
+  { href: "/pricing", label: "服务与定价" },
   { href: "/subscribe", label: "订阅" }
 ];
 

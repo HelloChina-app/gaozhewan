@@ -1,13 +1,13 @@
-type ProContentProps = {
+type ContentPackProps = {
   angles: string[];
   headlines: string[];
 };
 
-export function ProContent({ angles, headlines }: ProContentProps) {
+export function ContentPack({ angles, headlines }: ContentPackProps) {
   return (
-    <section className="pro-content" aria-label="Pro 专属内容">
+    <section className="content-pack" aria-label="免费创作包">
       <div>
-        <p className="eyebrow">Pro 已解锁</p>
+        <p className="eyebrow">免费创作包</p>
         <h2>可直接改写的内容包</h2>
       </div>
       <div className="topic-section">
@@ -29,4 +29,3 @@ export function ProContent({ angles, headlines }: ProContentProps) {
     </section>
   );
 }
-

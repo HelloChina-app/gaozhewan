@@ -16,9 +16,9 @@ sources:
   - 来源名称 :: https://example.com/
   - 交叉来源 :: https://example.com/
 proAngles:
-  - Pro 写作角度 1
-  - Pro 写作角度 2
-  - Pro 写作角度 3
+  - 免费写作角度 1
+  - 免费写作角度 2
+  - 免费写作角度 3
 headlineTemplates:
   - 备选标题 1
   - 备选标题 2

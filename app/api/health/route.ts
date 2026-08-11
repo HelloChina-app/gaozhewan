@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import { emailDeliveryConfigured } from "@/lib/email";
 import { labIdeaStoreEnabled } from "@/lib/lab-ideas";
-import { getUsdtCheckoutConfig } from "@/lib/usdt";
+import { getUsdtCheckoutConfigForProduct } from "@/lib/usdt";
 
 export function GET() {
-  const checkout = getUsdtCheckoutConfig();
+  const checkout = getUsdtCheckoutConfigForProduct("idea-diagnosis");
   const deliveryConfigured = emailDeliveryConfigured();
   const newsletterConfigured = deliveryConfigured;
 
@@ -23,13 +23,14 @@ export function GET() {
       lab: {
         intakeConfigured: labIdeaStoreEnabled(),
         notificationsConfigured: deliveryConfigured,
-        paymentsConfigured: checkout.enabled
+        paymentsConfigured: Boolean(checkout?.enabled)
       },
       monetization: {
         asset: "USDT",
-        automaticVerification: checkout.automaticVerification,
-        checkoutConfigured: checkout.enabled,
-        network: checkout.enabled ? checkout.network : null
+        model: "fixed-scope-lab-services",
+        automaticVerification: Boolean(checkout?.automaticVerification),
+        checkoutConfigured: Boolean(checkout?.enabled),
+        network: checkout?.enabled ? checkout.network : null
       },
       timestamp: new Date().toISOString()
     },

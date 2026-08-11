@@ -2,17 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SubscribeForm } from "@/components/subscribe-form";
 import { site } from "@/lib/site";
-import { getUsdtCheckoutConfig } from "@/lib/usdt";
+import { labServicePackages } from "@/lib/lab";
 
 export const metadata: Metadata = {
   title: "免费订阅 AI 工具与全球选题周刊",
   description:
-    "免费订阅搞着玩邮件，按你关注的方向接收全球新奇信号、AI 工具核验、实验室案例和中文创作选题；需要完整执行简报时可用 USDT 开通 Pro。"
+    "免费订阅搞着玩邮件，按你关注的方向接收全球新奇信号、AI 工具核验、实验室案例、具身智能 DIY 和完整中文创作选题。"
 };
 
 export default function SubscribePage() {
-  const checkout = getUsdtCheckoutConfig();
-  const network = checkout.network || "收银台页面指定网络";
+  const startingPackage = labServicePackages[0];
   const pageUrl = `${site.url}/subscribe`;
   const webPageJsonLd = {
     "@context": "https://schema.org",
@@ -80,32 +79,32 @@ export default function SubscribePage() {
       <section className="section section-muted">
         <div className="section-inner subscribe-band">
           <div>
-            <p className="eyebrow">需要完整写作包？</p>
-            <h2>搞选题 Pro：每天 3 张可直接开写的选题卡</h2>
+            <p className="eyebrow">有一个自己的问题？</p>
+            <h2>内容免费，实验室帮你把创意做成第一版</h2>
             <p>
-              免费内容负责发现、筛选并公开核验来源；Pro 补全写作角度、标题模板、竞争度、时效窗口与复制简报，适合需要稳定产出的创作者和内容团队。
+              周刊和选题卡不会设付费墙。需要个性化帮助时，先免费提交创意；适合实验室的项目再确认范围并使用 USDT 启动。
             </p>
             <div className="subscribe-actions">
-              <Link className="button" href="/checkout">
-                使用 {checkout.amount} USDT 开通
+              <Link className="button" href="/lab#submit">
+                免费提交创意
               </Link>
               <Link className="text-button" href="/pricing">
-                查看免费版与 Pro 对比
+                查看服务与定价
               </Link>
             </div>
           </div>
           <div className="value-list">
             <div className="value-row">
-              <h3>{checkout.amount} USDT / 年</h3>
-              <p>一次支付，解锁 365 天完整选题工作台。</p>
+              <h3>{startingPackage.amount} USDT 起</h3>
+              <p>从创意诊断开始，不急着写代码，也不强迫升级更大的服务。</p>
             </div>
             <div className="value-row">
               <h3>只接受 USDT</h3>
-              <p>不收人民币、银行卡、PayPal 或其他代币。</p>
+              <p>确认服务范围后，只使用 TRON（TRC20）USDT 启动。</p>
             </div>
             <div className="value-row">
-              <h3>扫码付款，链上核验</h3>
-              <p>进入收银台后扫描二维码，并严格使用 {network} 完成转账。</p>
+              <h3>先确认，后付款</h3>
+              <p>不适合实验室、范围不清或无法验收的创意，不进入付款环节。</p>
             </div>
           </div>
         </div>

@@ -56,13 +56,7 @@ function matchesQuery(card: ExplorerCard, terms: string[]): boolean {
   return terms.every((term) => text.includes(term));
 }
 
-export function TopicsExplorer({
-  cards,
-  showPro = false
-}: {
-  cards: ExplorerCard[];
-  showPro?: boolean;
-}) {
+export function TopicsExplorer({ cards }: { cards: ExplorerCard[] }) {
   const [comp, setComp] = useState<CompKey>("全部");
   const [sort, setSort] = useState<SortKey>("newest");
   const [heat, setHeat] = useState<HeatKey>("全部");
@@ -91,10 +85,10 @@ export function TopicsExplorer({
   }, [cards, now]);
 
   const filtered = cards.filter((card) => {
-    if (showPro && comp !== "全部" && card.competition !== comp) return false;
+    if (comp !== "全部" && card.competition !== comp) return false;
     if (!matchesQuery(card, terms)) return false;
     // 热度筛选依赖当前时间，仅挂载后生效；挂载前不过滤，保持首屏一致。
-    if (showPro && heat !== "全部" && now != null && card.window) {
+    if (heat !== "全部" && now != null && card.window) {
       const closed = isClosed(getDeadline(card.publishedAt, card.window), now);
       if (heat === "writable" && closed) return false;
       if (heat === "closed" && !closed) return false;
@@ -125,8 +119,7 @@ export function TopicsExplorer({
       </div>
 
       <div className="filter-row" aria-label="筛选与排序">
-        {showPro
-          ? compOptions.map((option) => (
+        {compOptions.map((option) => (
               <button
                 key={option}
                 type="button"
@@ -135,26 +128,21 @@ export function TopicsExplorer({
               >
                 {option === "全部" ? "全部" : `竞争度 ${option}`}
               </button>
-            ))
-          : null}
-        {showPro ? (
-          <button
-            type="button"
-            className={heat === "writable" ? "active" : undefined}
-            onClick={() => setHeat(heat === "writable" ? "全部" : "writable")}
-          >
-            {writableCount != null ? `还能写 ${writableCount}` : "还能写"}
-          </button>
-        ) : null}
-        {showPro ? (
-          <button
-            type="button"
-            className={heat === "closed" ? "active" : undefined}
-            onClick={() => setHeat(heat === "closed" ? "全部" : "closed")}
-          >
-            热度已过
-          </button>
-        ) : null}
+            ))}
+        <button
+          type="button"
+          className={heat === "writable" ? "active" : undefined}
+          onClick={() => setHeat(heat === "writable" ? "全部" : "writable")}
+        >
+          {writableCount != null ? `还能写 ${writableCount}` : "还能写"}
+        </button>
+        <button
+          type="button"
+          className={heat === "closed" ? "active" : undefined}
+          onClick={() => setHeat(heat === "closed" ? "全部" : "closed")}
+        >
+          热度已过
+        </button>
         <button
           type="button"
           className={sort === "newest" ? "active" : undefined}
@@ -169,15 +157,13 @@ export function TopicsExplorer({
         >
           高分优先
         </button>
-        {showPro ? (
-          <button
-            type="button"
-            className={sort === "closing" ? "active" : undefined}
-            onClick={() => setSort("closing")}
-          >
-            快关闭
-          </button>
-        ) : null}
+        <button
+          type="button"
+          className={sort === "closing" ? "active" : undefined}
+          onClick={() => setSort("closing")}
+        >
+          快关闭
+        </button>
       </div>
 
       <p className="topic-count" aria-live="polite">
@@ -189,7 +175,7 @@ export function TopicsExplorer({
       {sorted.length > 0 ? (
         <div className="topic-grid">
           {sorted.map((card) => (
-            <TopicCardPreview card={card} key={card.id} showPro={showPro} />
+            <TopicCardPreview card={card} key={card.id} />
           ))}
         </div>
       ) : (

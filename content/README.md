@@ -6,7 +6,7 @@
 ## 目录结构
 
 - `posts/*.md`：免费全球信号文章。文件名即 slug（URL）。
-- `topic-cards/*.md`：搞选题 Pro 选题卡。文件名即 id。
+- `topic-cards/*.md`：免费完整选题卡。文件名即 id。
 - `templates/post.md`、`templates/topic-card.md`：新建内容时复制这两个模板。
 - `seed-backlog.md`：首批内容抓取方向、入选标准和不发布标准。
 - `_drafts/`：`npm run signals` 抓取生成的草稿，**不会被发布**，已被 git 忽略。
@@ -47,7 +47,7 @@
    - 搞着玩指数：给 novelty / viral / accessible 三个 0–10 分。
    - 写 3 个角度 + 3 个标题，materials 填真实链接。
 3. **发布**：补全的文件放进 `topic-cards/`（或据此写一篇 `posts/` 文章），删掉对应草稿。
-4. **分发**：正式选题卡会自动进入首页、选题工作台、独立详情页、sitemap 和 RSS；来源链接保持公开可核验，写作角度与标题模板继续由 Pro 解锁。
+4. **分发**：正式选题卡会自动进入首页、选题工作台、独立详情页、sitemap 和 RSS；来源、写作角度、标题模板、竞争度与时效窗口全部免费公开。
 5. **校验**：`npm run check:content` 通过后提交部署。
 
 ### 两个真实例子（2026-06-17 抓取）

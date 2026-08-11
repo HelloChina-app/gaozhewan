@@ -10,13 +10,10 @@ import {
 } from "@/lib/content";
 import { site } from "@/lib/site";
 import { truncateText } from "@/lib/utils";
-import { getProAccess } from "@/lib/pro-access";
 
 type TopicPageProps = {
   params: Promise<{ id: string }>;
 };
-
-export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params
@@ -50,7 +47,6 @@ export async function generateMetadata({
 export default async function TopicPage({ params }: TopicPageProps) {
   const { id } = await params;
   const card = getTopicCardById(id);
-  const access = await getProAccess();
 
   if (!card) {
     notFound();
@@ -110,14 +106,10 @@ export default async function TopicPage({ params }: TopicPageProps) {
           <span>/</span>
           <Link href="/topics">选题卡</Link>
           <span>/</span>
-          <span>{access ? `时效 ${card.window}` : "免费预览"}</span>
+          <span>完整公开</span>
         </div>
 
-        <TopicCardFull
-          card={card}
-          headingLevel="h1"
-          showPro={Boolean(access)}
-        />
+        <TopicCardFull card={card} headingLevel="h1" />
 
         {clusters.length > 0 ? (
           <nav className="topic-cluster-links" aria-label="所属主题">
@@ -143,7 +135,7 @@ export default async function TopicPage({ params }: TopicPageProps) {
             </div>
             <div className="topic-grid">
               {more.map((item) => (
-                <TopicCardPreview card={item} key={item.id} showPro={Boolean(access)} />
+                <TopicCardPreview card={item} key={item.id} />
               ))}
             </div>
           </section>
@@ -164,20 +156,13 @@ export default async function TopicPage({ params }: TopicPageProps) {
       <aside className="article-side">
         <div className="subscribe-band">
           <div>
-            <p className="eyebrow">{access ? "Pro 已解锁" : "搞选题 Pro"}</p>
-            <h2>
-              {access
-                ? "完整角度、标题模板和复制简报已显示"
-                : "使用 USDT 开通完整选题卡"}
-            </h2>
+            <p className="eyebrow">搞着玩实验室</p>
+            <h2>有了选题，也可以把它做成第一版</h2>
+            <p>提交真实问题，先免费甄选；需要诊断、原型或 MVP 共建时，只接受 USDT。</p>
           </div>
-          {access ? (
-            <p className="form-message">授权邮箱：{access.email}</p>
-          ) : (
-            <Link className="button" href="/checkout">
-              前往 USDT 收银台
-            </Link>
-          )}
+          <Link className="button" href="/lab#submit">
+            提交创意
+          </Link>
         </div>
       </aside>
     </article>

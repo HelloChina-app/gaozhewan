@@ -17,7 +17,7 @@ export default function PostIndexPage() {
   const sortedCards = getSortedTopicCards();
   const tags = getAllTags();
   const [publicSample, ...rest] = sortedCards;
-  const lockedSamples = rest.slice(0, 2);
+  const moreSamples = rest.slice(0, 2);
 
   return (
     <>
@@ -26,8 +26,7 @@ export default function PostIndexPage() {
           <p className="eyebrow">搞选题 · 把全球信号变成今天能发的内容</p>
           <h1>把全球信号拆成你今天能发的选题</h1>
           <p>
-            免费版帮你判断一件事值不值得跟，搞选题 Pro
-            公开核验来源；Pro 交付角度、标题、时效、竞争度和复制简报。
+            每张选题卡都公开核验来源、写作角度、标题模板、时效与竞争度。内容免费，拿走就能改写。
           </p>
         </div>
 
@@ -41,8 +40,8 @@ export default function PostIndexPage() {
             <p>不搬运资讯，重点补中国视角、国内可用性和创作者改写角度。</p>
           </div>
           <div className="value-row">
-            <h3>Pro 可执行</h3>
-            <p>每天 3 张选题卡，直接服务公众号、小红书、视频脚本和工具实测。</p>
+            <h3>完整可执行</h3>
+            <p>每天 3 张完整选题卡，直接服务公众号、小红书、视频脚本和工具实测。</p>
           </div>
         </div>
       </section>
@@ -54,14 +53,14 @@ export default function PostIndexPage() {
               <p className="eyebrow">完整示例</p>
               <h2>不是又一条资讯，是一张今天就能动手的选题卡</h2>
             </div>
-            <Link className="text-button" href="/pricing">
-              查看搞选题 Pro
+            <Link className="text-button" href="/topics">
+              打开免费选题工作台
             </Link>
           </div>
           <div className="topic-sample-grid">
             <TopicCardFull card={publicSample} />
             <div className="topic-preview-stack">
-              {lockedSamples.map((card) => (
+              {moreSamples.map((card) => (
                 <TopicCardPreview card={card} key={card.id} />
               ))}
             </div>
@@ -97,7 +96,7 @@ export default function PostIndexPage() {
           <div>
             <p className="eyebrow">免费邮件订阅</p>
             <h2>每周收一封值得继续跟的选题摘要</h2>
-            <p>选择搞选题方向，我们会优先发送全球信号、中文创作角度和 Pro 更新。</p>
+            <p>选择搞选题方向，我们会优先发送全球信号、中文创作角度和实验室新进展。</p>
           </div>
           <SubscribeForm source="topic-line" defaultInterest="搞选题" />
         </div>

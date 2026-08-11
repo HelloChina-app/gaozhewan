@@ -14,7 +14,7 @@ export function SiteFooter() {
         <Link href="/topics">选题卡</Link>
         <Link href="/weekly">周刊</Link>
         <Link href="/privacy">隐私政策</Link>
-        <Link href="/pricing">搞选题 Pro</Link>
+        <Link href="/pricing">服务与定价</Link>
         <Link href="/subscribe">订阅</Link>
         <a href="/feed.xml">RSS</a>
         <a href="/llms.txt">AI 索引</a>

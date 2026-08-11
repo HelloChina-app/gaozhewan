@@ -10,7 +10,7 @@ const paths = [
   "/api/health",
   "/icon.svg",
   "/manifest.webmanifest",
-  "/global-signal-radar.jpg",
+  "/og.png",
   "/sitemap.xml",
   "/robots.txt"
 ];

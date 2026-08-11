@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { TopicsExplorer } from "@/components/topics-explorer";
 import { getSortedTopicCards, topicClusters } from "@/lib/content";
-import { getProAccess } from "@/lib/pro-access";
 
 export const metadata: Metadata = {
   title: "选题工作台",
@@ -10,18 +9,8 @@ export const metadata: Metadata = {
     "搞着玩选题工作台：全球信号拆出的可执行选题，按竞争度筛选、按搞着玩指数或时间排序，快速锁定今天值得写的那条。"
 };
 
-export default async function TopicsPage() {
-  const access = await getProAccess();
+export default function TopicsPage() {
   const cards = getSortedTopicCards();
-  const visibleCards = access
-    ? cards
-    : cards.map(({ id, title, heat, scores, publishedAt }) => ({
-        id,
-        title,
-        heat,
-        scores,
-        publishedAt
-      }));
 
   return (
     <section className="page-shell">
@@ -29,9 +18,7 @@ export default async function TopicsPage() {
         <p className="eyebrow">选题工作台</p>
         <h1>今天写哪条？</h1>
         <p>
-          {access
-            ? "Pro 已解锁：搜索完整写作包，按竞争度、分数或时效窗口筛选。"
-            : "免费版可浏览全球信号摘要、搞着玩指数和核验来源；Pro 解锁写作角度、标题模板、复制简报、竞争度与时效窗口。"}
+          全部选题卡永久免费：搜索写作角度与标题模板，按竞争度、分数或时效窗口筛选，来源可回到原站核验。
         </p>
       </div>
 
@@ -54,24 +41,18 @@ export default async function TopicsPage() {
         </div>
       </section>
 
-      <TopicsExplorer cards={visibleCards} showPro={Boolean(access)} />
+      <TopicsExplorer cards={cards} />
 
       <section className="section">
         <div className="subscribe-band">
           <div>
-            <p className="eyebrow">{access ? "Pro 已生效" : "搞选题 Pro"}</p>
-            <h2>{access ? "你的完整选题工作台已解锁" : "每天 3 张选题卡，打开就能写"}</h2>
-            <p>
-              {access
-                ? `当前访问授权：${access.email}`
-                : "只接受 USDT。付款经链上确认后，成功页立即生成一年期访问链接；邮件服务可用时也会发送副本。"}
-            </p>
+            <p className="eyebrow">免费内容 · 实验室共建</p>
+            <h2>内容拿走用；想把创意做出来，再来找我们</h2>
+            <p>选题卡不再收费。实验室只为创意诊断、原型冲刺和 MVP 共建收取固定范围服务费，并且只接受 USDT。</p>
           </div>
-          {access ? null : (
-            <Link className="button" href="/checkout">
-              使用 USDT 开通
-            </Link>
-          )}
+          <Link className="button" href="/lab#submit">
+            提交一个真实问题
+          </Link>
         </div>
       </section>
     </section>

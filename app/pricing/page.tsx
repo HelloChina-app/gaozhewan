@@ -1,103 +1,127 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { TopicCardPreview } from "@/components/topic-card-preview";
-import { getSortedTopicCards } from "@/lib/content";
-import { getUsdtCheckoutConfig } from "@/lib/usdt";
+import { labServicePackages } from "@/lib/lab";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "搞选题 Pro 定价",
+  title: "实验室服务与 USDT 定价",
   description:
-    "搞选题 Pro 每日交付 3 张全球选题卡，包含写作角度、标题模板、时效窗口和复制简报；核验来源永久免费公开。"
+    "搞着玩内容永久免费；实验室为用户自己的创意提供 29 USDT 创意诊断、299 USDT 原型冲刺和 999 USDT MVP 共建启动服务。",
+  alternates: { canonical: "/pricing" },
+  openGraph: {
+    title: "搞着玩实验室服务与 USDT 定价",
+    description: "不卖同一份内容，只为每个用户自己的问题交付固定范围结果。",
+    type: "website",
+    url: `${site.url}/pricing`
+  }
 };
 
-const compareRows = [
-  ["内容", "免费", "Pro"],
-  ["全球信号", "1 个话题轻量解读", "3 张可改写选题卡"],
-  ["搞着玩指数", "新奇度、传播潜力、国内可用", "增加竞争度和时效窗口"],
-  ["写作角度", "保留 1 个方向", "3 个角度 + 标题模板"],
-  ["核验来源", "完整公开", "完整公开 + 可执行复制简报"]
+const steps = [
+  ["01", "免费提交", "说清真实问题、目标用户和第一版验收结果，获得私有创意编号。"],
+  ["02", "先甄选再付款", "我们判断是否适合实验室，并在付款前确认固定范围、周期与边界。"],
+  ["03", "USDT 启动", "只使用 TRON（TRC20）USDT；付款与创意编号绑定并自动核验。"],
+  ["04", "交付与验收", "按页面列出的交付物完成第一版；超出范围的工作不会自动收费。"]
 ];
 
 const faqs = [
   {
-    q: "和免费内容有什么区别？",
-    a: "免费内容帮你判断一件事值不值得关注，并公开核验来源；Pro 直接给可写角度、标题模板、竞争度、时效窗口和复制简报。"
+    q: "为什么选题卡不收费了？",
+    a: "同一套内容很难长期为不同用户创造同等价值。搞着玩把信号、角度、标题和来源全部免费公开，用它们证明判断力和执行力。"
   },
   {
-    q: "适合谁？",
-    a: "适合科技、AI、工具、效率、设计、副业类账号，以及需要稳定选题输入的内容团队。"
+    q: "实验室究竟卖什么？",
+    a: "卖针对你自己的问题所做的诊断、原型或固定范围 MVP 交付，不卖流量、收入或成功保证。"
   },
   {
-    q: "现在怎么开通？",
-    a: "进入 USDT 收银台，按页面指定的唯一网络付款并提交交易哈希。链上核验通过后，成功页会立即生成访问链接；邮件服务可用时也会发送副本。"
+    q: "能不能不提交创意直接付款？",
+    a: "不能。先提交、甄选并确认范围，可以避免你为不适合实验室或无法验收的需求付款。"
   },
   {
     q: "支持哪些付款方式？",
-    a: "只接受 USDT。本站不接受人民币、美元、银行卡、PayPal、其他稳定币或其他加密资产。"
+    a: "只接受页面指定网络的 USDT。目前不接受人民币、美元、银行卡、PayPal、其他稳定币或其他加密资产。"
   },
   {
-    q: "付款后多久开通？",
-    a: "提交交易哈希后，系统会核对币种、网络、收款地址、到账金额和链上确认状态。信息全部匹配后自动生成一年期访问链接；网络延迟或异常订单才会进入人工处理。"
+    q: "999 USDT 包含所有功能吗？",
+    a: "不包含。999 USDT 是固定范围 MVP 的启动款，最终交付边界会在付款前确认；新增功能另行确认。"
   }
 ];
 
 export default function PricingPage() {
-  const checkout = getUsdtCheckoutConfig();
-  const recentCards = getSortedTopicCards().slice(0, 3);
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "搞着玩实验室固定范围服务",
+    itemListElement: labServicePackages.map((item, index) => ({
+      "@type": "Offer",
+      position: index + 1,
+      name: item.name,
+      description: item.summary,
+      price: item.amount,
+      priceCurrency: "USDT",
+      url: `${site.url}/lab#submit`
+    }))
+  };
+
   return (
     <>
       <section className="page-shell">
         <div className="page-title">
-          <p className="eyebrow">搞选题 Pro</p>
-          <h1>把全球信号变成你能直接发的选题</h1>
+          <p className="eyebrow">实验室服务 · USDT ONLY</p>
+          <h1>内容免费；只为你的问题收费</h1>
           <p>
-            每天从全球信号里挑出值得写的，拆成写作角度、标题模板和素材，让你打开就能写。
+            选题、工具核验和公开实验直接拿走。只有当你希望实验室诊断一个创意、做出原型或共建 MVP 时，才按固定范围付款。
           </p>
-        </div>
-
-        <div className="pricing-grid">
-          <div className="price-card">
-            <p className="eyebrow">USDT ONLY</p>
-            <h2>Pro 年度版</h2>
-            <div className="price">
-              <strong>{checkout.amount} USDT</strong>
-              <span>/ 年</span>
-            </div>
-            <p>
-              一次支付，解锁 365 天完整选题工作台。仅接受页面指定网络的 USDT，其他付款方式一律不支持。
-            </p>
-            <Link className="button" href="/checkout">
-              前往 USDT 收银台
+          <div className="hero-actions">
+            <Link className="button" href="/lab#submit">
+              免费提交创意
+            </Link>
+            <Link className="text-button" href="/topics">
+              浏览免费选题
             </Link>
           </div>
-
-          <div className="compare-table" aria-label="免费与 Pro 对比">
-            {compareRows.map((row, index) => (
-              <div className="compare-row" key={row.join("-")}>
-                {row.map((cell) =>
-                  index === 0 ? (
-                    <strong key={cell}>{cell}</strong>
-                  ) : (
-                    <span key={cell}>{cell}</span>
-                  )
-                )}
-              </div>
-            ))}
-          </div>
         </div>
+
+        <div className="lab-pricing-grid" id="services">
+          {labServicePackages.map((item) => (
+            <article className="lab-price-card" key={item.id}>
+              <p className="eyebrow">{item.delivery}</p>
+              <h2>{item.name}</h2>
+              <div className="price">
+                <strong>{item.amount}</strong>
+                <span>USDT</span>
+              </div>
+              <p>{item.summary}</p>
+              <ul>
+                {item.deliverables.map((deliverable) => (
+                  <li key={deliverable}>{deliverable}</li>
+                ))}
+              </ul>
+              <Link className="button" href={`/lab#submit`}>
+                先提交再决定
+              </Link>
+            </article>
+          ))}
+        </div>
+        <p className="lab-price-note">
+          页面价格不是无限范围报价。付款前必须用创意编号确认交付物、周期、修改次数和验收边界；未经确认，不应转账。
+        </p>
       </section>
 
-      <section className="section">
+      <section className="section section-dark">
         <div className="section-inner">
           <div className="section-head">
             <div>
-              <p className="eyebrow">选题卡预览</p>
-              <h2>一张选题卡，打开就能照着写</h2>
+              <p className="eyebrow">从创意到第一版</p>
+              <h2>四步形成真正的变现闭环</h2>
             </div>
           </div>
-          <div className="topic-grid">
-            {recentCards.map((card) => (
-              <TopicCardPreview card={card} key={card.id} />
+          <div className="value-list">
+            {steps.map(([number, title, text]) => (
+              <article className="value-row" key={number}>
+                <strong>{number}</strong>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
             ))}
           </div>
         </div>
@@ -108,7 +132,7 @@ export default function PricingPage() {
           <div className="section-head">
             <div>
               <p className="eyebrow">FAQ</p>
-              <h2>几个你可能关心的问题</h2>
+              <h2>付款前先把边界讲清楚</h2>
             </div>
           </div>
           <div className="faq-list">
@@ -121,6 +145,12 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
+
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
     </>
   );
 }

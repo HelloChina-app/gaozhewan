@@ -22,6 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const contentHubs = new Set(["", "/post", "/tools", "/weekly", "/topics"]);
   const routeLastModified: Record<string, string> = {
     "/lab": "2026-07-28",
+    "/pricing": "2026-08-11",
     "/lab/embodied-ai": "2026-08-10",
     "/lab/embodied-ai/so101-china-bom": "2026-08-10",
     "/lab/embodied-ai/so101-calibration": "2026-08-10"
