@@ -1,6 +1,6 @@
 ---
 title: Tailscale 追出 SQLite 16 年 WAL-Reset 数据竞态：修复版不是撤回的 3.52.0
-heat: Tailscale 于 8 月 12 日披露其控制平面在六个月内经历 19 次 SQLite 数据库损坏，并与 SQLite 核心开发者追到 WAL checkpoint 与写事务之间的极罕见竞态；截至 Asia/Katmandu 8 月 13 日 08:08，Hacker News 为 814 分、148 条评论。官方说明竞态会让 checkpoint 误以为部分 WAL 页面已写回主库，实际页面却永久丢失，其他引用页继续落盘后形成损坏；SQLite 将其命名为 WAL-Reset bug，估计至少存在 16 年。边界必须前置：这不是“SQLite 或 WAL 一用就坏”，Tailscale 的单写者分片架构运行多年才在大规模下触发，SQLite 团队甚至需要专门加入故障注入才能稳定测试。最初包含修复的 3.52.0 因另一个 stale expression index 误报问题被撤回，随后发布的 3.51.3 才是只带 WAL-Reset 修复的维护版，3.53.0 再加入相关自愈索引能力；不能建议读者寻找或锁定已撤回的 3.52.0。升级只能阻止该竞态继续发生，不能自动修复既有损坏，也不能替代一致性快照、PRAGMA integrity_check、恢复演练和应用级数据核对。
+heat: Tailscale 于 8 月 12 日披露其控制平面在六个月内经历 19 次 SQLite 数据库损坏，并与 SQLite 核心开发者追到 WAL checkpoint 与写事务之间的极罕见竞态；截至 Asia/Katmandu 8 月 13 日 10:04，Hacker News 为 875 分、168 条评论。官方说明竞态会让 checkpoint 误以为部分 WAL 页面已写回主库，实际页面却永久丢失，其他引用页继续落盘后形成损坏；SQLite 将其命名为 WAL-Reset bug，估计至少存在 16 年。边界必须前置：这不是“SQLite 或 WAL 一用就坏”，Tailscale 的单写者分片架构运行多年才在大规模下触发，SQLite 团队甚至需要专门加入故障注入才能稳定测试。最初包含修复的 3.52.0 因另一个 stale expression index 误报问题被撤回，随后发布的 3.51.3 才是只带 WAL-Reset 修复的维护版，3.53.0 再加入相关自愈索引能力；不能建议读者寻找或锁定已撤回的 3.52.0。升级只能阻止该竞态继续发生，不能自动修复既有损坏，也不能替代一致性快照、PRAGMA integrity_check、恢复演练和应用级数据核对。
 window: 1 周
 competition: 中
 publishedAt: 2026-08-13
@@ -25,7 +25,7 @@ materials:
   - SQLite 官方 WAL-Reset bug 说明 :: https://sqlite.org/wal.html#the_wal_reset_bug
   - SQLite 官方版本变更记录与 3.52.0 撤回说明 :: https://sqlite.org/changes.html#version_3_52_0
   - SQLite 官方 WAL-Reset 修复提交 :: https://sqlite.org/src/info/7168988acbec2d8d
-  - Hacker News 独立讨论与热度快照（截至 8 月 13 日 08:08 为 814 分 / 148 评论） :: https://news.ycombinator.com/item?id=49272832
+  - Hacker News 独立讨论与热度快照（截至 8 月 13 日 10:04 为 875 分 / 168 评论） :: https://news.ycombinator.com/item?id=49272832
 ---
 
 ## 先说结论：真正危险的是“成功提交后悄悄消失”，不是一次普通报错

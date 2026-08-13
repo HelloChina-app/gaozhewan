@@ -1,6 +1,6 @@
 ---
 title: Qwen3.8 首次开放 Max 级 2.4T 权重：95B 激活也要搬近 4.9TB
-heat: Qwen 于 8 月 12 日公开 Qwen3.8-2.4T-A95B 模型卡与权重，把官方称为“Qwen-Max 级”的模型首次开放下载；截至 Asia/Katmandu 8 月 13 日 08:08，Hacker News 为 509 分、111 条评论，Hugging Face 为 529 likes、978 downloads。官方规格为 2.4T 总参数、每 token 激活 95B，262,144 原生上下文并可扩展到 1,010,000；模型索引列出 213 个 BF16 safetensors 分片、总计 4,892,365,451,008 bytes，不能把“95B 激活”误写成普通工作站只需装下 95B 权重。边界必须前置：开放仓库版是 text-only，所有交互必须开启 thinking，不能关闭，也不支持视觉；Qwen Cloud 的 Qwen3.8-Max 才另含视觉、默认 1M 上下文、非思考模式与内置工具。模型卡跑分主要是 Qwen 自测，部分为内部双语 benchmark 或依赖指定 harness、长超时和 judge，尚需独立复现。仓库标记 `license: other`，采用自定义 Qwen3.8-Max License：一般允许使用、修改和商用，但超 1 亿月活或月收入 2000 万美元的商业产品需显著展示模型名；模型服务或 AI 编程/办公助手业务连续 12 个月合计收入超 5000 万美元时需另取商业许可，不能简称为无条件开源或标准 Apache/MIT。
+heat: Qwen 于 8 月 12 日公开 Qwen3.8-2.4T-A95B 模型卡与权重，把官方称为“Qwen-Max 级”的模型首次开放下载；截至 Asia/Katmandu 8 月 13 日 10:04，Hacker News 为 534 分、117 条评论，Hugging Face 为 567 likes、978 downloads。官方规格为 2.4T 总参数、每 token 激活 95B，262,144 原生上下文并可扩展到 1,010,000；模型索引列出 213 个 BF16 safetensors 分片、总计 4,892,365,451,008 bytes，不能把“95B 激活”误写成普通工作站只需装下 95B 权重。边界必须前置：开放仓库版是 text-only，所有交互必须开启 thinking，不能关闭，也不支持视觉；Qwen Cloud 的 Qwen3.8-Max 才另含视觉、默认 1M 上下文、非思考模式与内置工具。模型卡跑分主要是 Qwen 自测，部分为内部双语 benchmark 或依赖指定 harness、长超时和 judge，尚需独立复现。仓库标记 `license: other`，采用自定义 Qwen3.8-Max License：一般允许使用、修改和商用，但超 1 亿月活或月收入 2000 万美元的商业产品需显著展示模型名；模型服务或 AI 编程/办公助手业务连续 12 个月合计收入超 5000 万美元时需另取商业许可，不能简称为无条件开源或标准 Apache/MIT。
 window: 72h
 competition: 高
 publishedAt: 2026-08-13
@@ -25,7 +25,7 @@ materials:
   - Qwen3.8 官方发布博客与云端 Max 功能说明 :: https://qwen.ai/blog?id=qwen3.8
   - Qwen3.8-Max 自定义许可证原文 :: https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B/blob/main/LICENSE
   - Hugging Face 权重索引，列出 213 个分片与总字节数 :: https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B/blob/main/model.safetensors.index.json
-  - Hacker News 独立讨论与热度快照（截至 8 月 13 日 08:08 为 509 分 / 111 评论） :: https://news.ycombinator.com/item?id=49273478
+  - Hacker News 独立讨论与热度快照（截至 8 月 13 日 10:04 为 534 分 / 117 评论） :: https://news.ycombinator.com/item?id=49273478
 ---
 
 ## 先说结论：这是可下载的前沿模型，但不是一张消费级显卡的新玩具

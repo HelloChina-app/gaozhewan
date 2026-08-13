@@ -1,6 +1,6 @@
 ---
 title: Zed 把 agent 对话、代码与评审放进 Delta：实时协作已演示，仍是私测
-heat: Zed 于 8 月 12 日发布 Delta，把 agent 对话、持续变化的 worktree 与逐行评论放进同一线程，并以 DeltaDB 在参与者之间实时复制代码和上下文；截至 Asia/Katmandu 8 月 13 日 08:08，Hacker News 为 410 分、138 条评论。官方称它继续使用现有 Git 仓库，用户仍可照常 commit、push，未使用 Delta 的同事看到的是普通 Git 仓库；浏览器端则把同一 Rust 应用编译为 WebAssembly，并先接入 Claude Code 等第三方 agent harness。边界必须前置：Delta 目前只向首批用户发出 private beta 邀请，DeltaDB 也仍标注 Early Access，公开页面没有给出正式开放时间、定价、自托管、离线工作、数据驻留、保留期限或企业合规承诺；实时同步、评论锚定、云端 runner 与大 transcript 的性能来自官方演示，尚无独立规模测试。线程默认私有且只对受邀者开放是产品声明，不等于敏感源码、prompt、工具输出和密钥可以未经审查上传；“兼容 Git”也不等于 Delta 的细粒度历史与对话能无损导出到其他工具。
+heat: Zed 于 8 月 12 日发布 Delta，把 agent 对话、持续变化的 worktree 与逐行评论放进同一线程，并以 DeltaDB 在参与者之间实时复制代码和上下文；截至 Asia/Katmandu 8 月 13 日 10:04，Hacker News 为 455 分、152 条评论。官方称它继续使用现有 Git 仓库，用户仍可照常 commit、push，未使用 Delta 的同事看到的是普通 Git 仓库；浏览器端则把同一 Rust 应用编译为 WebAssembly，并先接入 Claude Code 等第三方 agent harness。边界必须前置：Delta 目前只向首批用户发出 private beta 邀请，DeltaDB 也仍标注 Early Access，公开页面没有给出正式开放时间、定价、自托管、离线工作、数据驻留、保留期限或企业合规承诺；实时同步、评论锚定、云端 runner 与大 transcript 的性能来自官方演示，尚无独立规模测试。线程默认私有且只对受邀者开放是产品声明，不等于敏感源码、prompt、工具输出和密钥可以未经审查上传；“兼容 Git”也不等于 Delta 的细粒度历史与对话能无损导出到其他工具。
 window: 72h
 competition: 中
 publishedAt: 2026-08-13
@@ -24,7 +24,7 @@ materials:
   - Zed Delta 原始发布、private beta、Git 兼容与 Claude Code 接入说明 :: https://zed.dev/blog/introducing-delta
   - DeltaDB 官方技术背景、逐操作历史与 Early Access 状态 :: https://zed.dev/blog/introducing-deltadb
   - DeltaDB 官方 Early Access 页面与功能声明 :: https://zed.dev/deltadb
-  - Hacker News 独立讨论与热度快照（截至 8 月 13 日 08:08 为 410 分 / 138 评论） :: https://news.ycombinator.com/item?id=49276574
+  - Hacker News 独立讨论与热度快照（截至 8 月 13 日 10:04 为 455 分 / 152 评论） :: https://news.ycombinator.com/item?id=49276574
 ---
 
 ## 先说结论：Delta 改的不是补全按钮，而是 agent 时代的交接面
