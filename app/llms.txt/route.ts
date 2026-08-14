@@ -17,6 +17,7 @@ ${site.name} 是一个中文内容与实验网站，免费公开全球真实信�
 - [SO-101 配置与校准教程](${site.url}/lab/embodied-ai/so101-calibration): 端口识别、舵机 ID 与波特率配置、Follower/Leader 校准命令和常见报错排查。
 - [主题聚合](${site.url}/topics): 按主题组织的答案型内容与持续更新。
 - [选题卡](${site.url}/post): 可验证、带来源的全球信号与行动判断。
+- [周刊](${site.url}/weekly): 每周五按新奇度、传播潜力、国内可用性与事实可靠度整理的免费全球信号。
 - [工具库](${site.url}/tools): 工具介绍、使用判断与实践指南。
 - [副业](${site.url}/side-hustles): 面向可执行和可验证结果的副业内容。
 - [实验室服务与定价](${site.url}/pricing): 固定范围交付、USDT 价格与付款边界。

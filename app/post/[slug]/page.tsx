@@ -1,6 +1,7 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { ReactNode } from "react";
 import { GzwScore } from "@/components/gzw-score";
 import { ContentPack } from "@/components/content-pack";
 import {
@@ -43,20 +44,43 @@ export async function generateMetadata({
   };
 }
 
+function renderInline(text: string): ReactNode[] {
+  return text
+    .split(/(\*\*[^*]+\*\*|\[[^\]]+\]\(\/[^)\s]+\))/g)
+    .filter(Boolean)
+    .map((part, index) => {
+      const bold = part.match(/^\*\*(.+)\*\*$/);
+      if (bold) {
+        return <strong key={`bold-${index}`}>{bold[1]}</strong>;
+      }
+
+      const link = part.match(/^\[([^\]]+)\]\((\/[^)\s]+)\)$/);
+      if (link) {
+        return (
+          <Link href={link[2]} key={`link-${index}`}>
+            {link[1]}
+          </Link>
+        );
+      }
+
+      return part;
+    });
+}
+
 function renderBlock(block: BodyBlock, index: number) {
   if (block.type === "heading") {
     return <h2 key={`${block.type}-${index}`}>{block.text}</h2>;
   }
 
   if (block.type === "paragraph") {
-    return <p key={`${block.type}-${index}`}>{block.text}</p>;
+    return <p key={`${block.type}-${index}`}>{renderInline(block.text)}</p>;
   }
 
   if (block.type === "list") {
     return (
       <ul key={`${block.type}-${index}`}>
         {block.items.map((item) => (
-          <li key={item}>{item}</li>
+          <li key={item}>{renderInline(item)}</li>
         ))}
       </ul>
     );
@@ -65,7 +89,7 @@ function renderBlock(block: BodyBlock, index: number) {
   return (
     <aside className="callout" key={`${block.type}-${index}`}>
       <strong>{block.title}</strong>
-      <p>{block.text}</p>
+      <p>{renderInline(block.text)}</p>
     </aside>
   );
 }
